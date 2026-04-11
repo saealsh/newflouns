@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فلونس برو — مخططك المالي الذكي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   FLOUNCE PRO v3 — 3 THEMES, SOLID BACKGROUNDS
+   Dark (default) · Light · Midnight
+   WCAG AA compliant contrast on all themes
+═══════════════════════════════════════════════ */
+
+/* ── THEME 1: DARK (DEFAULT) ── */
+:root {
+  /* Solid backgrounds — layered depth without patterns */
+  --bg:     #111318;   /* page background */
+  --bg2:    #1a1d24;   /* header/nav */
+  --bg3:    #21252e;   /* cards */
+  --bg4:    #2a2f3a;   /* elevated / hover */
+  --bg5:    #343a47;   /* inputs, selects */
+
+  /* Accent — electric blue (PRO identity) */
+  --accent:    #3b82f6;
+  --accent2:   #60a5fa;
+  --accent3:   #93c5fd;
+  --accent-dim:rgba(59,130,246,.15);
+  --accent-glow:rgba(59,130,246,.25);
+
+  /* Gold — highlights, badges, active nav */
+  --gold:    #f59e0b;
+  --gold2:   #fbbf24;
+  --gold3:   #fcd34d;
+  --gold-dim:rgba(245,158,11,.15);
+
+  /* Positive — income, savings */
+  --green:   #10b981;
+  --green2:  #34d399;
+  --green3:  #6ee7b7;
+  --green-dim:rgba(16,185,129,.15);
+
+  /* Semantic */
+  --danger:  #ef4444;
+  --warn:    #f97316;
+  --ok:      #10b981;
+
+  /* Text */
+  --text:    #f1f5f9;
+  --text2:   #94a3b8;
+  --text3:   #475569;
+  --text4:   #2d3748;
+
+  /* Borders */
+  --border:  rgba(255,255,255,.08);
+  --border2: rgba(255,255,255,.14);
+  --border3: rgba(255,255,255,.22);
+
+  /* PRO gradient — unique to PRO identity */
+  --pro-grad: linear-gradient(135deg, #1e3a5f 0%, #0f2440 100%);
+  --pro-accent: #3b82f6;
+  --pro-glow:  rgba(59,130,246,.3);
+
+  --r-sm:8px; --r-md:14px; --r-lg:20px;
+  --shadow: 0 4px 20px rgba(0,0,0,.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.5);
+  --font-body:'Cairo',sans-serif;
+  --font-display:'Tajawal',sans-serif;
+}
+
+/* ── THEME 2: LIGHT ── */
+[data-theme="light"] {
+  --bg:     #f8fafc;
+  --bg2:    #ffffff;
+  --bg3:    #ffffff;
+  --bg4:    #f1f5f9;
+  --bg5:    #e2e8f0;
+  --accent:    #2563eb;
+  --accent2:   #3b82f6;
+  --accent3:   #60a5fa;
+  --accent-dim:rgba(37,99,235,.1);
+  --accent-glow:rgba(37,99,235,.2);
+  --gold:    #d97706;
+  --gold2:   #f59e0b;
+  --gold3:   #fbbf24;
+  --gold-dim:rgba(217,119,6,.1);
+  --green:   #059669;
+  --green2:  #10b981;
+  --green3:  #34d399;
+  --green-dim:rgba(5,150,105,.1);
+  --danger:  #dc2626;
+  --warn:    #ea580c;
+  --ok:      #059669;
+  --text:    #0f172a;
+  --text2:   #475569;
+  --text3:   #94a3b8;
+  --text4:   #cbd5e1;
+  --border:  rgba(0,0,0,.08);
+  --border2: rgba(0,0,0,.13);
+  --border3: rgba(0,0,0,.2);
+  --pro-grad: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+  --pro-accent: #2563eb;
+  --pro-glow:  rgba(37,99,235,.2);
+  --shadow: 0 2px 12px rgba(0,0,0,.08);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,.12);
+}
+
+/* ── THEME 3: MIDNIGHT ── */
+[data-theme="midnight"] {
+  --bg:     #060810;
+  --bg2:    #0d1117;
+  --bg3:    #161b27;
+  --bg4:    #1e2535;
+  --bg5:    #283044;
+  --accent:    #818cf8;
+  --accent2:   #a5b4fc;
+  --accent3:   #c7d2fe;
+  --accent-dim:rgba(129,140,248,.15);
+  --accent-glow:rgba(129,140,248,.28);
+  --gold:    #e9b94e;
+  --gold2:   #f0cc6a;
+  --gold3:   #f5de8f;
+  --gold-dim:rgba(233,185,78,.14);
+  --green:   #22c55e;
+  --green2:  #4ade80;
+  --green3:  #86efac;
+  --green-dim:rgba(34,197,94,.14);
+  --danger:  #f87171;
+  --warn:    #fb923c;
+  --ok:      #22c55e;
+  --text:    #e2e8f0;
+  --text2:   #8892a4;
+  --text3:   #4a5568;
+  --text4:   #2d3748;
+  --border:  rgba(255,255,255,.07);
+  --border2: rgba(255,255,255,.12);
+  --border3: rgba(255,255,255,.2);
+  --pro-grad: linear-gradient(135deg, #1e1b4b 0%, #0e0c2e 100%);
+  --pro-accent: #818cf8;
+  --pro-glow:  rgba(129,140,248,.3);
+  --shadow: 0 4px 24px rgba(0,0,0,.6);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,.7);
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  direction: rtl;
+  overflow-x: hidden;
+  padding-bottom: 72px;
+  transition: background .3s, color .3s;
+}
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border2); border-radius:4px; }
+
+/* ─────────────────────────────────────
+   PRO IDENTITY BANNER
+   Visually distinct from free version
+───────────────────────────────────── */
+.pro-banner {
+  background: var(--pro-grad);
+  border-bottom: 1px solid var(--pro-accent);
+  padding: 6px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 300;
+}
+.pro-crown {
+  font-size: 14px;
+  animation: crownFloat 3s ease-in-out infinite;
+}
+@keyframes crownFloat {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-2px);}
+}
+.pro-text {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent3);
+  letter-spacing: .5px;
+}
+.pro-chip {
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 9px;
+  border-radius: 20px;
+  letter-spacing: .5px;
+}
+.pro-price {
+  font-size: 11px;
+  color: var(--text2);
+  margin-right: auto;
+}
+
+/* ─────────────────────────────────────
+   HEADER
+───────────────────────────────────── */
+.header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 33px;
+  z-index: 200;
+}
+[data-theme="light"] .header {
+  box-shadow: 0 1px 0 rgba(0,0,0,.06);
+}
+.header-inner {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 54px;
+  padding: 0 14px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+.logo-name {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--text);
+}
+.logo-pro-tag {
+  font-size: 9px;
+  font-weight: 800;
+  background: var(--accent);
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 4px;
+  letter-spacing: .5px;
+  margin-top: -8px;
+}
+.header-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px 10px;
+  flex-shrink: 0;
+}
+.header-date-h { font-size: 9px; color: var(--gold); font-weight: 700; }
+.header-date-day { font-size: 10px; color: var(--text2); font-weight: 600; }
+.header-spacer { flex: 1; }
+.bell-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg4);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  transition: all .2s;
+}
+.bell-btn.alert { border-color: var(--gold); color: var(--gold); }
+.bell-dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  display: none;
+  animation: pulse 2s infinite;
+}
+.bell-dot.show { display: block; }
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,.5); }
+  50%      { box-shadow: 0 0 0 4px rgba(239,68,68,0); }
+}
+
+/* ─────────────────────────────────────
+   MAIN NAV
+───────────────────────────────────── */
+.main-nav {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 87px;
+  z-index: 199;
+}
+.main-nav-inner {
+  max-width: 620px;
+  margin: 0 auto;
+  display: flex;
+}
+.main-nav-btn {
+  flex: 1;
+  padding: 11px 2px 9px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all .18s;
+}
+.main-nav-btn:hover { color: var(--text2); background: var(--bg4); }
+.main-nav-btn.active { color: var(--accent2); border-bottom-color: var(--accent); }
+.nav-icon { font-size: 17px; }
+.nav-label { font-size: 10px; white-space: nowrap; }
+
+/* MONTH BAR */
+.month-bar {
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  padding: 7px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.month-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  border: 1px solid var(--border2);
+  background: var(--bg4);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .18s;
+}
+.month-arrow:hover { border-color: var(--accent); color: var(--accent2); }
+.month-label { font-size: 14px; font-weight: 700; color: var(--text); min-width: 110px; text-align: center; }
+
+/* ─────────────────────────────────────
+   MAIN LAYOUT
+───────────────────────────────────── */
+.main {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 12px 12px 0;
+}
+
+/* ─────────────────────────────────────
+   CARDS
+───────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.card:hover { border-color: var(--border2); box-shadow: var(--shadow); }
+.card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.card-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.card.income .card-icon  { background: var(--green-dim); }
+.card.expense .card-icon { background: rgba(239,68,68,.12); }
+.card.saved  .card-icon  { background: var(--gold-dim); }
+.card.balance .card-icon { background: var(--accent-dim); }
+.card-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+.card.income  .card-badge { background: var(--green-dim); color: var(--green2); }
+.card.expense .card-badge { background: rgba(239,68,68,.12); color: var(--danger); }
+.card-label { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+.card-value { font-family: var(--font-display); font-size: 22px; font-weight: 900; line-height: 1; }
+.card.income  .card-value { color: var(--green2); }
+.card.expense .card-value { color: var(--danger); }
+.card.saved   .card-value { color: var(--gold2); }
+.card.balance .card-value { color: var(--text); }
+.card-sub { font-size: 10px; color: var(--text3); margin-top: 3px; }
+.card-bar { background: var(--bg5); border-radius: 3px; height: 3px; margin-top: 8px; overflow: hidden; }
+.card-bar-fill { height: 100%; border-radius: 3px; transition: width .7s ease; }
+.card.income  .card-bar-fill { background: var(--green); }
+.card.expense .card-bar-fill { background: var(--danger); }
+
+/* ─────────────────────────────────────
+   PROGRESS
+───────────────────────────────────── */
+.progress-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.progress-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 9px; }
+.progress-title { font-size: 12px; font-weight: 700; color: var(--text2); }
+.progress-pct { font-family: var(--font-display); font-size: 20px; font-weight: 900; color: var(--accent2); }
+.progress-track { background: var(--bg5); border-radius: 10px; height: 7px; overflow: hidden; margin-bottom: 6px; }
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: var(--accent);
+  transition: width .8s ease;
+  position: relative;
+  overflow: hidden;
+}
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer { 100% { left: 140%; } }
+.progress-fill.warn   { background: var(--warn); }
+.progress-fill.danger { background: var(--danger); }
+.progress-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); }
+
+/* ─────────────────────────────────────
+   PRO FEATURE CARD (AI / Leak / Saving)
+   — visually distinguished from free UI
+───────────────────────────────────── */
+.pro-feature-card {
+  background: var(--pro-grad);
+  border: 1px solid var(--pro-accent);
+  border-radius: var(--r-md);
+  padding: 14px 15px;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.pro-feature-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; left: -30px;
+  width: 120px; height: 120px;
+  background: radial-gradient(circle, var(--pro-glow), transparent 70%);
+  pointer-events: none;
+}
+.pro-feature-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 9px;
+  font-weight: 800;
+  background: var(--accent);
+  color: #fff;
+  padding: 2px 7px;
+  border-radius: 4px;
+  letter-spacing: .5px;
+  margin-bottom: 8px;
+}
+.ai-orb {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 0 16px var(--accent-glow);
+  transition: transform .25s;
+  animation: orbPulse 3s ease-in-out infinite;
+}
+@keyframes orbPulse {
+  0%,100% { box-shadow: 0 0 10px var(--accent-glow); }
+  50%      { box-shadow: 0 0 22px var(--accent-glow); }
+}
+.ai-orb:hover { transform: scale(1.08) rotate(8deg); }
+.ai-row { display: flex; gap: 11px; align-items: flex-start; }
+.ai-body { flex: 1; }
+.ai-label { font-size: 11px; font-weight: 700; color: var(--accent3); margin-bottom: 3px; }
+.ai-text { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.ai-actions { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
+.ai-btn {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.14);
+  color: var(--accent3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: all .18s;
+}
+.ai-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* Leak detector */
+.leak-card {
+  background: var(--bg3);
+  border: 1px solid rgba(249,115,22,.25);
+  border-right: 3px solid var(--warn);
+  border-radius: var(--r-md);
+  padding: 13px 14px;
+  margin-bottom: 10px;
+}
+.leak-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.leak-title { font-size: 13px; font-weight: 700; color: var(--warn); }
+.leak-items { display: flex; flex-direction: column; gap: 6px; }
+.leak-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--bg4);
+  border-radius: 9px;
+  padding: 9px 12px;
+}
+.leak-item-emoji { font-size: 17px; }
+.leak-item-body { flex: 1; }
+.leak-item-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.leak-item-detail { font-size: 10px; color: var(--text3); margin-top: 1px; }
+.leak-item-amt { font-family: var(--font-display); font-size: 14px; font-weight: 800; color: var(--warn); }
+.leak-tip { margin-top: 9px; font-size: 11px; color: var(--text3); border-right: 2px solid var(--warn); padding-right: 8px; line-height: 1.5; }
+
+/* Saving plan */
+.saving-card {
+  background: var(--bg3);
+  border: 1px solid rgba(16,185,129,.2);
+  border-right: 3px solid var(--green);
+  border-radius: var(--r-md);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.saving-header { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.saving-title { font-size: 13px; font-weight: 700; color: var(--green2); }
+.saving-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 11px; }
+.saving-item { background: var(--bg4); border-radius: 9px; padding: 10px; text-align: center; }
+.saving-item-val { font-family: var(--font-display); font-size: 17px; font-weight: 800; color: var(--green2); }
+.saving-item-lbl { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.saving-slider-lbl { font-size: 11px; color: var(--text2); margin-bottom: 5px; display: flex; justify-content: space-between; }
+.saving-slider { width: 100%; height: 4px; accent-color: var(--green); margin-bottom: 12px; }
+.saving-tip { font-size: 11px; color: var(--text3); line-height: 1.5; }
+
+/* ─────────────────────────────────────
+   PTS BAR
+───────────────────────────────────── */
+.pts-bar {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.pts-val { font-family: var(--font-display); font-size: 18px; font-weight: 900; color: var(--gold2); }
+.pts-lbl { font-size: 11px; color: var(--text3); }
+.pts-level {
+  margin-right: auto;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--gold-dim);
+  color: var(--gold2);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+/* ─────────────────────────────────────
+   STREAK CARD
+───────────────────────────────────── */
+.streak-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.streak-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.streak-title { font-size: 13px; font-weight: 700; color: var(--text2); }
+.streak-flame { font-size: 22px; animation: flamePop 1.6s ease-in-out infinite; }
+@keyframes flamePop { 0%,100%{transform:scale(1);} 50%{transform:scale(1.15);} }
+.streak-num {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 900;
+  color: var(--text3);
+  line-height: 1;
+  text-align: center;
+  margin-bottom: 4px;
+}
+.streak-num.active { color: var(--gold2); }
+.streak-sub { text-align: center; font-size: 11px; color: var(--text3); margin-bottom: 14px; }
+.streak-dots { display: flex; gap: 5px; justify-content: center; margin-bottom: 14px; flex-wrap: wrap; }
+.streak-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 700;
+  transition: all .25s;
+}
+.streak-dot.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+.streak-dot.today { border-color: var(--gold2); color: var(--gold2); }
+.streak-checkin {
+  width: 100%;
+  padding: 11px;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 3px 14px var(--accent-glow);
+}
+.streak-checkin:hover { opacity: .88; transform: translateY(-1px); }
+.streak-checkin.done {
+  background: var(--bg4);
+  color: var(--text3);
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+  border: 1px dashed var(--border2);
+}
+.streak-msg { text-align: center; font-size: 12px; color: var(--gold2); margin-top: 9px; min-height: 16px; }
+.streak-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-top: 11px; }
+.streak-stat { background: var(--bg4); border-radius: 8px; padding: 9px; text-align: center; }
+.streak-stat-num { font-family: var(--font-display); font-size: 17px; font-weight: 900; color: var(--accent2); }
+.streak-stat-lbl { font-size: 9px; color: var(--text3); margin-top: 2px; }
+
+/* ─────────────────────────────────────
+   SALARY STRIP
+───────────────────────────────────── */
+.salary-strip {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 10px;
+}
+.salary-icon { font-size: 22px; flex-shrink: 0; }
+.salary-body { flex: 1; }
+.salary-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+.salary-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.salary-select {
+  background: var(--bg5);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 4px 8px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+  width: 65px;
+}
+.salary-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text2);
+  background: var(--bg5);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 4px 12px;
+  white-space: nowrap;
+}
+.salary-badge.today { border-color: var(--gold); color: var(--gold2); background: var(--gold-dim); }
+
+/* ─────────────────────────────────────
+   SECTION CARD
+───────────────────────────────────── */
+.section-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 11px; }
+.section-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.section-subtitle { font-size: 10px; color: var(--text3); margin-top: 2px; }
+.section-total { font-size: 13px; font-weight: 800; color: var(--gold2); }
+.add-trigger {
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  border-radius: 7px;
+  padding: 4px 11px;
+  color: var(--text2);
+  font-family: var(--font-body);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all .18s;
+}
+.add-trigger:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* ─────────────────────────────────────
+   ITEMS
+───────────────────────────────────── */
+.items-list { display: flex; flex-direction: column; gap: 4px; margin-bottom: 7px; }
+.item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg4);
+  border-radius: 9px;
+  padding: 9px 11px;
+  border: 1px solid transparent;
+  transition: all .18s;
+}
+.item-row:hover { border-color: var(--border2); }
+.item-row.paid { opacity: .4; }
+.item-row.paid .item-name { text-decoration: line-through; }
+.item-emoji {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--bg5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.item-name { flex: 1; font-size: 13px; color: var(--text); cursor: pointer; }
+.item-amount { font-size: 13px; font-weight: 700; white-space: nowrap; }
+.item-amount.income  { color: var(--green2); }
+.item-amount.expense { color: var(--danger); }
+.item-del { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 12px; padding: 3px; transition: color .18s; }
+.item-del:hover { color: var(--danger); }
+.empty-state { text-align: center; padding: 18px; color: var(--text3); font-size: 12px; }
+.empty-state-icon { font-size: 28px; opacity: .25; display: block; margin-bottom: 5px; }
+
+/* ─────────────────────────────────────
+   FORMS
+───────────────────────────────────── */
+.add-form {
+  background: var(--bg4);
+  border-radius: 10px;
+  padding: 11px;
+  border: 1px solid var(--border);
+  display: none;
+  margin-top: 6px;
+}
+.add-form.open { display: block; animation: slideDown .2s ease; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-5px); } to { opacity:1; transform:translateY(0); } }
+.cat-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+.cat-chip {
+  background: var(--bg5);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 3px 10px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--text3);
+  transition: all .18s;
+}
+.cat-chip:hover,.cat-chip.sel { background: var(--accent-dim); border-color: var(--accent); color: var(--accent2); }
+.form-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.form-input {
+  flex: 1;
+  min-width: 80px;
+  background: var(--bg5);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  transition: border-color .18s;
+}
+.form-input:focus { border-color: var(--accent); }
+.form-input::placeholder { color: var(--text3); }
+.form-select {
+  flex: 1;
+  min-width: 80px;
+  background: var(--bg5);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  outline: none;
+  cursor: pointer;
+}
+.form-select option { background: var(--bg3); }
+.form-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all .18s;
+  white-space: nowrap;
+}
+.form-btn:hover { opacity: .88; transform: translateY(-1px); }
+.amt-shortcuts { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+.amt-sh {
+  background: var(--bg5);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 11px;
+  cursor: pointer;
+  color: var(--text3);
+  transition: all .18s;
+  font-family: var(--font-body);
+}
+.amt-sh:hover { background: var(--accent-dim); color: var(--accent2); border-color: var(--accent); }
+.form-check { display: flex; align-items: center; gap: 6px; margin-top: 7px; font-size: 12px; color: var(--text3); cursor: pointer; }
+.form-check input { accent-color: var(--accent); }
+
+/* ─────────────────────────────────────
+   BUDGET
+───────────────────────────────────── */
+.budget-alert {
+  background: rgba(239,68,68,.08);
+  border: 1px solid rgba(239,68,68,.2);
+  border-radius: 9px;
+  padding: 10px 13px;
+  margin-bottom: 10px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--danger);
+}
+.budget-alert.show { display: flex; }
+.budget-item { background: var(--bg4); border-radius: 10px; padding: 11px; margin-bottom: 6px; }
+.budget-item-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 7px; }
+.budget-cat { font-size: 13px; font-weight: 700; color: var(--text); }
+.budget-nums { display: flex; align-items: center; gap: 5px; }
+.budget-spent { font-size: 12px; font-weight: 700; color: var(--gold2); }
+.budget-limit { font-size: 11px; color: var(--text3); }
+.budget-track-bg { background: var(--bg5); border-radius: 10px; height: 6px; overflow: hidden; margin-bottom: 4px; }
+.budget-track-fill { height: 100%; border-radius: 10px; background: var(--accent); transition: width .7s ease; }
+.budget-track-fill.warn   { background: var(--warn); }
+.budget-track-fill.danger { background: var(--danger); }
+.budget-foot { display: flex; justify-content: space-between; font-size: 10px; color: var(--text3); }
+.budget-remain.over { color: var(--danger); }
+
+/* ─────────────────────────────────────
+   GOALS
+───────────────────────────────────── */
+.goal-item { background: var(--bg4); border-radius: 10px; padding: 12px; margin-bottom: 6px; }
+.goal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.goal-name { font-size: 13px; font-weight: 700; color: var(--text); }
+.goal-amounts { font-size: 11px; color: var(--text3); }
+.goal-track-bg { background: var(--bg5); border-radius: 10px; height: 6px; overflow: hidden; margin-bottom: 4px; }
+.goal-track-fill { height: 100%; border-radius: 10px; background: var(--green); transition: width .7s ease; }
+.goal-pct { font-size: 11px; color: var(--text3); }
+
+/* ─────────────────────────────────────
+   ACHIEVEMENTS
+───────────────────────────────────── */
+.ach-grid { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 10px; }
+.ach-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 9px 8px;
+  background: var(--bg4);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  min-width: 56px;
+  transition: all .2s;
+}
+.ach-badge:hover { transform: scale(1.05); }
+.ach-badge.on { border-color: var(--gold); background: var(--gold-dim); }
+.ach-badge.off { opacity: .28; filter: grayscale(1); }
+.ach-icon { font-size: 21px; }
+.ach-name { font-size: 9px; text-align: center; color: var(--text3); line-height: 1.3; }
+.ach-pts { font-size: 9px; font-weight: 700; color: var(--text3); }
+.ach-badge.on .ach-pts { color: var(--gold2); }
+
+/* ─────────────────────────────────────
+   TIP
+───────────────────────────────────── */
+.tip-bar {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 11px 13px;
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.tip-text { flex: 1; font-size: 12px; color: var(--text2); line-height: 1.6; }
+.tip-next-btn {
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  color: var(--text3);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: var(--font-body);
+  transition: all .18s;
+  white-space: nowrap;
+}
+.tip-next-btn:hover { border-color: var(--accent); color: var(--accent2); }
+
+/* ─────────────────────────────────────
+   SEARCH
+───────────────────────────────────── */
+.search-bar {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 9px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 13px;
+  direction: rtl;
+}
+.search-input::placeholder { color: var(--text3); }
+.search-clear { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 12px; }
+.search-results { display: flex; flex-direction: column; gap: 4px; margin-top: 7px; max-height: 150px; overflow-y: auto; }
+
+/* ─────────────────────────────────────
+   YEAR SELECTOR
+───────────────────────────────────── */
+.year-selector {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 10px 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.year-lbl { font-size: 12px; color: var(--text3); font-weight: 600; }
+.year-btns { display: flex; gap: 5px; flex-wrap: wrap; }
+.year-btn {
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  color: var(--text3);
+  padding: 3px 11px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: var(--font-body);
+  transition: all .18s;
+}
+.year-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); font-weight: 700; }
+.year-input {
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 3px 9px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: var(--font-body);
+  width: 80px;
+  outline: none;
+}
+.year-go {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-body);
+}
+
+/* ─────────────────────────────────────
+   CHARTS
+───────────────────────────────────── */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+.chart-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; }
+.chart-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 11px; }
+.pie-wrap { display: flex; gap: 10px; align-items: center; }
+.pie-legend { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.pie-item { display: flex; align-items: center; gap: 6px; font-size: 11px; }
+.pie-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.pie-lbl { flex: 1; color: var(--text3); }
+.pie-pct { color: var(--text); font-weight: 700; }
+.cmp-row { display: flex; gap: 6px; align-items: center; margin-bottom: 6px; font-size: 11px; }
+.cmp-lbl { width: 65px; color: var(--text3); }
+.cmp-bar-bg { flex: 1; background: var(--bg5); border-radius: 4px; height: 7px; overflow: hidden; }
+.cmp-bar-fill { height: 100%; border-radius: 4px; transition: width .7s ease; }
+.cmp-val { width: 55px; text-align: left; font-weight: 700; color: var(--text2); font-size: 10px; }
+
+/* Period chart */
+.period-tabs { display: flex; gap: 4px; margin-bottom: 11px; }
+.period-tab {
+  flex: 1;
+  padding: 6px 4px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  background: var(--bg4);
+  color: var(--text3);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all .18s;
+  font-family: var(--font-body);
+}
+.period-tab.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent2); font-weight: 700; }
+.bar-chart-wrap { height: 100px; display: flex; align-items: flex-end; gap: 3px; margin: 8px 0; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.bar-fill { width: 100%; border-radius: 3px 3px 0 0; min-height: 2px; transition: height .5s ease; }
+.bar-col-lbl { font-size: 8px; color: var(--text3); }
+
+/* ─────────────────────────────────────
+   YEARLY
+───────────────────────────────────── */
+.ycards { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
+.ycard { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; text-align: center; }
+.ycard:hover { border-color: var(--border2); }
+.ycard-icon { font-size: 22px; margin-bottom: 5px; }
+.ycard-val { font-family: var(--font-display); font-size: 17px; font-weight: 900; color: var(--gold2); }
+.ycard-lbl { font-size: 10px; color: var(--text3); margin-top: 3px; }
+.year-bars-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; margin-bottom: 10px; }
+.year-bars { display: flex; gap: 3px; align-items: flex-end; height: 88px; margin-bottom: 6px; }
+.year-bar-wrap { flex: 1; display: flex; gap: 2px; align-items: flex-end; justify-content: center; height: 100%; }
+.year-bar { flex: 1; border-radius: 2px 2px 0 0; min-height: 2px; transition: height .5s ease; }
+.year-bar.income  { background: var(--green); opacity: .8; }
+.year-bar.expense { background: var(--danger); opacity: .7; }
+.year-lbrs { display: flex; gap: 3px; }
+.year-lbl-item { flex: 1; text-align: center; font-size: 8px; color: var(--text3); }
+.year-legend { display: flex; gap: 12px; margin-top: 8px; }
+.year-leg-item { display: flex; align-items: center; gap: 5px; font-size: 9px; color: var(--text3); }
+.year-leg-dot { width: 7px; height: 7px; border-radius: 2px; }
+
+/* ─────────────────────────────────────
+   REPORTS
+───────────────────────────────────── */
+.report-header {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: 16px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.report-icon-bg {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.report-title { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--text); }
+.report-subtitle { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.report-filters { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 13px; margin-bottom: 10px; }
+.report-filters-title { font-size: 12px; font-weight: 700; color: var(--text2); margin-bottom: 9px; }
+.report-filter-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.rfilter-sel { flex: 1; min-width: 100px; background: var(--bg5); border: 1px solid var(--border); border-radius: 7px; padding: 7px 10px; color: var(--text); font-family: var(--font-body); font-size: 12px; outline: none; cursor: pointer; }
+.rfilter-sel option { background: var(--bg3); }
+.rfilter-btn { padding: 7px 14px; border-radius: 7px; background: var(--accent); border: none; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font-body); transition: opacity .18s; white-space: nowrap; }
+.rfilter-btn:hover { opacity: .88; }
+.report-summary-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 10px; }
+.rsumm-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 13px; text-align: center; }
+.rsumm-icon { font-size: 20px; margin-bottom: 5px; }
+.rsumm-val { font-family: var(--font-display); font-size: 16px; font-weight: 800; }
+.rsumm-val.income  { color: var(--green2); }
+.rsumm-val.expense { color: var(--danger); }
+.rsumm-val.save    { color: var(--gold2); }
+.rsumm-lbl { font-size: 10px; color: var(--text3); margin-top: 3px; }
+.report-table-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; margin-bottom: 10px; }
+.report-table-head { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--border); }
+.report-table-title { font-size: 12px; font-weight: 700; color: var(--text2); }
+.rtable { width: 100%; border-collapse: collapse; }
+.rtable th { text-align: right; font-size: 10px; font-weight: 700; color: var(--text3); padding: 9px 14px; background: var(--bg4); border-bottom: 1px solid var(--border); }
+.rtable td { padding: 9px 14px; font-size: 12px; border-bottom: 1px solid var(--border); }
+.rtable tr:last-child td { border-bottom: none; }
+.rtable tr:hover td { background: var(--bg4); }
+.rtable .td-income  { color: var(--green2); font-weight: 700; }
+.rtable .td-expense { color: var(--danger); font-weight: 700; }
+.report-export-bar { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.export-btn { flex: 1; min-width: 80px; padding: 9px 14px; border-radius: 9px; border: 1px solid var(--border); background: var(--bg3); color: var(--text2); font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font-body); display: flex; align-items: center; justify-content: center; gap: 6px; transition: all .18s; }
+.export-btn:hover { border-color: var(--accent); color: var(--accent2); background: var(--accent-dim); }
+.report-cat-breakdown { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 13px; margin-bottom: 10px; }
+.cat-breakdown-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.cbd-icon { font-size: 15px; width: 22px; flex-shrink: 0; }
+.cbd-name { flex: 1; font-size: 12px; color: var(--text2); }
+.cbd-bar-bg { width: 90px; height: 5px; background: var(--bg5); border-radius: 3px; overflow: hidden; flex-shrink: 0; }
+.cbd-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); transition: width .7s ease; }
+.cbd-amt { font-size: 12px; font-weight: 700; color: var(--gold2); min-width: 65px; text-align: left; }
+.cbd-pct { font-size: 10px; color: var(--text3); min-width: 28px; text-align: left; }
+
+/* ─────────────────────────────────────
+   ZAKAT
+───────────────────────────────────── */
+.zakat-panel { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px; margin-bottom: 10px; }
+.zakat-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.zakat-icon-bg { width: 44px; height: 44px; border-radius: 12px; background: var(--gold-dim); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+.zakat-title { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--gold2); }
+.zakat-subtitle { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.zakat-tabs { display: flex; gap: 4px; margin-bottom: 14px; }
+.zakat-tab { flex: 1; padding: 7px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg4); color: var(--text3); font-size: 11px; font-weight: 700; cursor: pointer; text-align: center; transition: all .18s; }
+.zakat-tab.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold2); }
+.zakat-row { display: flex; gap: 8px; align-items: center; margin-bottom: 7px; }
+.zakat-lbl { font-size: 12px; color: var(--text3); flex: 1; }
+.zakat-input { background: var(--bg5); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text); font-family: var(--font-body); font-size: 13px; outline: none; width: 140px; transition: border-color .18s; }
+.zakat-input:focus { border-color: var(--gold); }
+.zakat-input::placeholder { color: var(--text3); }
+.zakat-nisab-info { background: var(--bg4); border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px; margin-bottom: 13px; font-size: 11px; color: var(--text3); line-height: 1.7; }
+.zakat-nisab-info b { color: var(--gold2); }
+.zakat-result { background: var(--bg4); border: 1px solid var(--gold); border-radius: var(--r-md); padding: 18px; text-align: center; display: none; margin-top: 14px; }
+.zakat-result.show { display: block; }
+.zakat-result-title { font-size: 12px; color: var(--text3); margin-bottom: 4px; }
+.zakat-result-amt { font-family: var(--font-display); font-size: 38px; font-weight: 900; color: var(--gold2); margin-bottom: 6px; }
+.zakat-result-note { font-size: 11px; color: var(--text3); line-height: 1.6; }
+.zakat-result-eligible { font-size: 13px; color: var(--green2); margin-bottom: 4px; }
+.zakat-result-ineligible { font-size: 13px; color: var(--text3); margin-bottom: 4px; }
+.zakat-calc-btn { width: 100%; padding: 13px; border-radius: 11px; background: var(--gold); border: none; color: #000; font-family: var(--font-display); font-size: 15px; font-weight: 800; cursor: pointer; transition: all .2s; margin-top: 4px; }
+.zakat-calc-btn:hover { opacity: .88; transform: translateY(-1px); }
+.zakat-madhab-sel { background: var(--bg5); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--text); font-family: var(--font-body); font-size: 12px; outline: none; cursor: pointer; width: 100%; margin-bottom: 11px; }
+.zakat-madhab-sel option { background: var(--bg3); }
+.auto-fill-btn { background: var(--accent-dim); border: 1px solid var(--accent); border-radius: 7px; padding: 5px 12px; color: var(--accent2); font-size: 11px; cursor: pointer; font-family: var(--font-body); transition: all .18s; white-space: nowrap; }
+.auto-fill-btn:hover { background: var(--accent); color: #fff; }
+
+/* ─────────────────────────────────────
+   SETTINGS — THEME PICKER (3 only)
+───────────────────────────────────── */
+.theme-panel { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-md); padding: 16px; margin-bottom: 10px; }
+.theme-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+.theme-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 16px; }
+.theme-swatch {
+  border-radius: 12px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all .22s;
+  padding: 14px 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.theme-swatch:hover { transform: translateY(-2px); border-color: var(--border3); }
+.theme-swatch.active { border-color: var(--accent2); }
+.theme-swatch.active::after {
+  content: '✓';
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 18px;
+  text-align: center;
+}
+.swatch-emoji { font-size: 24px; }
+.swatch-name { font-size: 11px; font-weight: 700; color: var(--text2); }
+.swatch-desc { font-size: 9px; color: var(--text3); text-align: center; }
+
+/* Dark swatch */
+.sw-dark { background: linear-gradient(160deg, #111318, #21252e); }
+.sw-dark .swatch-name { color: #f1f5f9; }
+/* Light swatch */
+.sw-light { background: linear-gradient(160deg, #f8fafc, #ffffff); border: 1px solid rgba(0,0,0,.08); }
+.sw-light .swatch-name { color: #0f172a; }
+.sw-light .swatch-desc { color: #94a3b8; }
+/* Midnight swatch */
+.sw-midnight { background: linear-gradient(160deg, #060810, #161b27); }
+.sw-midnight .swatch-name { color: #e2e8f0; }
+
+.custom-cats-title { font-size: 11px; font-weight: 700; color: var(--text3); margin-bottom: 8px; }
+.custom-cats-list { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.custom-cat-tag { background: var(--bg4); border: 1px solid var(--border); border-radius: 16px; padding: 4px 10px; font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 5px; }
+.custom-cat-del { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 11px; }
+.custom-cat-del:hover { color: var(--danger); }
+.custom-cat-add { display: flex; gap: 6px; }
+.custom-cat-input { flex: 1; background: var(--bg5); border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; color: var(--text); font-family: var(--font-body); font-size: 12px; outline: none; }
+.custom-cat-input:focus { border-color: var(--accent); }
+.custom-cat-btn { background: var(--accent); border: none; color: #fff; border-radius: 8px; padding: 7px 12px; font-size: 12px; cursor: pointer; font-family: var(--font-body); }
+
+/* ─────────────────────────────────────
+   NOTIFICATIONS PANEL
+───────────────────────────────────── */
+.notif-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 400; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.notif-overlay.open { opacity: 1; pointer-events: all; }
+.notif-panel {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(380px,100vw);
+  background: var(--bg2);
+  border-left: 1px solid var(--border);
+  z-index: 401;
+  transform: translateX(100%);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.notif-panel.open { transform: translateX(0); }
+.notif-panel-head { padding: 15px 14px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.notif-panel-title { font-size: 15px; font-weight: 800; color: var(--text); }
+.notif-panel-close { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 17px; padding: 4px; }
+.notif-panel-body { flex: 1; overflow-y: auto; padding: 10px 13px; display: flex; flex-direction: column; gap: 6px; }
+.notif-panel-footer { padding: 10px 13px; border-top: 1px solid var(--border); flex-shrink: 0; max-height: 55vh; overflow-y: auto; }
+.notif-item { background: var(--bg3); border-radius: 10px; padding: 11px; border: 1px solid var(--border); display: flex; gap: 9px; align-items: flex-start; }
+.notif-item.urgent  { border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.06); }
+.notif-item.warning { border-color: rgba(249,115,22,.25); }
+.notif-item.done    { opacity: .35; border-style: dashed; }
+.notif-icon { font-size: 21px; flex-shrink: 0; }
+.notif-body { flex: 1; min-width: 0; }
+.notif-name { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.notif-amt { font-family: var(--font-display); font-size: 16px; font-weight: 900; color: var(--gold2); margin-bottom: 3px; }
+.notif-meta { font-size: 10px; color: var(--text3); display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.notif-sbadge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 6px; }
+.notif-sbadge.overdue  { background: rgba(239,68,68,.15); color: var(--danger); }
+.notif-sbadge.soon     { background: rgba(249,115,22,.12); color: var(--warn); }
+.notif-sbadge.upcoming { background: var(--accent-dim); color: var(--accent2); }
+.notif-sbadge.paid     { background: var(--green-dim); color: var(--green2); }
+.notif-actions { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.notif-check { width: 28px; height: 28px; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; cursor: pointer; font-size: 12px; color: var(--text3); display: flex; align-items: center; justify-content: center; transition: all .18s; }
+.notif-check:hover { border-color: var(--accent); color: var(--accent2); }
+.notif-check.checked { background: var(--green-dim); border-color: var(--green); color: var(--green2); }
+.notif-del-btn { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 11px; padding: 2px; }
+.notif-del-btn:hover { color: var(--danger); }
+.notif-add-form { background: var(--bg3); border-radius: 11px; padding: 12px; border: 1px solid var(--border); }
+.notif-add-title { font-size: 11px; font-weight: 700; color: var(--accent2); margin-bottom: 9px; }
+.notif-fi { flex: 1; min-width: 80px; background: var(--bg5); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; color: var(--text); font-family: var(--font-body); font-size: 12px; outline: none; direction: rtl; }
+.notif-fi:focus { border-color: var(--accent); }
+.notif-fi::placeholder { color: var(--text3); }
+.notif-fi-sel { flex: 1; background: var(--bg5); border: 1px solid var(--border); border-radius: 7px; padding: 8px 10px; color: var(--text); font-family: var(--font-body); font-size: 12px; outline: none; cursor: pointer; }
+.notif-fi-sel option { background: var(--bg3); }
+.notif-add-btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 9px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font-body); transition: opacity .18s; margin-top: 3px; }
+.notif-add-btn:hover { opacity: .88; }
+.day-chips { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 6px; }
+.day-chip { background: var(--bg5); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; font-size: 10px; cursor: pointer; color: var(--text3); transition: all .18s; font-family: var(--font-body); }
+.day-chip:hover,.day-chip.sel { background: var(--accent-dim); border-color: var(--accent); color: var(--accent2); }
+.notif-section-lbl { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: .6px; padding: 2px 0; }
+.notif-empty { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 30px; text-align: center; }
+.notif-empty-icon { font-size: 36px; opacity: .25; }
+.notif-empty-text { color: var(--text3); font-size: 12px; line-height: 1.6; }
+
+/* ─────────────────────────────────────
+   QUICK ADD BAR
+───────────────────────────────────── */
+.quick-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 8px 12px 12px;
+  display: flex; gap: 7px; align-items: center;
+}
+.qa-types { display: flex; gap: 4px; flex-shrink: 0; }
+.qa-type-btn { width: 34px; height: 34px; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all .18s; color: var(--text3); }
+.qa-type-btn.expense.active { background: rgba(239,68,68,.12); border-color: var(--danger); color: var(--danger); }
+.qa-type-btn.income.active  { background: var(--green-dim); border-color: var(--green); color: var(--green2); }
+.qa-field { flex: 1; display: flex; gap: 5px; align-items: center; background: var(--bg3); border: 1.5px solid var(--border); border-radius: 10px; padding: 7px 11px; transition: border-color .18s; }
+.qa-field:focus-within { border-color: var(--accent); }
+.qa-input { flex: 1; background: none; border: none; outline: none; color: var(--text); font-family: var(--font-body); font-size: 13px; direction: rtl; }
+.qa-input::placeholder { color: var(--text3); }
+.qa-sep { width: 1px; height: 16px; background: var(--border2); flex-shrink: 0; }
+.qa-amount { width: 65px; background: none; border: none; outline: none; color: var(--text); font-family: var(--font-body); font-size: 13px; text-align: left; }
+.qa-submit { width: 38px; height: 38px; border-radius: 10px; border: none; background: var(--accent); color: #fff; font-size: 17px; cursor: pointer; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .18s; }
+.qa-submit:hover { opacity: .88; }
+
+/* ─────────────────────────────────────
+   SAVE + TOAST
+───────────────────────────────────── */
+.save-wrap { position: fixed; bottom: 64px; left: 50%; transform: translateX(-50%); z-index: 290; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.save-wrap.dirty { opacity: 1; pointer-events: all; }
+.save-btn-main { background: var(--accent); color: #fff; border: none; border-radius: 20px; padding: 9px 20px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: var(--font-display); box-shadow: 0 4px 16px var(--accent-glow); display: flex; align-items: center; gap: 6px; transition: all .2s; white-space: nowrap; }
+.save-btn-main.saved { background: var(--green); }
+#toastWrap { position: fixed; top: 100px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 6px; pointer-events: none; align-items: center; }
+.toast { background: var(--bg2); border: 1px solid var(--border2); border-radius: 10px; padding: 9px 18px; font-size: 13px; font-weight: 600; color: var(--text2); box-shadow: var(--shadow); animation: toastIn .25s ease; white-space: nowrap; }
+.toast.success { border-color: var(--green); color: var(--green2); }
+.toast.warn    { border-color: var(--gold); color: var(--gold2); }
+.toast.danger  { border-color: var(--danger); color: var(--danger); }
+@keyframes toastIn { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:translateY(0); } }
+@keyframes fadeIn  { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+/* Footer */
+.footer { text-align: center; padding: 36px 16px 12px; color: var(--text3); font-size: 11px; border-top: 1px solid var(--border); }
+
+@media (max-width: 480px) {
+  .charts-grid { grid-template-columns: 1fr; }
+  .ycards { grid-template-columns: 1fr 1fr; }
+  .report-summary-row { grid-template-columns: 1fr 1fr; }
+  .nav-label { font-size: 9px; }
+  .theme-grid { grid-template-columns: repeat(3,1fr); }
+}
+@media print {
+  .header,.quick-bar,.save-wrap,.main-nav,.pro-banner,.notif-overlay,.notif-panel { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NOTIFICATIONS PANEL -->
+<div class="notif-overlay" id="notifOverlay" onclick="closeNotifPanel()"></div>
+<div class="notif-panel" id="notifPanel">
+  <div class="notif-panel-head">
+    <div class="notif-panel-title">🔔 المستحقات والتنبيهات</div>
+    <button class="notif-panel-close" onclick="closeNotifPanel()">✕</button>
+  </div>
+  <div class="notif-panel-body" id="notifPanelBody"></div>
+  <div class="notif-panel-footer">
+    <div class="notif-add-form">
+      <div class="notif-add-title">➕ أضف تنبيهاً جديداً</div>
+      <div class="day-chips" id="notifCatChips">
+        <span class="day-chip" onclick="notifSetCat('🏠','إيجار')">🏠 إيجار</span>
+        <span class="day-chip" onclick="notifSetCat('🚗','قسط سيارة')">🚗 قسط</span>
+        <span class="day-chip" onclick="notifSetCat('📱','جوال/نت')">📱 جوال</span>
+        <span class="day-chip" onclick="notifSetCat('📺','اشتراكات')">📺 اشتراكات</span>
+        <span class="day-chip" onclick="notifSetCat('💡','فواتير')">💡 فواتير</span>
+        <span class="day-chip" onclick="notifSetCat('🏦','قسط بنكي')">🏦 بنك</span>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:6px">
+        <input class="notif-fi" id="nfName" type="text" placeholder="اسم المستحق">
+        <input class="notif-fi" id="nfIcon" type="text" value="🏠" style="max-width:55px;text-align:center">
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:6px">
+        <input class="notif-fi" id="nfAmt" type="number" placeholder="المبلغ ﷼" style="max-width:110px">
+        <select class="notif-fi-sel" id="nfAlert">
+          <option value="3">قبل ٣ أيام</option>
+          <option value="5" selected>قبل ٥ أيام</option>
+          <option value="7">قبل ٧ أيام</option>
+          <option value="10">قبل ١٠ أيام</option>
+        </select>
+      </div>
+      <div style="font-size:10px;color:var(--text3);margin-bottom:5px">📅 يوم الاستحقاق:</div>
+      <div class="day-chips" id="dayChips">
+        <span class="day-chip" onclick="notifSetDay(1)">١</span>
+        <span class="day-chip" onclick="notifSetDay(5)">٥</span>
+        <span class="day-chip" onclick="notifSetDay(10)">١٠</span>
+        <span class="day-chip" onclick="notifSetDay(15)">١٥</span>
+        <span class="day-chip" onclick="notifSetDay(20)">٢٠</span>
+        <span class="day-chip" onclick="notifSetDay(25)">٢٥</span>
+        <span class="day-chip" onclick="notifSetDay(28)">٢٨</span>
+      </div>
+      <div style="display:flex;gap:6px;margin-bottom:7px">
+        <input class="notif-fi" id="nfDay" type="number" placeholder="يوم (١-٣١)" min="1" max="31">
+      </div>
+      <label style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--text3);cursor:pointer;margin-bottom:8px">
+        <input type="checkbox" id="nfRecurring" checked style="accent-color:var(--accent)"> يتكرر شهرياً 🔄
+      </label>
+      <button class="notif-add-btn" onclick="addNotif()">✅ أضف التنبيه</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRO IDENTITY BANNER -->
+<div class="pro-banner">
+  <span class="pro-crown">👑</span>
+  <span class="pro-chip">PRO</span>
+  <span class="pro-text">فلونس برو — تحليل مالي بالذكاء الاصطناعي</span>
+  <span class="pro-price">10 ﷼/شهر</span>
+</div>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo" onclick="showTab('monthly')">
+      <div class="logo-mark">💰</div>
+      <div>
+        <div class="logo-name">فلونس</div>
+      </div>
+      <span class="logo-pro-tag">PRO</span>
+    </div>
+    <div class="header-date" id="headerDate"></div>
+    <div class="header-spacer"></div>
+    <button class="bell-btn" id="bellBtn" onclick="openNotifPanel()">🔔<div class="bell-dot" id="bellDot"></div></button>
+  </div>
+</header>
+
+<!-- MAIN NAV -->
+<nav class="main-nav">
+  <div class="main-nav-inner">
+    <button class="main-nav-btn active" id="tabMonthly" onclick="showTab('monthly')">
+      <span class="nav-icon">📅</span><span class="nav-label">الشهر</span>
+    </button>
+    <button class="main-nav-btn" id="tabYearly" onclick="showTab('yearly')">
+      <span class="nav-icon">📆</span><span class="nav-label">السنة</span>
+    </button>
+    <button class="main-nav-btn" id="tabReports" onclick="showTab('reports')">
+      <span class="nav-icon">📊</span><span class="nav-label">التقارير</span>
+    </button>
+    <button class="main-nav-btn" id="tabZakat" onclick="showTab('zakat')">
+      <span class="nav-icon">🌙</span><span class="nav-label">الزكاة</span>
+    </button>
+    <button class="main-nav-btn" id="tabSettings" onclick="showTab('settings')">
+      <span class="nav-icon">⚙️</span><span class="nav-label">الإعدادات</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MONTH BAR -->
+<div class="month-bar" id="monthBar">
+  <button class="month-arrow" onclick="changeMonth(-1)">‹</button>
+  <div class="month-label" id="monthLbl">—</div>
+  <button class="month-arrow" onclick="changeMonth(1)">›</button>
+</div>
+
+<div id="toastWrap"></div>
+<div class="save-wrap" id="saveWrap">
+  <button class="save-btn-main" id="saveBtn" onclick="saveAll()">💾 احفظ التغييرات</button>
+</div>
+
+<div class="quick-bar">
+  <div class="qa-types">
+    <button class="qa-type-btn expense active" id="qaBtnOut" onclick="qaSetType('out')" title="مصروف">💸</button>
+    <button class="qa-type-btn income" id="qaBtnIn" onclick="qaSetType('in')" title="دخل">💵</button>
+  </div>
+  <div class="qa-field">
+    <input class="qa-input" id="qaName" placeholder="وش صرفت على؟" onkeydown="if(event.key==='Enter')qaSubmit()">
+    <div class="qa-sep"></div>
+    <input class="qa-amount" id="qaAmt" type="number" placeholder="ريال" onkeydown="if(event.key==='Enter')qaSubmit()">
+  </div>
+  <button class="qa-submit" onclick="qaSubmit()">✓</button>
+</div>
+
+<main class="main">
+
+<!-- ══ MONTHLY ══ -->
+<div id="viewMonthly">
+  <div class="year-selector">
+    <div class="year-lbl">📅 السنة:</div>
+    <div class="year-btns" id="yearBtns"></div>
+    <input class="year-input" id="yearCustom" type="number" placeholder="أخرى">
+    <button class="year-go" onclick="goYear()">انتقل</button>
+  </div>
+
+  <div class="salary-strip">
+    <div class="salary-icon">💰</div>
+    <div class="salary-body">
+      <div class="salary-label">يوم نزول الراتب</div>
+      <div class="salary-row">
+        <span style="font-size:12px;color:var(--text3)">كل شهر يوم:</span>
+        <select class="salary-select" id="salarySelect" onchange="setSalaryDay(this.value)"></select>
+        <div class="salary-badge" id="salaryCd">اختر يوم</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="streak-card">
+    <div class="streak-head">
+      <div>
+        <div class="streak-title">سلسلة المتابعة اليومية</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px">سجّل حضورك كل يوم 🔥</div>
+      </div>
+      <div class="streak-flame">🔥</div>
+    </div>
+    <div class="streak-num" id="streakNum">0</div>
+    <div class="streak-sub">يوم متتالي</div>
+    <div class="streak-dots" id="streakDots"></div>
+    <button class="streak-checkin" id="streakBtn" onclick="doCheckin()">🔥 سجّل حضورك اليوم</button>
+    <div class="streak-msg" id="streakMsg"></div>
+    <div class="streak-stats">
+      <div class="streak-stat"><div class="streak-stat-num" id="sCur">0</div><div class="streak-stat-lbl">الحالية</div></div>
+      <div class="streak-stat"><div class="streak-stat-num" id="sMax">0</div><div class="streak-stat-lbl">الأطول</div></div>
+      <div class="streak-stat"><div class="streak-stat-num" id="sTot">0</div><div class="streak-stat-lbl">إجمالي</div></div>
+    </div>
+  </div>
+
+  <!-- AI INSIGHT — PRO feature card -->
+  <div class="pro-feature-card">
+    <div class="pro-feature-tag">✨ PRO — ذكاء اصطناعي</div>
+    <div class="ai-row">
+      <div class="ai-orb" onclick="refreshAI()">🧠</div>
+      <div class="ai-body">
+        <div class="ai-label">تحليل مالي ذكي</div>
+        <div class="ai-text" id="aiText">أضف بياناتك أول عشان أحللها لك ✨</div>
+        <div class="ai-actions">
+          <button class="ai-btn" onclick="aiAnalyzeLeaks()">🔍 كشف التسرب</button>
+          <button class="ai-btn" onclick="aiSuggestSavings()">💡 خطة ادخار</button>
+          <button class="ai-btn" onclick="refreshAI()">🔄 تحديث</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEAK CARD -->
+  <div class="leak-card" id="leakCard" style="display:none">
+    <div class="leak-header">
+      <span style="font-size:20px">🔍</span>
+      <div class="leak-title">اكتشاف التسرب المالي</div>
+    </div>
+    <div class="leak-items" id="leakItems"></div>
+    <div class="leak-tip" id="leakTip"></div>
+  </div>
+
+  <!-- SAVING PLAN -->
+  <div class="saving-card" id="savingPlanCard" style="display:none">
+    <div class="saving-header">
+      <span style="font-size:20px">🏦</span>
+      <div class="saving-title">خطة الادخار الذكية</div>
+    </div>
+    <div class="saving-slider-lbl">
+      <span>المبلغ اليومي: <strong id="dailySavingVal" style="color:var(--green2)">20 ﷼</strong></span>
+      <span style="font-size:10px;color:var(--text3)">اسحب للتعديل</span>
+    </div>
+    <input type="range" class="saving-slider" id="dailySavingSlider" min="5" max="200" step="5" value="20" oninput="updateSavingPlan(this.value)">
+    <div class="saving-grid">
+      <div class="saving-item"><div class="saving-item-val" id="sv-daily">20 ﷼</div><div class="saving-item-lbl">يومياً</div></div>
+      <div class="saving-item"><div class="saving-item-val" id="sv-monthly">608 ﷼</div><div class="saving-item-lbl">شهرياً</div></div>
+      <div class="saving-item"><div class="saving-item-val" id="sv-yearly">7,300 ﷼</div><div class="saving-item-lbl">سنوياً</div></div>
+    </div>
+    <div class="saving-tip" id="savingTip">20 ريال يومياً = 7,300 ريال سنوياً 🎯</div>
+  </div>
+
+  <div class="pts-bar">
+    <span style="font-size:18px">⭐</span>
+    <div><div class="pts-val" id="ptsVal">0</div><div class="pts-lbl">نقطة</div></div>
+    <div class="pts-level" id="ptsLevel">مبتدئ 🌱</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card income">
+      <div class="card-head"><div class="card-icon">💵</div><div class="card-badge" id="incBadge">—</div></div>
+      <div class="card-label">الدخل</div>
+      <div class="card-value" id="tInc">٠ ﷼</div>
+      <div class="card-bar"><div class="card-bar-fill" id="incBar" style="width:0%"></div></div>
+    </div>
+    <div class="card expense">
+      <div class="card-head"><div class="card-icon">💸</div><div class="card-badge" id="expBadge">—</div></div>
+      <div class="card-label">المصاريف</div>
+      <div class="card-value" id="tExp">٠ ﷼</div>
+      <div class="card-bar"><div class="card-bar-fill" id="expBar" style="width:0%"></div></div>
+    </div>
+    <div class="card saved">
+      <div class="card-head"><div class="card-icon">🏦</div><div class="card-badge" id="savBadge">—</div></div>
+      <div class="card-label">التوفير</div>
+      <div class="card-value" id="tSav">٠ ﷼</div>
+    </div>
+    <div class="card balance">
+      <div class="card-head"><div class="card-icon">⚖️</div></div>
+      <div class="card-label">الباقي</div>
+      <div class="card-value" id="tBal">٠ ﷼</div>
+      <div class="card-sub" id="balSub"></div>
+    </div>
+  </div>
+
+  <div class="progress-block">
+    <div class="progress-head">
+      <div class="progress-title">📊 نسبة الإنفاق من الدخل</div>
+      <div class="progress-pct" id="progPct">٠٪</div>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
+    <div class="progress-labels"><span id="spentLbl">صرفت: ٠ ﷼</span><span id="incomeLbl">دخلك: ٠ ﷼</span></div>
+  </div>
+
+  <!-- ADVANCED CHARTS — PRO -->
+  <div class="section-card">
+    <div class="section-head">
+      <div><div class="section-title">📈 الرسوم البيانية</div></div>
+      <div class="pro-feature-tag" style="margin-bottom:0">✨ PRO</div>
+    </div>
+    <div class="period-tabs">
+      <button class="period-tab active" onclick="setPeriod('daily',this)">يومي</button>
+      <button class="period-tab" onclick="setPeriod('weekly',this)">أسبوعي</button>
+      <button class="period-tab" onclick="setPeriod('monthly',this)">شهري</button>
+      <button class="period-tab" onclick="setPeriod('yearly',this)">سنوي</button>
+    </div>
+    <div class="bar-chart-wrap" id="periodChart"></div>
+    <div style="display:flex;justify-content:center;gap:14px;margin-top:4px">
+      <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3)"><div style="width:8px;height:8px;border-radius:2px;background:var(--danger)"></div>مصاريف</div>
+      <div style="display:flex;align-items:center;gap:5px;font-size:10px;color:var(--text3)"><div style="width:8px;height:8px;border-radius:2px;background:var(--green)"></div>دخل</div>
+    </div>
+  </div>
+
+  <div class="tip-bar">
+    <span style="font-size:15px">💡</span>
+    <div class="tip-text" id="tipText"></div>
+    <button class="tip-next-btn" onclick="nextTip()">ثانية ›</button>
+  </div>
+
+  <div class="search-bar">
+    <span style="font-size:13px;color:var(--text3)">🔍</span>
+    <input class="search-input" id="searchInput" placeholder="ابحث في المعاملات..." oninput="doSearch(this.value)">
+    <button class="search-clear" onclick="clearSearch()">✕</button>
+    <div class="search-results" id="searchResults" style="display:none"></div>
+  </div>
+
+  <!-- Income -->
+  <div class="section-card">
+    <div class="section-head">
+      <div><div class="section-title">💵 مصادر الدخل</div><div class="section-subtitle">راتب، فريلانس، تجارة...</div></div>
+      <div style="display:flex;gap:7px;align-items:center">
+        <span class="section-total" id="incTotal">٠ ﷼</span>
+        <button class="add-trigger" onclick="toggleForm('formIncome')">+ أضف</button>
+      </div>
+    </div>
+    <div class="items-list" id="incList"></div>
+    <div class="add-form" id="formIncome">
+      <div class="cat-chips">
+        <span class="cat-chip" onclick="qSetCat('incCat','💼','incName','راتب')">💼 راتب</span>
+        <span class="cat-chip" onclick="qSetCat('incCat','💻','incName','فريلانس')">💻 فريلانس</span>
+        <span class="cat-chip" onclick="qSetCat('incCat','🏪','incName','تجارة')">🏪 تجارة</span>
+        <span class="cat-chip" onclick="qSetCat('incCat','📦','incName','استثمار')">📦 استثمار</span>
+      </div>
+      <div class="form-row">
+        <input class="form-input" id="incName" type="text" placeholder="الاسم">
+        <input class="form-input" id="incAmt" type="number" placeholder="المبلغ ﷼" style="max-width:110px">
+        <select class="form-select" id="incCat" style="max-width:110px">
+          <option value="💼">💼 راتب</option><option value="💻">💻 فريلانس</option>
+          <option value="🏪">🏪 تجارة</option><option value="📦">📦 استثمار</option>
+          <option value="🎁">🎁 هدية</option><option value="➕">➕ غير ذلك</option>
+        </select>
+        <button class="form-btn" onclick="addItem('income')">سجّل</button>
+      </div>
+      <div class="amt-shortcuts">
+        <span class="amt-sh" onclick="setAmt('incAmt',1000)">١٠٠٠</span>
+        <span class="amt-sh" onclick="setAmt('incAmt',3000)">٣٠٠٠</span>
+        <span class="amt-sh" onclick="setAmt('incAmt',5000)">٥٠٠٠</span>
+        <span class="amt-sh" onclick="setAmt('incAmt',10000)">١٠٠٠٠</span>
+        <span class="amt-sh" onclick="setAmt('incAmt',15000)">١٥٠٠٠</span>
+      </div>
+      <label class="form-check"><input type="checkbox" id="incRec"> كرره كل شهر 🔄</label>
+    </div>
+  </div>
+
+  <!-- Fixed -->
+  <div class="section-card">
+    <div class="section-head">
+      <div><div class="section-title">🏠 المصاريف الثابتة</div><div class="section-subtitle">إيجار، قسط، اشتراكات...</div></div>
+      <div style="display:flex;gap:7px;align-items:center">
+        <span class="section-total" id="fixTotal">٠ ﷼</span>
+        <button class="add-trigger" onclick="toggleForm('formFixed')">+ أضف</button>
+      </div>
+    </div>
+    <div class="items-list" id="fixList"></div>
+    <div class="add-form" id="formFixed">
+      <div class="form-row">
+        <input class="form-input" id="fixName" type="text" placeholder="الاسم">
+        <input class="form-input" id="fixAmt" type="number" placeholder="المبلغ ﷼" style="max-width:110px">
+        <select class="form-select" id="fixCat" style="max-width:110px">
+          <option value="🏠">🏠 إيجار</option><option value="💡">💡 كهرباء/ماء</option>
+          <option value="📱">📱 جوال/نت</option><option value="🚗">🚗 سيارة</option>
+          <option value="🏦">🏦 قسط</option><option value="📺">📺 اشتراكات</option>
+          <option value="➕">➕ غير ذلك</option>
+        </select>
+        <button class="form-btn" onclick="addItem('fixed')">سجّل</button>
+      </div>
+      <label class="form-check"><input type="checkbox" id="fixRec" checked> كرره كل شهر 🔄</label>
+    </div>
+  </div>
+
+  <!-- Variable -->
+  <div class="section-card">
+    <div class="section-head">
+      <div><div class="section-title">📝 المشتريات اليومية</div><div class="section-subtitle">سجّل كل ما تصرف يومياً</div></div>
+      <div style="display:flex;gap:7px;align-items:center">
+        <span class="section-total" id="varTotal">٠ ﷼</span>
+        <button class="add-trigger" onclick="toggleForm('formVar')">+ أضف</button>
+      </div>
+    </div>
+    <div class="items-list" id="varList"></div>
+    <div class="add-form" id="formVar">
+      <div class="cat-chips">
+        <span class="cat-chip" onclick="qSetCat('varCat','🛒','varName','بقالة')">🛒 بقالة</span>
+        <span class="cat-chip" onclick="qSetCat('varCat','🍽️','varName','مطعم')">🍽️ مطعم</span>
+        <span class="cat-chip" onclick="qSetCat('varCat','☕','varName','قهوة')">☕ قهوة</span>
+        <span class="cat-chip" onclick="qSetCat('varCat','🎮','varName','ترفيه')">🎮 ترفيه</span>
+        <span class="cat-chip" onclick="qSetCat('varCat','💄','varName','عناية')">💄 عناية</span>
+        <span class="cat-chip" onclick="qSetCat('varCat','✈️','varName','سفر')">✈️ سفر</span>
+        <span class="cat-chip" onclick="qSetCat('varCat','🏥','varName','صحة')">🏥 صحة</span>
+      </div>
+      <div class="form-row">
+        <input class="form-input" id="varName" type="text" placeholder="مثل: غداء، قهوة...">
+        <input class="form-input" id="varAmt" type="number" placeholder="المبلغ ﷼" style="max-width:110px">
+        <select class="form-select" id="varCat" style="max-width:110px">
+          <option value="🛒">🛒 بقالة</option><option value="🍽️">🍽️ مطاعم</option>
+          <option value="☕">☕ قهوة</option><option value="👗">👗 ملابس</option>
+          <option value="💄">💄 عناية</option><option value="🎮">🎮 ترفيه</option>
+          <option value="✈️">✈️ سفر</option><option value="🏥">🏥 صحة</option>
+          <option value="🎁">🎁 هدايا</option><option value="➕">➕ غير ذلك</option>
+        </select>
+        <button class="form-btn" onclick="addItem('variable')">سجّل</button>
+      </div>
+      <div class="amt-shortcuts">
+        <span class="amt-sh" onclick="setAmt('varAmt',20)">٢٠</span>
+        <span class="amt-sh" onclick="setAmt('varAmt',50)">٥٠</span>
+        <span class="amt-sh" onclick="setAmt('varAmt',100)">١٠٠</span>
+        <span class="amt-sh" onclick="setAmt('varAmt',200)">٢٠٠</span>
+        <span class="amt-sh" onclick="setAmt('varAmt',500)">٥٠٠</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Goals -->
+  <div class="section-card">
+    <div class="section-head">
+      <div><div class="section-title">🎯 الأهداف المالية</div><div class="section-subtitle">سفر، سيارة، زواج...</div></div>
+      <button class="add-trigger" onclick="toggleForm('formGoal')">+ هدف</button>
+    </div>
+    <div id="goalList"></div>
+    <div class="add-form" id="formGoal">
+      <div class="form-row">
+        <input class="form-input" id="goalName" type="text" placeholder="اسم الهدف">
+        <input class="form-input" id="goalTarget" type="number" placeholder="المبلغ المستهدف">
+        <input class="form-input" id="goalSaved" type="number" placeholder="وفّرت لحد الآن">
+        <select class="form-select" id="goalIcon" style="max-width:90px">
+          <option value="✈️">✈️ سفر</option><option value="🚗">🚗 سيارة</option>
+          <option value="🏠">🏠 بيت</option><option value="💍">💍 زواج</option>
+          <option value="📱">📱 جهاز</option><option value="🎓">🎓 دراسة</option>
+          <option value="🆘">🆘 طوارئ</option><option value="⭐">⭐ أخرى</option>
+        </select>
+        <button class="form-btn" onclick="addGoal()">سجّل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Budget -->
+  <div class="section-card">
+    <div class="section-head">
+      <div><div class="section-title">🛡️ ميزانية الفئات</div><div class="section-subtitle">حدد سقفاً لكل نوع إنفاق</div></div>
+      <button class="add-trigger" onclick="toggleForm('formBudget')">+ فئة</button>
+    </div>
+    <div class="budget-alert" id="budgetAlert"></div>
+    <div id="budgetItems"></div>
+    <div class="add-form" id="formBudget">
+      <div class="form-row">
+        <select class="form-select" id="bcCat">
+          <option value="🍽️ مطاعم">🍽️ مطاعم</option><option value="☕ قهوة">☕ قهوة</option>
+          <option value="🎮 ترفيه">🎮 ترفيه</option><option value="🛒 بقالة">🛒 بقالة</option>
+          <option value="👗 ملابس">👗 ملابس</option><option value="✈️ سفر">✈️ سفر</option>
+          <option value="🏥 صحة">🏥 صحة</option><option value="💄 عناية">💄 عناية</option>
+          <option value="⛽ بنزين">⛽ بنزين</option>
+        </select>
+        <input class="form-input" id="bcName" type="text" placeholder="أو اكتب اسم فئة">
+        <input class="form-input" id="bcLimit" type="number" placeholder="الحد ﷼" style="max-width:100px">
+        <button class="form-btn" onclick="addBudgetCat()">سجّل</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="section-card">
+    <div class="section-head"><div class="section-title">🏆 الإنجازات</div></div>
+    <div class="ach-grid" id="achGrid"></div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-title">🥧 توزيع المصاريف</div>
+      <div class="pie-wrap">
+        <svg width="80" height="80" viewBox="0 0 100 100" id="pieChart" style="flex-shrink:0"></svg>
+        <div class="pie-legend" id="pieLegend"></div>
+      </div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">📊 مقارنة الشهرين</div>
+      <div id="cmpChart"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ YEARLY ══ -->
+<div id="viewYearly" style="display:none">
+  <div class="ycards">
+    <div class="ycard"><div class="ycard-icon">💵</div><div class="ycard-val" id="yInc">٠</div><div class="ycard-lbl">إجمالي الدخل</div></div>
+    <div class="ycard"><div class="ycard-icon">💸</div><div class="ycard-val" id="yExp">٠</div><div class="ycard-lbl">إجمالي المصاريف</div></div>
+    <div class="ycard"><div class="ycard-icon">🏦</div><div class="ycard-val" id="ySav">٠</div><div class="ycard-lbl">إجمالي التوفير</div></div>
+  </div>
+  <div class="year-bars-card">
+    <div class="chart-title">📈 الدخل والمصاريف شهرياً (<span id="yearChartLabel"></span>)</div>
+    <div class="year-bars" id="yearBars"></div>
+    <div class="year-lbrs" id="yearLbls"></div>
+    <div class="year-legend">
+      <div class="year-leg-item"><div class="year-leg-dot" style="background:var(--green)"></div>دخل</div>
+      <div class="year-leg-item"><div class="year-leg-dot" style="background:var(--danger)"></div>مصروف</div>
+    </div>
+  </div>
+  <div class="section-card">
+    <div class="section-head"><div class="section-title">🏆 الإنجازات السنوية</div></div>
+    <div id="yearAch" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:8px"></div>
+  </div>
+</div>
+
+<!-- ══ REPORTS ══ -->
+<div id="viewReports" style="display:none">
+  <div class="report-header">
+    <div class="report-icon-bg">📊</div>
+    <div>
+      <div class="report-title">التقارير المالية</div>
+      <div class="report-subtitle">تحليل ذكي — فلونس برو ✨</div>
+    </div>
+  </div>
+  <div class="report-filters">
+    <div class="report-filters-title">🔍 تصفية التقارير</div>
+    <div class="report-filter-row">
+      <select class="rfilter-sel" id="rFilterType">
+        <option value="all">كل البيانات</option>
+        <option value="income">الدخل فقط</option>
+        <option value="expense">المصاريف فقط</option>
+      </select>
+      <select class="rfilter-sel" id="rFilterPeriod">
+        <option value="month">الشهر الحالي</option>
+        <option value="quarter">الربع</option>
+        <option value="year">السنة كاملة</option>
+      </select>
+      <button class="rfilter-btn" onclick="generateReport()">عرض ›</button>
+    </div>
+  </div>
+  <div class="report-export-bar">
+    <button class="export-btn" onclick="exportPDF()">🖨️ PDF</button>
+    <button class="export-btn" onclick="exportCSV()">📋 CSV</button>
+    <button class="export-btn" onclick="exportTxt()">📄 نصي</button>
+  </div>
+  <div class="report-summary-row">
+    <div class="rsumm-card"><div class="rsumm-icon">💵</div><div class="rsumm-val income" id="rTotInc">٠ ﷼</div><div class="rsumm-lbl">إجمالي الدخل</div></div>
+    <div class="rsumm-card"><div class="rsumm-icon">💸</div><div class="rsumm-val expense" id="rTotExp">٠ ﷼</div><div class="rsumm-lbl">إجمالي المصاريف</div></div>
+    <div class="rsumm-card"><div class="rsumm-icon">🏦</div><div class="rsumm-val save" id="rTotSav">٠ ﷼</div><div class="rsumm-lbl">صافي التوفير</div></div>
+  </div>
+  <div class="report-cat-breakdown">
+    <div class="chart-title">📂 توزيع المصاريف حسب الفئة</div>
+    <div id="catBreakdown"></div>
+  </div>
+  <div class="report-table-card">
+    <div class="report-table-head">
+      <div class="report-table-title">📋 تفاصيل المعاملات</div>
+      <div id="reportCount" style="font-size:10px;color:var(--text3)"></div>
+    </div>
+    <div style="overflow-x:auto">
+      <table class="rtable">
+        <thead><tr><th>البند</th><th>الفئة</th><th>النوع</th><th>المبلغ</th></tr></thead>
+        <tbody id="reportBody"></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="report-table-card">
+    <div class="report-table-head"><div class="report-table-title">📅 ملخص شهري</div></div>
+    <div style="overflow-x:auto">
+      <table class="rtable">
+        <thead><tr><th>الشهر</th><th>الدخل</th><th>المصاريف</th><th>التوفير</th><th>نسبة الإنفاق</th></tr></thead>
+        <tbody id="monthlyBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ZAKAT ══ -->
+<div id="viewZakat" style="display:none">
+  <div class="zakat-panel">
+    <div class="zakat-header">
+      <div class="zakat-icon-bg">☪️</div>
+      <div>
+        <div class="zakat-title">حاسبة الزكاة</div>
+        <div class="zakat-subtitle">احسب زكاتك وفق المذاهب الفقهية</div>
+      </div>
+    </div>
+    <div class="zakat-tabs">
+      <div class="zakat-tab active" onclick="setZakatTab('cash')" id="ztCash">💵 النقود</div>
+      <div class="zakat-tab" onclick="setZakatTab('gold')" id="ztGold">🥇 الذهب</div>
+      <div class="zakat-tab" onclick="setZakatTab('trade')" id="ztTrade">🏪 التجارة</div>
+    </div>
+    <div style="font-size:11px;color:var(--text3);margin-bottom:5px">⚖️ اختر المذهب الفقهي:</div>
+    <select class="zakat-madhab-sel" id="madhabSel" onchange="updateNisabInfo()">
+      <option value="hanafi">الحنفي — نصاب الفضة (٥٩٥ جرام فضة)</option>
+      <option value="maliki" selected>المالكي / الشافعي / الحنبلي — نصاب الذهب (٨٥ جرام ذهب)</option>
+    </select>
+    <div class="zakat-nisab-info" id="nisabInfo">جاري حساب النصاب...</div>
+    <div id="ztabCash">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <div style="font-size:11px;font-weight:700;color:var(--text2)">💰 أدخل بياناتك</div>
+        <button class="auto-fill-btn" onclick="autoFillZakat()">⚡ ملء تلقائي</button>
+      </div>
+      <div class="zakat-row"><div class="zakat-lbl">💵 النقود السائلة</div><input class="zakat-input" id="zCash" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">🏦 حسابات الادخار</div><input class="zakat-input" id="zSavings" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">📈 الاستثمارات</div><input class="zakat-input" id="zInvest" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">💰 ديون لك</div><input class="zakat-input" id="zDebtsFor" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">➖ الديون عليك</div><input class="zakat-input" id="zDebtsOn" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+    </div>
+    <div id="ztabGold" style="display:none">
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:8px">🥇 الذهب المملوك</div>
+      <div class="zakat-row"><div class="zakat-lbl">ذهب للادخار (جرام)</div><input class="zakat-input" id="zGoldGrams" type="number" placeholder="٠ جرام" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">سعر الجرام (﷼)</div><input class="zakat-input" id="zGoldPrice" type="number" placeholder="٢٢٠" oninput="calcZakat()"></div>
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin:10px 0 8px">⚗️ الفضة المملوكة</div>
+      <div class="zakat-row"><div class="zakat-lbl">فضة للادخار (جرام)</div><input class="zakat-input" id="zSilverGrams" type="number" placeholder="٠ جرام" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">سعر الجرام (﷼)</div><input class="zakat-input" id="zSilverPrice" type="number" placeholder="٣" oninput="calcZakat()"></div>
+    </div>
+    <div id="ztabTrade" style="display:none">
+      <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:8px">🏪 عروض التجارة</div>
+      <div class="zakat-row"><div class="zakat-lbl">قيمة البضائع</div><input class="zakat-input" id="zStock" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">الديون المستحقة</div><input class="zakat-input" id="zTradeDebt" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+      <div class="zakat-row"><div class="zakat-lbl">➖ الديون على المنشأة</div><input class="zakat-input" id="zTradeOwed" type="number" placeholder="٠ ﷼" oninput="calcZakat()"></div>
+    </div>
+    <button class="zakat-calc-btn" onclick="calcZakat()">🧮 احسب الزكاة</button>
+    <div class="zakat-result" id="zakatResult"></div>
+  </div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div id="viewSettings" style="display:none">
+  <div class="theme-panel">
+    <div class="theme-title">🎨 اختر الثيم</div>
+    <div class="theme-grid">
+      <div class="theme-swatch sw-dark active" data-theme="default" onclick="applyTheme('default',this)">
+        <span class="swatch-emoji">🌑</span>
+        <span class="swatch-name">داكن</span>
+        <span class="swatch-desc">أزرق كلاسيك</span>
+      </div>
+      <div class="theme-swatch sw-light" data-theme="light" onclick="applyTheme('light',this)">
+        <span class="swatch-emoji">☀️</span>
+        <span class="swatch-name">فاتح</span>
+        <span class="swatch-desc">نظيف وواضح</span>
+      </div>
+      <div class="theme-swatch sw-midnight" data-theme="midnight" onclick="applyTheme('midnight',this)">
+        <span class="swatch-emoji">🌌</span>
+        <span class="swatch-name">منتصف الليل</span>
+        <span class="swatch-desc">بنفسجي عميق</span>
+      </div>
+    </div>
+    <div class="custom-cats-title">➕ فئات مخصصة للمصاريف</div>
+    <div class="custom-cats-list" id="customCatsList"></div>
+    <div class="custom-cat-add">
+      <input class="custom-cat-input" id="newCatInput" placeholder="مثال: ☕ قهوة أو 🐾 حيوانات">
+      <button class="custom-cat-btn" onclick="addCustomCat()">أضف</button>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-head"><div class="section-title">💰 يوم نزول الراتب</div></div>
+    <div class="salary-row" style="margin-top:4px">
+      <span style="font-size:12px;color:var(--text3)">كل شهر يوم:</span>
+      <select class="salary-select" id="salarySelect2" onchange="setSalaryDay(this.value)" style="width:80px"></select>
+      <div class="salary-badge" id="salaryCd2">اختر يوم</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-head"><div class="section-title">📊 إحصائيات الحساب</div></div>
+    <div id="accountStats" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px"></div>
+  </div>
+
+  <div class="section-card">
+    <div class="section-head"><div class="section-title">🗑️ إدارة البيانات</div></div>
+    <button onclick="if(confirm('هل أنت متأكد؟ سيتم حذف بيانات الشهر الحالي!'))clearMonthData()" style="width:100%;padding:10px;border-radius:9px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--danger);font-family:var(--font-body);font-size:13px;cursor:pointer">🗑️ حذف بيانات الشهر الحالي</button>
+  </div>
+</div>
+
+</main>
+<div class="footer">فلونس برو 👑 — مخططك المالي الذكي | بياناتك محلية ومؤمّنة 🔒</div>
+
+<script>
+'use strict';
+const MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+const DAY_NAMES=['أح','إث','ثل','أر','خم','جم','سب'];
+const DAYS_AR=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const PIE_COLORS=['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#f97316','#06b6d4','#84cc16','#ec4899','#14b8a6'];
+const TIPS=['قاعدة ٥٠/٣٠/٢٠: احتياجات، رغبات، ادخار 💡','وفّر صندوق طوارئ بـ ١٠٠٠ ﷼ أولاً 🆘','ألغِ الاشتراكات غير المستخدمة 📺','اكتب قائمة قبل الجمعية — توفر ٢٠٪ 🛒','أول الراتب: حوّل للتوفير فوراً 🏦','قبل أي شراء: احتاجه أو بس خاطري؟ 🤔','استثمر في نفسك — كورس أو كتاب 📚','وفّر أولاً ثم أنفق — مو العكس 💰'];
+const ACHIEVEMENTS=[{id:'first_save',icon:'🌱',name:'أول توفير',pts:50},{id:'no_exceed',icon:'🛡️',name:'ما تجاوزت',pts:100},{id:'save_20',icon:'💎',name:'وفّرت ٢٠٪',pts:200},{id:'daily_log',icon:'📅',name:'تسجيل يومي',pts:75},{id:'goal_done',icon:'🏆',name:'حققت هدف',pts:300},{id:'three_months',icon:'🔥',name:'٣ شهور',pts:500}];
+const LEVELS=[{min:0,name:'مبتدئ 🌱'},{min:100,name:'ذكي 💡'},{min:300,name:'محترف 💼'},{min:700,name:'خبير 🏆'},{min:1500,name:'ماهر 💎'},{min:3000,name:'أسطورة ⭐'}];
+const now=new Date();
+let state={year:now.getFullYear(),month:now.getMonth(),tab:'monthly',tipIdx:0,qaType:'out',dirty:false,pts:0,salaryDay:0,data:{},streak:{days:[],current:0,max:0,total:0},notifs:[],zakatTab:'cash',period:'monthly',customCats:[],theme:'default'};
+const S={save(k,v){try{localStorage.setItem('fl_'+k,JSON.stringify(v));}catch(e){}},load(k,fb){try{const r=localStorage.getItem('fl_'+k);return r===null?fb:JSON.parse(r);}catch(e){return fb;}}};
+function init(){
+  state.data=S.load('data',{});state.pts=S.load('pts',0);state.salaryDay=S.load('salary',0);
+  state.streak=S.load('streak',{days:[],current:0,max:0,total:0});state.notifs=S.load('notifs',[]);
+  state.customCats=S.load('customCats',[]);state.theme=S.load('theme','default');
+  migrateData();applyTheme(state.theme,null,true);buildSalarySelects();buildYearBtns();
+  renderHeaderDate();renderAll();initStreakRender();updateBellBadge();checkNotifAlerts();
+  updateNisabInfo();document.getElementById('tipText').textContent=TIPS[0];
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)saveAll();});
+  document.addEventListener('keydown',e=>{if(e.ctrlKey&&e.key==='s'){e.preventDefault();saveAll();}});
+}
+function migrateData(){Object.keys(state.data).forEach(k=>{const m=state.data[k];if(!m.income)m.income=[];if(!m.fixed)m.fixed=[];if(!m.variable)m.variable=[];if(!m.goals)m.goals=[];if(!m.daily)m.daily={};if(!m.budgets)m.budgets=[];});}
+function applyTheme(theme,el,silent){
+  const valid=['default','light','midnight'];
+  if(!valid.includes(theme))theme='default';
+  document.documentElement.setAttribute('data-theme',theme==='default'?'':theme);
+  state.theme=theme;if(!silent)S.save('theme',theme);
+  document.querySelectorAll('.theme-swatch').forEach(s=>s.classList.toggle('active',s.dataset.theme===theme));
+  if(!silent){const names={default:'ثيم داكن 🌑',light:'ثيم فاتح ☀️',midnight:'منتصف الليل 🌌'};toast(names[theme]||'','warn');}
+}
+function renderHeaderDate(){
+  const el=document.getElementById('headerDate');if(!el)return;
+  const t=new Date();let h='';
+  try{h=new Intl.DateTimeFormat('ar-SA-u-ca-islamic',{day:'numeric',month:'short'}).format(t);}catch(e){h='';}
+  el.innerHTML=`<div class="header-date-h">${h||'هجري'}</div><div class="header-date-day">${DAYS_AR[t.getDay()]} ${t.getDate()} ${MONTHS[t.getMonth()]}</div>`;
+}
+const makeKey=(y,m)=>`${y}_m${m}`;
+function getMonthData(y,m){const k=makeKey(y,m);if(!state.data[k])state.data[k]={income:[],fixed:[],variable:[],goals:[],daily:{},budgets:[]};return state.data[k];}
+function getTotals(y,m){
+  const d=getMonthData(y,m),sum=arr=>arr.reduce((s,x)=>s+(Number(x.amt)||0),0);
+  let dI=0,dO=0;Object.values(d.daily).forEach(arr=>arr.forEach(e=>{if(e.type==='out')dO+=e.amt;else dI+=e.amt;}));
+  const income=sum(d.income)+dI,expense=sum(d.fixed)+sum(d.variable)+dO,save=income-expense;
+  const spendPct=income>0?Math.min(100,Math.round((expense/income)*100)):0;
+  const savePct=income>0?Math.round((Math.max(0,save)/income)*100):0;
+  return{income,expense,save,spendPct,savePct};
+}
+function getCategorySpending(y,m){
+  const d=getMonthData(y,m),cats={};
+  [...d.variable,...d.fixed].forEach(i=>{const c=i.cat||'➕';cats[c]=(cats[c]||0)+(Number(i.amt)||0);});
+  Object.values(d.daily).forEach(arr=>arr.forEach(e=>{if(e.type==='out'){const c=e.cat||'➕';cats[c]=(cats[c]||0)+(Number(e.amt)||0);}}));
+  return cats;
+}
+function getBudgetSpending(bName,catSpend){
+  let total=0;
+  const bE=[...bName].find(c=>/\p{Emoji}/u.test(c))||'';
+  const bT=bName.replace(/[\p{Emoji}]/gu,'').trim();
+  Object.entries(catSpend).forEach(([cat,amt])=>{
+    const cE=[...cat].find(c=>/\p{Emoji}/u.test(c))||'';
+    const cT=cat.replace(/[\p{Emoji}]/gu,'').trim();
+    if(bE&&cE&&bE===cE)total+=amt;
+    else if(bT&&cT&&(bT.includes(cT)||cT.includes(bT)))total+=amt;
+  });
+  return total;
+}
+const fmt=n=>{const v=Math.abs(Math.round(n||0));return(n<0?'-':'')+v.toLocaleString('ar-SA');};
+function showTab(t){
+  state.tab=t;
+  ['monthly','yearly','reports','zakat','settings'].forEach(tab=>{
+    const btn=document.getElementById('tab'+tab.charAt(0).toUpperCase()+tab.slice(1));
+    if(btn)btn.className='main-nav-btn'+(tab===t?' active':'');
+    const view=document.getElementById('view'+tab.charAt(0).toUpperCase()+tab.slice(1));
+    if(view)view.style.display=tab===t?'block':'none';
+  });
+  const mb=document.getElementById('monthBar');
+  if(mb)mb.style.display=(t==='monthly'||t==='yearly')?'flex':'none';
+  if(t==='yearly')renderYearly();
+  else if(t==='reports')generateReport();
+  else if(t==='zakat')updateNisabInfo();
+  else if(t==='settings')renderSettings();
+  else if(t==='monthly')renderAll();
+}
+function changeMonth(d){const date=new Date(state.year,state.month+d,1);state.year=date.getFullYear();state.month=date.getMonth();buildYearBtns();renderAll();}
+function buildYearBtns(){
+  const cur=new Date().getFullYear(),years=[cur-2,cur-1,cur,cur+1];
+  document.getElementById('yearBtns').innerHTML=years.map(y=>`<button class="year-btn${y===state.year?' active':''}" onclick="setYear(${y})">${y}</button>`).join('');
+}
+function setYear(y){state.year=y;buildYearBtns();renderAll();}
+function goYear(){const y=parseInt(document.getElementById('yearCustom').value);if(y>=1990&&y<=2100){setYear(y);document.getElementById('yearCustom').value='';}else toast('سنة غير صحيحة','warn');}
+function updateMonthLabel(){document.getElementById('monthLbl').textContent=MONTHS[state.month]+' '+state.year;}
+function renderAll(){
+  updateMonthLabel();
+  if(state.tab==='monthly'){renderSummary();renderLists();renderCharts();renderBudgets();renderGoals();renderAI();renderPts();renderAch();updateSalaryCountdown();renderPeriodChart();detectLeaks();}
+  else if(state.tab==='yearly')renderYearly();
+  else if(state.tab==='reports')generateReport();
+}
+function renderSummary(){
+  const t=getTotals(state.year,state.month),p=getTotals(state.year,state.month>0?state.month-1:11);
+  setText('tInc',fmt(t.income)+' ﷼');setText('tExp',fmt(t.expense)+' ﷼');
+  setText('tSav',fmt(Math.max(0,t.save))+' ﷼');setText('tBal',fmt(t.income-t.expense)+' ﷼');
+  setText('balSub',t.save>=0?'✅ ماشي':'⚠️ تجاوز');
+  if(p.income>0)setText('incBadge',(t.income-p.income>=0?'+':'')+fmt(t.income-p.income)+' ﷼');
+  setText('savBadge',t.savePct+'٪');setText('expBadge',t.spendPct+'٪');
+  const mx=Math.max(t.income,t.expense,1);
+  setStyle('incBar','width',Math.round((t.income/mx)*100)+'%');setStyle('expBar','width',Math.round((t.expense/mx)*100)+'%');
+  const fill=document.getElementById('progFill');
+  if(fill){fill.style.width=t.spendPct+'%';fill.className='progress-fill'+(t.spendPct>90?' danger':t.spendPct>70?' warn':'');}
+  setText('progPct',t.spendPct+'٪');setText('spentLbl','صرفت: '+fmt(t.expense)+' ﷼');setText('incomeLbl','دخلك: '+fmt(t.income)+' ﷼');
+  if(t.income>0&&t.spendPct>=90&&!sessionStorage.getItem('alerted_'+makeKey(state.year,state.month))){sessionStorage.setItem('alerted_'+makeKey(state.year,state.month),'1');toast('تجاوزت '+t.spendPct+'٪ من ميزانيتك!','danger');}
+}
+function renderAI(){
+  const t=getTotals(state.year,state.month);let msg='';
+  if(!t.income)msg='أضف دخلك أول عشان أحللها لك ✨';
+  else if(t.expense>t.income)msg='⚠️ مصاريفك تتجاوز دخلك — راجع الإنفاق!';
+  else if(t.savePct>=20)msg=`🌟 ماشاء الله! توفيرك ${t.savePct}٪ — أنت على الطريق الصح`;
+  else if(t.savePct>=10)msg=`📊 توفيرك ${t.savePct}٪ — جيد، حاول توصل ٢٠٪`;
+  else msg=`⚡ توفيرك ${t.savePct}٪ — اضغط "خطة ادخار" لأقترح حلاً`;
+  setText('aiText',msg);
+}
+function refreshAI(){renderAI();toast('تم تحديث التحليل ✨','warn');}
+function aiAnalyzeLeaks(){detectLeaks(true);}
+function aiSuggestSavings(){const c=document.getElementById('savingPlanCard');if(c){c.style.display='block';updateSavingPlan(20);}toast('تم إنشاء خطة الادخار 💡','warn');}
+function detectLeaks(forceShow){
+  const cats=getCategorySpending(state.year,state.month),leaks=[],T=200;
+  Object.entries(cats).forEach(([cat,m])=>{if(m>=T)leaks.push({cat,monthly:m,yearly:m*12,daily:Math.round(m/30)});});
+  const card=document.getElementById('leakCard'),itemsEl=document.getElementById('leakItems'),tipEl=document.getElementById('leakTip');
+  if(!card||!itemsEl)return;
+  if(!leaks.length&&!forceShow){card.style.display='none';return;}
+  card.style.display='block';
+  if(!leaks.length){itemsEl.innerHTML='<div style="font-size:12px;color:var(--text3);padding:8px">لا تسرب مالي — ممتاز! ✅</div>';if(tipEl)tipEl.textContent='';return;}
+  itemsEl.innerHTML=leaks.map(l=>`<div class="leak-item"><div class="leak-item-emoji">${l.cat}</div><div class="leak-item-body"><div class="leak-item-name">${l.cat}</div><div class="leak-item-detail">~${l.daily} ﷼ يومياً — ${fmt(l.yearly)} ﷼ سنوياً</div></div><div class="leak-item-amt">${fmt(l.monthly)} ﷼/شهر</div></div>`).join('');
+  const b=leaks[0],pot=Math.round(b.monthly*.3);
+  if(tipEl)tipEl.textContent=`💡 لو خفّضت ${b.cat} بـ ٣٠٪ ستوفر ${fmt(pot)} ﷼/شهر = ${fmt(pot*12)} ﷼/سنة`;
+  if(forceShow)toast('تم تحليل التسرب المالي 🔍','warn');
+}
+function updateSavingPlan(daily){
+  daily=parseInt(daily)||20;
+  const monthly=Math.round(daily*30.4),yearly=Math.round(daily*365);
+  setText('dailySavingVal',fmt(daily)+' ﷼');setText('sv-daily',fmt(daily)+' ﷼');setText('sv-monthly',fmt(monthly)+' ﷼');setText('sv-yearly',fmt(yearly)+' ﷼');
+  const tip=yearly>=10000?`${fmt(daily)} ريال يومياً = ${fmt(yearly)} ريال سنوياً — رحلة سياحية! ✈️`:yearly>=5000?`${fmt(daily)} ريال يومياً = ${fmt(yearly)} ريال سنوياً — جهاز جديد! 📱`:`ابدأ بـ ${fmt(daily)} ريال وزِد تدريجياً 📈`;
+  setText('savingTip',tip);
+}
+function setPeriod(period,el){state.period=period;document.querySelectorAll('.period-tab').forEach(t=>t.classList.remove('active'));if(el)el.classList.add('active');renderPeriodChart();}
+function renderPeriodChart(){
+  const el=document.getElementById('periodChart');if(!el)return;
+  const d=getMonthData(state.year,state.month);let data=[];
+  if(state.period==='daily'){const days=new Date(state.year,state.month+1,0).getDate();for(let day=1;day<=Math.min(days,15);day++){const arr=d.daily[day]||[];data.push({lbl:day+'',exp:arr.filter(e=>e.type==='out').reduce((s,e)=>s+e.amt,0),inc:arr.filter(e=>e.type==='in').reduce((s,e)=>s+e.amt,0)});}}
+  else if(state.period==='weekly'){for(let w=0;w<5;w++){const s=w*7+1,e=Math.min((w+1)*7,31);let exp=0,inc=0;for(let day=s;day<=e;day++){const arr=d.daily[day]||[];exp+=arr.filter(e=>e.type==='out').reduce((s,e)=>s+e.amt,0);inc+=arr.filter(e=>e.type==='in').reduce((s,e)=>s+e.amt,0);}data.push({lbl:'أ'+(w+1),exp,inc});}}
+  else if(state.period==='monthly'){for(let m=0;m<12;m++){const t=getTotals(state.year,m);data.push({lbl:MONTHS[m].slice(0,3),exp:t.expense,inc:t.income});}}
+  else{for(let y=state.year-4;y<=state.year;y++){let exp=0,inc=0;for(let m=0;m<12;m++){const t=getTotals(y,m);exp+=t.expense;inc+=t.income;}data.push({lbl:y+'',exp,inc});}}
+  const mx=Math.max(...data.map(d=>Math.max(d.exp,d.inc)),1);
+  el.innerHTML=data.map(d=>{const eh=Math.round((d.exp/mx)*96),ih=Math.round((d.inc/mx)*96);return `<div class="bar-col"><div style="display:flex;gap:2px;align-items:flex-end;height:96px;"><div class="bar-fill" style="height:${eh}px;background:var(--danger);flex:1;" title="${fmt(d.exp)} ﷼"></div>${d.inc>0?`<div class="bar-fill" style="height:${ih}px;background:var(--green);flex:1;" title="${fmt(d.inc)} ﷼"></div>`:''}</div><div class="bar-col-lbl">${d.lbl}</div></div>`;}).join('');
+}
+function renderLists(){const m=getMonthData(state.year,state.month);renderItemList(m.income,'income','incList','incTotal','income');renderItemList(m.fixed,'fixed','fixList','fixTotal','expense');renderItemList(m.variable,'variable','varList','varTotal','expense');}
+function renderItemList(arr,type,listId,totalId,colorCls){
+  const total=arr.reduce((s,x)=>s+(Number(x.amt)||0),0);setText(totalId,fmt(total)+' ﷼');
+  const el=document.getElementById(listId);if(!el)return;
+  if(!arr.length){el.innerHTML=`<div class="empty-state"><span class="empty-state-icon">${colorCls==='income'?'💵':'💸'}</span>ما في شيء — أضف!</div>`;return;}
+  el.innerHTML=arr.map(item=>`<div class="item-row${item.paid?' paid':''}"><div class="item-emoji">${item.cat}</div><div class="item-name" onclick="togglePaid('${type}',${item.id})">${item.name}${item.recurring?'<span style="font-size:9px;color:var(--text3)"> 🔄</span>':''}</div><div class="item-amount ${colorCls}">${fmt(item.amt)} ﷼</div><button class="item-del" onclick="delItem('${type}',${item.id})">✕</button></div>`).join('');
+}
+function addItem(type){
+  const F={income:{n:'incName',a:'incAmt',c:'incCat',r:'incRec'},fixed:{n:'fixName',a:'fixAmt',c:'fixCat',r:'fixRec'},variable:{n:'varName',a:'varAmt',c:'varCat',r:null}};
+  const f=F[type];const name=document.getElementById(f.n)?.value.trim(),amt=parseFloat(document.getElementById(f.a)?.value)||0,cat=document.getElementById(f.c)?.value||'➕',rec=f.r?document.getElementById(f.r)?.checked:false;
+  if(!name){toast('اكتب الاسم أولاً ⚠️','warn');return;}if(!amt){toast('اكتب المبلغ ⚠️','warn');return;}
+  const m=getMonthData(state.year,state.month),arr=type==='income'?m.income:type==='fixed'?m.fixed:m.variable;
+  arr.push({id:Date.now(),name,amt,cat,paid:false,recurring:rec});
+  document.getElementById(f.n).value='';document.getElementById(f.a).value='';
+  addPts(15);markDirty();checkAch();renderAll();toast('تمت الإضافة ✅','success');
+}
+function delItem(type,id){const m=getMonthData(state.year,state.month);const arr=type==='income'?m.income:type==='fixed'?m.fixed:m.variable;const i=arr.findIndex(x=>x.id===id);if(i>=0)arr.splice(i,1);markDirty();renderAll();}
+function togglePaid(type,id){const m=getMonthData(state.year,state.month);const arr=type==='income'?m.income:type==='fixed'?m.fixed:m.variable;const item=arr.find(x=>x.id===id);if(!item)return;item.paid=!item.paid;if(item.paid){addPts(5);toast('تم ✅','success');}markDirty();renderAll();}
+function addGoal(){
+  const name=document.getElementById('goalName')?.value.trim(),target=parseFloat(document.getElementById('goalTarget')?.value)||0,saved=parseFloat(document.getElementById('goalSaved')?.value)||0,icon=document.getElementById('goalIcon')?.value||'⭐';
+  if(!name||!target){toast('اكتب اسم الهدف والمبلغ ⚠️','warn');return;}
+  const m=getMonthData(state.year,state.month);m.goals.push({id:Date.now(),name,target,saved,icon});
+  ['goalName','goalTarget','goalSaved'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});
+  addPts(50);markDirty();checkAch();renderGoals();toast('تم إضافة الهدف 🎯','success');
+}
+function delGoal(id){const m=getMonthData(state.year,state.month);m.goals=m.goals.filter(g=>g.id!==id);markDirty();renderGoals();}
+function renderGoals(){
+  const m=getMonthData(state.year,state.month),el=document.getElementById('goalList');if(!el)return;
+  if(!m.goals.length){el.innerHTML='<div class="empty-state"><span class="empty-state-icon">🎯</span>ما عندك أهداف بعد</div>';return;}
+  el.innerHTML=m.goals.map(g=>{const pct=g.target?Math.min(100,Math.round((g.saved/g.target)*100)):0;return `<div class="goal-item"><div class="goal-head"><div class="goal-name">${g.icon} ${g.name}</div><div style="display:flex;gap:7px;align-items:center"><div class="goal-amounts">${fmt(g.saved)} / ${fmt(g.target)} ﷼</div><button class="item-del" onclick="delGoal(${g.id})">✕</button></div></div><div class="goal-track-bg"><div class="goal-track-fill" style="width:${pct}%"></div></div><div class="goal-pct">${pct}٪ مكتمل ${pct>=100?'🎉':''}</div></div>`;}).join('');
+}
+function addBudgetCat(){
+  const sel=document.getElementById('bcCat')?.value||'',typed=document.getElementById('bcName')?.value.trim(),name=typed||sel,limit=parseFloat(document.getElementById('bcLimit')?.value)||0;
+  if(!name||!limit){toast('اكتب الفئة والمبلغ ⚠️','warn');return;}
+  const m=getMonthData(state.year,state.month);if(m.budgets.some(b=>b.name===name)){toast('الفئة موجودة','warn');return;}
+  m.budgets.push({id:Date.now(),name,limit});document.getElementById('bcName').value='';document.getElementById('bcLimit').value='';document.getElementById('formBudget').classList.remove('open');
+  addPts(10);markDirty();renderBudgets();toast('تمت إضافة الفئة ✅','success');
+}
+function delBudgetCat(id){const m=getMonthData(state.year,state.month);m.budgets=m.budgets.filter(b=>b.id!==id);markDirty();renderBudgets();}
+function renderBudgets(){
+  const m=getMonthData(state.year,state.month),el=document.getElementById('budgetItems'),alertEl=document.getElementById('budgetAlert');if(!el)return;
+  if(!m.budgets.length){el.innerHTML='<div class="empty-state"><span class="empty-state-icon">🛡️</span>ما عندك فئات — أضف!</div>';if(alertEl)alertEl.className='budget-alert';return;}
+  const catSpend=getCategorySpending(state.year,state.month),alerts=[];
+  el.innerHTML=m.budgets.map(b=>{const spent=getBudgetSpending(b.name,catSpend),pct=b.limit?Math.min(100,Math.round((spent/b.limit)*100)):0,remain=b.limit-spent,cls=pct>=100?'danger':pct>=80?'warn':'',emoji=pct>=100?'🚨':pct>=80?'⚠️':'✅';if(pct>=80)alerts.push({over:pct>=100,name:b.name,pct,remain});return `<div class="budget-item"><div class="budget-item-head"><div class="budget-cat">${emoji} ${b.name}</div><div style="display:flex;align-items:center;gap:7px"><div class="budget-nums"><span class="budget-spent">${fmt(spent)}</span><span class="budget-limit"> / ${fmt(b.limit)} ﷼</span></div><button class="item-del" onclick="delBudgetCat(${b.id})">✕</button></div></div><div class="budget-track-bg"><div class="budget-track-fill ${cls}" style="width:${pct}%"></div></div><div class="budget-foot"><span>${pct}٪</span><span class="budget-remain${remain<0?' over':''}">${remain>=0?'باقي: '+fmt(remain)+' ﷼':'تجاوزت بـ '+fmt(Math.abs(remain))+' ﷼'}</span></div></div>`;}).join('');
+  if(alertEl){if(alerts.length){alertEl.innerHTML=alerts.map(a=>`<div style="display:flex;align-items:center;gap:7px"><span>${a.over?'🚨':'⚠️'}</span><b>${a.name} — ${a.pct}٪</b> ${a.remain<0?'تجاوزت!':'قرّبت من الحد'}</div>`).join('');alertEl.className='budget-alert show';}else alertEl.className='budget-alert';}
+}
+function renderCharts(){renderPieChart();renderCmpChart();}
+function renderPieChart(){
+  const m=getMonthData(state.year,state.month),cats={};
+  [...m.fixed,...m.variable].forEach(({cat,amt})=>{cats[cat]=(cats[cat]||0)+(Number(amt)||0);});
+  const entries=Object.entries(cats).sort((a,b)=>b[1]-a[1]),total=entries.reduce((s,[,v])=>s+v,0);
+  const svg=document.getElementById('pieChart'),leg=document.getElementById('pieLegend');if(!svg||!leg)return;
+  if(!total){svg.innerHTML='<text x="50" y="55" text-anchor="middle" fill="#475569" font-size="9">لا بيانات</text>';leg.innerHTML='';return;}
+  let paths='',lHTML='',sa=0;
+  entries.forEach(([cat,val],i)=>{const pct=val/total,angle=pct*360,large=angle>180?1:0,col=PIE_COLORS[i%PIE_COLORS.length],r=40,cx=50,cy=50;const x1=cx+r*Math.cos(sa*Math.PI/180),y1=cy+r*Math.sin(sa*Math.PI/180),x2=cx+r*Math.cos((sa+angle)*Math.PI/180),y2=cy+r*Math.sin((sa+angle)*Math.PI/180);if(entries.length===1)paths+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${col}"/>`;else paths+=`<path d="M${cx},${cy} L${x1.toFixed(2)},${y1.toFixed(2)} A${r},${r} 0 ${large},1 ${x2.toFixed(2)},${y2.toFixed(2)} Z" fill="${col}"/>`;lHTML+=`<div class="pie-item"><div class="pie-dot" style="background:${col}"></div><div class="pie-lbl">${cat}</div><div class="pie-pct">${Math.round(pct*100)}٪</div></div>`;sa+=angle;});
+  svg.innerHTML=paths;leg.innerHTML=lHTML;
+}
+function renderCmpChart(){
+  const t=getTotals(state.year,state.month),p=getTotals(state.year,state.month>0?state.month-1:11),mx=Math.max(t.income,t.expense,p.income,p.expense,1);
+  document.getElementById('cmpChart').innerHTML=`
+    <div class="cmp-row"><div class="cmp-lbl">دخل الشهر</div><div class="cmp-bar-bg"><div class="cmp-bar-fill" style="width:${Math.round((t.income/mx)*100)}%;background:var(--green)"></div></div><div class="cmp-val">${fmt(t.income)} ﷼</div></div>
+    <div class="cmp-row"><div class="cmp-lbl">دخل السابق</div><div class="cmp-bar-bg"><div class="cmp-bar-fill" style="width:${Math.round((p.income/mx)*100)}%;background:var(--green-dim)"></div></div><div class="cmp-val">${fmt(p.income)} ﷼</div></div>
+    <div class="cmp-row"><div class="cmp-lbl">مصروف الشهر</div><div class="cmp-bar-bg"><div class="cmp-bar-fill" style="width:${Math.round((t.expense/mx)*100)}%;background:var(--danger)"></div></div><div class="cmp-val">${fmt(t.expense)} ﷼</div></div>
+    <div class="cmp-row"><div class="cmp-lbl">مصروف السابق</div><div class="cmp-bar-bg"><div class="cmp-bar-fill" style="width:${Math.round((p.expense/mx)*100)}%;background:rgba(239,68,68,.25)"></div></div><div class="cmp-val">${fmt(p.expense)} ﷼</div></div>
+  `;
+}
+function renderYearly(){
+  const lbl=document.getElementById('yearChartLabel');if(lbl)lbl.textContent=state.year;
+  let yI=0,yE=0,iA=[],eA=[];for(let m=0;m<12;m++){const t=getTotals(state.year,m);yI+=t.income;yE+=t.expense;iA.push(t.income);eA.push(t.expense);}
+  setText('yInc',fmt(yI)+' ﷼');setText('yExp',fmt(yE)+' ﷼');setText('ySav',fmt(Math.max(0,yI-yE))+' ﷼');
+  const mx=Math.max(...iA,...eA,1),bars=document.getElementById('yearBars'),lbls=document.getElementById('yearLbls');
+  if(bars)bars.innerHTML=iA.map((v,i)=>`<div class="year-bar-wrap"><div class="year-bar income" style="height:${Math.round((v/mx)*86)}px"></div><div class="year-bar expense" style="height:${Math.round((eA[i]/mx)*86)}px"></div></div>`).join('');
+  if(lbls)lbls.innerHTML=MONTHS.map(m=>`<div class="year-lbl-item">${m.slice(0,3)}</div>`).join('');
+  const ul=ACHIEVEMENTS.filter(a=>localStorage.getItem('ach_'+a.id)),el=document.getElementById('yearAch');
+  if(el)el.innerHTML=ul.length?ul.map(a=>`<div style="display:flex;align-items:center;gap:7px;background:var(--bg4);padding:7px 11px;border-radius:9px;border:1px solid var(--border)"><span style="font-size:16px">${a.icon}</span><div><div style="font-size:11px;font-weight:700">${a.name}</div><div style="font-size:9px;color:var(--text3)">${a.pts} ⭐</div></div></div>`).join(''):'<div style="color:var(--text3);font-size:12px;padding:12px">ما حققت شي بعد 🚀</div>';
+}
+function generateReport(){
+  const fT=document.getElementById('rFilterType')?.value||'all',fP=document.getElementById('rFilterPeriod')?.value||'month';
+  let months=[];
+  if(fP==='month')months=[{y:state.year,m:state.month}];
+  else if(fP==='quarter'){const s=Math.floor(state.month/3)*3;for(let i=0;i<3;i++)months.push({y:state.year,m:s+i});}
+  else{for(let i=0;i<12;i++)months.push({y:state.year,m:i});}
+  let totInc=0,totExp=0,allRows=[],catTotals={};
+  months.forEach(({y,m})=>{const d=getMonthData(y,m);if(fT!=='expense'){d.income.forEach(item=>{totInc+=item.amt;allRows.push({...item,rowType:'income',month:MONTHS[m]});});Object.values(d.daily).forEach(arr=>arr.forEach(e=>{if(e.type==='in'){totInc+=e.amt;allRows.push({...e,rowType:'income',month:MONTHS[m]});}}));}if(fT!=='income'){d.fixed.forEach(item=>{totExp+=item.amt;catTotals[item.cat]=(catTotals[item.cat]||0)+item.amt;allRows.push({...item,rowType:'expense',month:MONTHS[m]});});d.variable.forEach(item=>{totExp+=item.amt;catTotals[item.cat]=(catTotals[item.cat]||0)+item.amt;allRows.push({...item,rowType:'expense',month:MONTHS[m]});});Object.values(d.daily).forEach(arr=>arr.forEach(e=>{if(e.type==='out'){totExp+=e.amt;catTotals[e.cat||'➕']=(catTotals[e.cat||'➕']||0)+e.amt;allRows.push({...e,rowType:'expense',month:MONTHS[m]});}}));}});
+  setText('rTotInc',fmt(totInc)+' ﷼');setText('rTotExp',fmt(totExp)+' ﷼');setText('rTotSav',fmt(Math.max(0,totInc-totExp))+' ﷼');
+  const catEl=document.getElementById('catBreakdown');if(catEl){const entries=Object.entries(catTotals).sort((a,b)=>b[1]-a[1]),mx=entries.length?entries[0][1]:1;catEl.innerHTML=entries.length?entries.map(([cat,amt])=>{const pct=Math.round((amt/(totExp||1))*100),w=Math.round((amt/mx)*100);return `<div class="cat-breakdown-row"><div class="cbd-icon">${cat}</div><div class="cbd-name">${cat}</div><div class="cbd-bar-bg"><div class="cbd-bar-fill" style="width:${w}%"></div></div><div class="cbd-amt">${fmt(amt)} ﷼</div><div class="cbd-pct">${pct}٪</div></div>`;}).join(''):'<div style="color:var(--text3);font-size:12px;text-align:center;padding:14px">لا توجد بيانات</div>';}
+  const tbody=document.getElementById('reportBody');if(tbody){tbody.innerHTML=allRows.slice(0,50).map(r=>`<tr><td>${r.name||'—'}</td><td>${r.cat||'—'}</td><td>${r.rowType==='income'?'دخل':'مصروف'}</td><td class="${r.rowType==='income'?'td-income':'td-expense'}">${fmt(r.amt)} ﷼</td></tr>`).join('');setText('reportCount',allRows.length+' معاملة');}
+  const mBody=document.getElementById('monthlyBody');if(mBody){mBody.innerHTML=months.map(({y,m})=>{const t=getTotals(y,m);return `<tr><td>${MONTHS[m]} ${y}</td><td style="color:var(--green2);font-weight:700">${fmt(t.income)} ﷼</td><td style="color:var(--danger);font-weight:700">${fmt(t.expense)} ﷼</td><td style="color:${t.save>=0?'var(--green2)':'var(--danger)'};font-weight:700">${fmt(t.save)} ﷼</td><td style="color:var(--gold2)">${t.spendPct}٪</td></tr>`;}).join('');}
+}
+function exportPDF(){
+  const t=getTotals(state.year,state.month),m=getMonthData(state.year,state.month);
+  const allItems=[...m.income.map(x=>({...x,type:'income'})),...m.fixed.map(x=>({...x,type:'expense'})),...m.variable.map(x=>({...x,type:'expense'}))];
+  const win=window.open('','_blank');
+  win.document.write(`<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="UTF-8"><title>تقرير فلونس برو</title><style>body{font-family:Arial;padding:28px;direction:rtl;background:#fff;color:#1a1a1a}h1{color:#1e40af;margin-bottom:4px}.sub{color:#64748b;font-size:12px;margin-bottom:20px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}.card{border:1px solid #e2e8f0;border-radius:10px;padding:14px;text-align:center}.cv{font-size:20px;font-weight:800}.cl{font-size:11px;color:#94a3b8;margin-top:3px}.inc{color:#10b981}.exp{color:#ef4444}.sav{color:#f59e0b}table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:right;padding:8px;background:#f8fafc;font-weight:700;color:#64748b;border-bottom:2px solid #e2e8f0}td{padding:7px 8px;border-bottom:1px solid #f1f5f9}.fn{color:#cbd5e1;font-size:10px;margin-top:18px;text-align:center}</style></head><body><h1>👑 تقرير فلونس برو</h1><div class="sub">${MONTHS[state.month]} ${state.year} — ${new Date().toLocaleDateString('ar-SA')}</div><div class="cards"><div class="card"><div class="cv inc">${fmt(t.income)} ﷼</div><div class="cl">الدخل</div></div><div class="card"><div class="cv exp">${fmt(t.expense)} ﷼</div><div class="cl">المصاريف</div></div><div class="card"><div class="cv sav">${fmt(Math.max(0,t.save))} ﷼</div><div class="cl">التوفير</div></div></div><table><thead><tr><th>البند</th><th>الفئة</th><th>النوع</th><th>المبلغ</th></tr></thead><tbody>${allItems.map(r=>`<tr><td>${r.name}</td><td>${r.cat}</td><td>${r.type==='income'?'دخل':'مصروف'}</td><td style="font-weight:700;color:${r.type==='income'?'#10b981':'#ef4444'}">${fmt(r.amt)} ﷼</td></tr>`).join('')}</tbody></table><div class="fn">فلونس برو 👑 — مخططك المالي الذكي 🔒</div></body></html>`);
+  win.document.close();setTimeout(()=>win.print(),500);toast('جاري فتح الطباعة 🖨️','warn');
+}
+function exportCSV(){
+  const m=getMonthData(state.year,state.month),t=getTotals(state.year,state.month);
+  let rows=[['البند','الفئة','النوع','المبلغ']];
+  m.income.forEach(x=>rows.push([x.name,x.cat,'دخل',x.amt]));m.fixed.forEach(x=>rows.push([x.name,x.cat,'ثابت',x.amt]));m.variable.forEach(x=>rows.push([x.name,x.cat,'متغير',x.amt]));
+  rows.push(['']);rows.push(['الدخل','','',t.income]);rows.push(['المصاريف','','',t.expense]);rows.push(['التوفير','','',t.save]);
+  const csv=rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n'),blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=url;a.download=`flounce_${MONTHS[state.month]}_${state.year}.csv`;a.click();URL.revokeObjectURL(url);toast('تم تصدير CSV ✅','success');
+}
+function exportTxt(){
+  const t=getTotals(state.year,state.month),m=getMonthData(state.year,state.month);
+  let txt=`تقرير فلونس برو 👑\n${MONTHS[state.month]} ${state.year}\n${'─'.repeat(36)}\nالدخل:    ${fmt(t.income)} ﷼\nالمصاريف: ${fmt(t.expense)} ﷼\nالتوفير:  ${fmt(t.save)} ﷼\nالإنفاق:  ${t.spendPct}٪\n${'─'.repeat(36)}\n`;
+  m.income.forEach(x=>txt+=`${x.cat} ${x.name}: ${fmt(x.amt)} ﷼\n`);m.fixed.forEach(x=>txt+=`${x.cat} ${x.name}: ${fmt(x.amt)} ﷼\n`);m.variable.forEach(x=>txt+=`${x.cat} ${x.name}: ${fmt(x.amt)} ﷼\n`);
+  const blob=new Blob([txt],{type:'text/plain;charset=utf-8;'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=`flounce_${MONTHS[state.month]}_${state.year}.txt`;a.click();URL.revokeObjectURL(url);toast('تم تصدير التقرير 📄','success');
+}
+const GOLD_PRICE=220,SILVER_PRICE=3.2;
+function getNisab(m){return m==='hanafi'?595*SILVER_PRICE:85*GOLD_PRICE;}
+function updateNisabInfo(){
+  const m=document.getElementById('madhabSel')?.value||'maliki',n=getNisab(m),el=document.getElementById('nisabInfo');if(!el)return;
+  el.innerHTML=m==='hanafi'?`نصاب الفضة (الحنفية): <b>٥٩٥ جرام فضة</b> ≈ <b>${fmt(n)} ﷼</b><br><span style="font-size:10px">الزكاة = ٢.٥٪ إذا تجاوز النصاب وحال الحول</span>`:`نصاب الذهب (الجمهور): <b>٨٥ جرام ذهب</b> ≈ <b>${fmt(n)} ﷼</b><br><span style="font-size:10px">الزكاة = ٢.٥٪ إذا تجاوز النصاب وحال الحول</span>`;
+  calcZakat();
+}
+function setZakatTab(tab){
+  state.zakatTab=tab;
+  ['cash','gold','trade'].forEach(t=>{document.getElementById('ztab'+t.charAt(0).toUpperCase()+t.slice(1)).style.display=t===tab?'block':'none';document.getElementById('zt'+t.charAt(0).toUpperCase()+t.slice(1)).className='zakat-tab'+(t===tab?' active':'');});
+  calcZakat();
+}
+function autoFillZakat(){let s=0;for(let m=0;m<12;m++){const t=getTotals(state.year,m);if(t.save>0)s+=t.save;}const el=document.getElementById('zCash');if(el)el.value=Math.round(s);toast('تم ملء البيانات ✨','warn');calcZakat();}
+function calcZakat(){
+  const madhab=document.getElementById('madhabSel')?.value||'maliki',n=getNisab(madhab),tab=state.zakatTab;let w=0;
+  if(tab==='cash'){const c=+document.getElementById('zCash')?.value||0,sv=+document.getElementById('zSavings')?.value||0,iv=+document.getElementById('zInvest')?.value||0,df=+document.getElementById('zDebtsFor')?.value||0,don=+document.getElementById('zDebtsOn')?.value||0;w=c+sv+iv+df-don;}
+  else if(tab==='gold'){const gg=+document.getElementById('zGoldGrams')?.value||0,gp=+document.getElementById('zGoldPrice')?.value||GOLD_PRICE,sg=+document.getElementById('zSilverGrams')?.value||0,sp=+document.getElementById('zSilverPrice')?.value||SILVER_PRICE;w=gg*gp+sg*sp;}
+  else{const st=+document.getElementById('zStock')?.value||0,td=+document.getElementById('zTradeDebt')?.value||0,to=+document.getElementById('zTradeOwed')?.value||0;w=st+td-to;}
+  const r=document.getElementById('zakatResult');if(!r)return;if(w<=0){r.className='zakat-result';return;}
+  const elig=w>=n,amt=elig?w*.025:0;
+  if(elig)r.innerHTML=`<div class="zakat-result-eligible">✅ وجبت عليك الزكاة</div><div class="zakat-result-title">مقدار الزكاة الواجبة</div><div class="zakat-result-amt">${fmt(amt)} ﷼</div><div class="zakat-result-note">الوعاء الزكوي: ${fmt(w)} ﷼<br>النصاب: ${fmt(n)} ﷼<br>نسبة الزكاة: ٢.٥٪<br><span style="color:var(--warn);font-size:10px">هذا حساب تقديري — استشر عالماً لتأكيد فتواك</span></div>`;
+  else r.innerHTML=`<div class="zakat-result-ineligible">ℹ️ لم يبلغ النصاب — لا زكاة حالياً</div><div class="zakat-result-note">وعاؤك: ${fmt(w)} ﷼<br>النصاب: ${fmt(n)} ﷼<br>الباقي للنصاب: ${fmt(n-w)} ﷼</div>`;
+  r.className='zakat-result show';
+}
+function renderSettings(){
+  document.querySelectorAll('.theme-swatch').forEach(s=>s.classList.toggle('active',s.dataset.theme===state.theme));renderCustomCats();renderAccountStats();
+}
+function renderCustomCats(){const el=document.getElementById('customCatsList');if(!el)return;el.innerHTML=state.customCats.map((cat,i)=>`<div class="custom-cat-tag"><span>${cat}</span><button class="custom-cat-del" onclick="removeCustomCat(${i})">✕</button></div>`).join('');}
+function addCustomCat(){const inp=document.getElementById('newCatInput'),val=inp?.value.trim();if(!val){toast('اكتب اسم الفئة ⚠️','warn');return;}state.customCats.push(val);S.save('customCats',state.customCats);inp.value='';renderCustomCats();toast('تمت إضافة الفئة ✅','success');}
+function removeCustomCat(i){state.customCats.splice(i,1);S.save('customCats',state.customCats);renderCustomCats();}
+function renderAccountStats(){
+  const el=document.getElementById('accountStats');if(!el)return;
+  let months=0,items=0;Object.values(state.data).forEach(m=>{if(m.income.length||m.variable.length||m.fixed.length)months++;items+=m.income.length+m.variable.length+m.fixed.length;});
+  el.innerHTML=`<div class="streak-stat"><div class="streak-stat-num">${months}</div><div class="streak-stat-lbl">شهر مسجّل</div></div><div class="streak-stat"><div class="streak-stat-num">${items}</div><div class="streak-stat-lbl">معاملة</div></div><div class="streak-stat"><div class="streak-stat-num">${state.pts}</div><div class="streak-stat-lbl">نقطة</div></div><div class="streak-stat"><div class="streak-stat-num">${state.notifs.length}</div><div class="streak-stat-lbl">تنبيه</div></div>`;
+}
+function clearMonthData(){const k=makeKey(state.year,state.month);state.data[k]={income:[],fixed:[],variable:[],goals:[],daily:{},budgets:[]};S.save('data',state.data);renderAll();toast('تم حذف بيانات الشهر 🗑️','warn');}
+function checkAch(){
+  const t=getTotals(state.year,state.month),m=getMonthData(state.year,state.month);
+  const conds={first_save:Object.values(state.data).some(d=>d.goals&&d.goals.length>0),no_exceed:t.income>0&&t.expense<=t.income,save_20:t.income>0&&t.savePct>=20,daily_log:Object.keys(m.daily||{}).length>=7,goal_done:Object.values(state.data).some(d=>d.goals&&d.goals.some(g=>g.target>0&&g.saved>=g.target)),three_months:(()=>{let c=0;for(let i=0;i<12;i++){const d=state.data[makeKey(state.year,i)];if(d&&(d.income.length||d.variable.length)){c++;if(c>=3)return true;}else c=0;}return false;})()};
+  ACHIEVEMENTS.forEach(a=>{if(!localStorage.getItem('ach_'+a.id)&&conds[a.id]){localStorage.setItem('ach_'+a.id,'1');addPts(a.pts);toast(`🏆 إنجاز: ${a.name} (+${a.pts} نقطة)`,'warn');}});renderAch();
+}
+function renderAch(){const el=document.getElementById('achGrid');if(!el)return;el.innerHTML=ACHIEVEMENTS.map(a=>{const on=!!localStorage.getItem('ach_'+a.id);return `<div class="ach-badge ${on?'on':'off'}"><div class="ach-icon">${a.icon}</div><div class="ach-name">${a.name}</div><div class="ach-pts">${a.pts} ⭐</div></div>`;}).join('');}
+function addPts(n){state.pts+=n;renderPts();}
+function renderPts(){setText('ptsVal',fmt(state.pts));const lv=LEVELS.reduce((a,l)=>state.pts>=l.min?l:a,LEVELS[0]);setText('ptsLevel',lv.name);}
+function getTodayStr(){const d=new Date();return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
+function initStreakRender(){calcStreak();renderStreak();}
+function calcStreak(){
+  const s=state.streak;if(!s.days||!s.days.length){s.current=0;return;}
+  const sorted=[...s.days].sort().reverse(),d=new Date();d.setDate(d.getDate()-1);
+  const yesterday=`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`,today=getTodayStr();
+  if(sorted[0]!==today&&sorted[0]!==yesterday){s.current=0;return;}
+  let cnt=0,check=sorted[0]===today?today:yesterday;
+  for(let i=0;i<sorted.length;i++){if(sorted[i]===check){cnt++;const dt=new Date(check);dt.setDate(dt.getDate()-1);check=`${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`;}else break;}
+  s.current=cnt;s.max=Math.max(s.max||0,cnt);s.total=s.days.length;
+}
+function doCheckin(){
+  const today=getTodayStr();if(state.streak.days.includes(today)){toast('سجّلت حضورك اليوم بالفعل 🔥','warn');return;}
+  state.streak.days.push(today);calcStreak();S.save('streak',state.streak);addPts(20);
+  if(state.streak.current===7){addPts(50);toast('🏆 أسبوع كامل! +٥٠ نقطة','warn');}
+  if(state.streak.current===30){addPts(200);toast('🌟 شهر كامل! +٢٠٠ نقطة','warn');}
+  renderStreak();toast('تم تسجيل حضورك 🔥 +٢٠ نقطة','success');
+}
+function renderStreak(){
+  calcStreak();const s=state.streak,today=getTodayStr(),checked=s.days.includes(today),cur=s.current||0;
+  const numEl=document.getElementById('streakNum');if(numEl){numEl.textContent=cur;numEl.className='streak-num'+(cur>0?' active':'');}
+  const dotsEl=document.getElementById('streakDots');
+  if(dotsEl){let h='';for(let i=6;i>=0;i--){const dt=new Date();dt.setDate(dt.getDate()-i);const ds=`${dt.getFullYear()}-${dt.getMonth()+1}-${dt.getDate()}`,done=s.days.includes(ds),isToday=(i===0),name=DAY_NAMES[dt.getDay()];h+=`<div style="display:flex;flex-direction:column;align-items:center;gap:3px"><div class="streak-dot${done?' done':''}${isToday&&!done?' today':''}">${done?'✓':name}</div><div style="font-size:8px;color:var(--text3)">${dt.getDate()}</div></div>`;}dotsEl.innerHTML=h;}
+  const btn=document.getElementById('streakBtn');if(btn){btn.textContent=checked?'✅ سجّلت حضورك اليوم':'🔥 سجّل حضورك اليوم';btn.className='streak-checkin'+(checked?' done':'');}
+  let msg='';if(!checked)msg='سجّل حضورك ⚡';else if(cur>=30)msg='🌟 شهر كامل!';else if(cur>=14)msg='💎 أسبوعين!';else if(cur>=7)msg='🏆 أسبوع كامل!';else if(cur>=3)msg=`🔥 ${cur} أيام — استمر!`;else if(cur===1)msg='✅ بداية موفقة!';else msg='ابدأ سلسلتك 💪';
+  setText('streakMsg',msg);setText('sCur',s.current||0);setText('sMax',s.max||0);setText('sTot',s.total||0);
+}
+function buildSalarySelects(){
+  ['salarySelect','salarySelect2'].forEach(id=>{const sel=document.getElementById(id);if(!sel)return;sel.innerHTML='<option value="">—</option>';for(let d=1;d<=31;d++){const opt=document.createElement('option');opt.value=d;opt.textContent=d;if(d===state.salaryDay)opt.selected=true;sel.appendChild(opt);}});
+  updateSalaryCountdown();
+}
+function setSalaryDay(v){state.salaryDay=parseInt(v)||0;S.save('salary',state.salaryDay);buildSalarySelects();updateSalaryCountdown();}
+function updateSalaryCountdown(){
+  ['salaryCd','salaryCd2'].forEach(id=>{const el=document.getElementById(id);if(!el)return;if(!state.salaryDay){el.textContent='اختر يوم';el.className='salary-badge';return;}const today=new Date(),td=today.getDate();let next=new Date(today.getFullYear(),today.getMonth(),state.salaryDay);if(next.getDate()!==state.salaryDay||next<today)next=new Date(today.getFullYear(),today.getMonth()+1,state.salaryDay);const diff=Math.ceil((next-today)/86400000);if(diff<=0||td===state.salaryDay){el.textContent='اليوم 🎉';el.className='salary-badge today';}else if(diff===1){el.textContent='غداً ⏰';el.className='salary-badge today';}else{el.textContent=`باقي ${diff} يوم`;el.className='salary-badge';}});
+}
+function openNotifPanel(){document.getElementById('notifOverlay').classList.add('open');document.getElementById('notifPanel').classList.add('open');renderNotifPanel();}
+function closeNotifPanel(){document.getElementById('notifOverlay').classList.remove('open');document.getElementById('notifPanel').classList.remove('open');}
+function notifSetCat(icon,name){const ic=document.getElementById('nfIcon'),nm=document.getElementById('nfName');if(ic)ic.value=icon;if(nm&&!nm.value)nm.value=name;document.querySelectorAll('#notifCatChips .day-chip').forEach(c=>c.classList.remove('sel'));if(event?.target)event.target.classList.add('sel');}
+function notifSetDay(d){const el=document.getElementById('nfDay');if(el)el.value=d;document.querySelectorAll('#dayChips .day-chip').forEach(c=>c.classList.remove('sel'));if(event?.target)event.target.classList.add('sel');}
+function addNotif(){
+  const name=document.getElementById('nfName')?.value.trim(),amt=parseFloat(document.getElementById('nfAmt')?.value)||0,icon=document.getElementById('nfIcon')?.value.trim()||'🔔',day=parseInt(document.getElementById('nfDay')?.value)||0,alertD=parseInt(document.getElementById('nfAlert')?.value)||5,rec=document.getElementById('nfRecurring')?.checked;
+  if(!name){toast('اكتب اسم المستحق ⚠️','warn');return;}if(!day||day<1||day>31){toast('حدد يوم الاستحقاق ⚠️','warn');return;}
+  state.notifs.push({id:Date.now(),name,amt,icon,day,alertDays:alertD,recurring:rec,paidMonths:{}});S.save('notifs',state.notifs);
+  ['nfName','nfAmt','nfDay'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('nfIcon').value='🏠';
+  document.querySelectorAll('#notifCatChips .day-chip,#dayChips .day-chip').forEach(c=>c.classList.remove('sel'));
+  updateBellBadge();renderNotifPanel();toast('✅ تم إضافة التنبيه','success');
+}
+function toggleNotifPaid(id){const k=`${state.year}-${state.month}`,n=state.notifs.find(x=>x.id===id);if(!n)return;if(!n.paidMonths)n.paidMonths={};if(n.paidMonths[k]){delete n.paidMonths[k];toast('إلغاء','warn');}else{n.paidMonths[k]=true;toast('✅ تم — '+n.name,'success');addPts(20);}S.save('notifs',state.notifs);updateBellBadge();renderNotifPanel();}
+function deleteNotif(id){state.notifs=state.notifs.filter(n=>n.id!==id);S.save('notifs',state.notifs);updateBellBadge();renderNotifPanel();}
+function getNotifStatus(item){const today=new Date().getDate(),k=`${state.year}-${state.month}`;if(item.paidMonths?.[k])return 'paid';const d=item.day-today;if(d<0)return 'overdue';if(d===0)return 'urgent';if(d<=item.alertDays)return 'soon';return 'upcoming';}
+function updateBellBadge(){const cnt=state.notifs.filter(n=>{const s=getNotifStatus(n);return s==='overdue'||s==='urgent'||s==='soon';}).length;const dot=document.getElementById('bellDot');if(dot)dot.className='bell-dot'+(cnt>0?' show':'');const btn=document.getElementById('bellBtn');if(btn)btn.className='bell-btn'+(cnt>0?' alert':'');}
+function checkNotifAlerts(){const urgent=state.notifs.filter(n=>getNotifStatus(n)==='urgent'),overdue=state.notifs.filter(n=>getNotifStatus(n)==='overdue');if(urgent.length)setTimeout(()=>toast('🔴 اليوم: '+urgent.map(n=>n.name).join('، '),'danger'),1500);else if(overdue.length)setTimeout(()=>toast('⚠️ متأخر: '+overdue[0].name,'danger'),1500);}
+function renderNotifPanel(){
+  const body=document.getElementById('notifPanelBody');if(!body)return;
+  if(!state.notifs.length){body.innerHTML='<div class="notif-empty"><div class="notif-empty-icon">🔔</div><div class="notif-empty-text">ما عندك تنبيهات<br>أضف مستحقاتك من الأسفل</div></div>';return;}
+  const labels={paid:{cls:'paid',txt:'✅ تم'},overdue:{cls:'overdue',txt:'⚠️ متأخر'},urgent:{cls:'overdue',txt:'🔴 اليوم!'},soon:{cls:'soon',txt:'⏰ قريب'},upcoming:{cls:'upcoming',txt:'📅 قادم'}};
+  const groups={urgent:[],soon:[],upcoming:[],paid:[]};
+  state.notifs.forEach(n=>{const s=getNotifStatus(n);if(s==='overdue'||s==='urgent')groups.urgent.push([n,s]);else if(s==='soon')groups.soon.push([n,s]);else if(s==='paid')groups.paid.push([n,s]);else groups.upcoming.push([n,s]);});
+  let h='';
+  const rG=(title,items)=>{if(!items.length)return;h+=`<div class="notif-section-lbl">${title}</div>`;items.forEach(([n,s])=>{const lbl=labels[s]||labels.upcoming,paid=s==='paid';h+=`<div class="notif-item${s==='overdue'||s==='urgent'?' urgent':s==='soon'?' warning':paid?' done':''}"><div class="notif-icon">${n.icon}</div><div class="notif-body"><div class="notif-name">${n.name}${n.recurring?' 🔄':''}</div>${n.amt?`<div class="notif-amt">${fmt(n.amt)} ﷼</div>`:''}<div class="notif-meta"><span class="notif-sbadge ${lbl.cls}">${lbl.txt}</span><span>يوم ${n.day}</span></div></div><div class="notif-actions"><button class="notif-check${paid?' checked':''}" onclick="toggleNotifPaid(${n.id})">${paid?'✓':'○'}</button><button class="notif-del-btn" onclick="deleteNotif(${n.id})">🗑</button></div></div>`;});};
+  rG('🔴 يحتاج انتباهك',groups.urgent);rG('⏰ قريب',groups.soon);rG('📅 قادم',groups.upcoming);rG('✅ تم',groups.paid);body.innerHTML=h;
+}
+function qaSetType(t){state.qaType=t;document.getElementById('qaBtnOut').className='qa-type-btn expense'+(t==='out'?' active':'');document.getElementById('qaBtnIn').className='qa-type-btn income'+(t==='in'?' active':'');document.getElementById('qaName').placeholder=t==='out'?'وش صرفت على؟':'مصدر الدخل؟';}
+function qaSubmit(){
+  const name=(document.getElementById('qaName')?.value||'').trim(),amt=parseFloat(document.getElementById('qaAmt')?.value)||0;
+  if(!name&&!amt){if(state.qaType==='out')toggleForm('formVar');else toggleForm('formIncome');return;}
+  if(!name){toast('اكتب الوصف ⚠️','warn');return;}if(!amt){toast('اكتب المبلغ ⚠️','warn');return;}
+  const m=getMonthData(state.year,state.month),td=new Date().getDate();
+  if(state.qaType==='out'){if(!m.daily[td])m.daily[td]=[];m.daily[td].push({id:Date.now(),name,amt,type:'out',cat:'➕'});}
+  else{m.income.push({id:Date.now(),name,amt,cat:'💵',paid:false,recurring:false});}
+  document.getElementById('qaName').value='';document.getElementById('qaAmt').value='';
+  addPts(10);markDirty();renderAll();toast((state.qaType==='out'?'💸 ':'💵 ')+name+' — '+fmt(amt)+' ﷼','success');
+}
+function doSearch(q){const r=document.getElementById('searchResults');if(!r)return;if(!q.trim()){r.style.display='none';r.innerHTML='';return;}const m=getMonthData(state.year,state.month);const all=[...m.income.map(x=>({...x,typeLabel:'دخل',color:'var(--green2)'})),...m.fixed.map(x=>({...x,typeLabel:'ثابت',color:'var(--danger)'})),...m.variable.map(x=>({...x,typeLabel:'متغير',color:'var(--danger)'}))].filter(x=>x.name.includes(q));if(!all.length){r.innerHTML='<div style="font-size:12px;color:var(--text3);padding:6px">ما لقينا شيئاً</div>';r.style.display='flex';return;}r.innerHTML=all.map(x=>`<div class="item-row"><div class="item-emoji">${x.cat}</div><div class="item-name">${x.name} <span style="font-size:9px;color:var(--text3)">(${x.typeLabel})</span></div><div class="item-amount" style="color:${x.color}">${fmt(x.amt)} ﷼</div></div>`).join('');r.style.display='flex';}
+function clearSearch(){document.getElementById('searchInput').value='';doSearch('');}
+function nextTip(){state.tipIdx=(state.tipIdx+1)%TIPS.length;setText('tipText',TIPS[state.tipIdx]);}
+function toggleForm(id){const el=document.getElementById(id);if(!el)return;el.classList.toggle('open');}
+function qSetCat(selId,val,inpId,name){const sel=document.getElementById(selId),inp=document.getElementById(inpId);if(sel)sel.value=val;if(inp&&!inp.value)inp.value=name;if(inp)inp.focus();if(event?.target){const p=event.target.closest('.cat-chips');if(p){p.querySelectorAll('.cat-chip').forEach(c=>c.classList.remove('sel'));event.target.classList.add('sel');}}}
+function setAmt(id,v){const el=document.getElementById(id);if(el){el.value=v;el.focus();}}
+function markDirty(){state.dirty=true;document.getElementById('saveWrap').classList.add('dirty');}
+function saveAll(){S.save('data',state.data);S.save('pts',state.pts);state.dirty=false;document.getElementById('saveWrap').classList.remove('dirty');const btn=document.getElementById('saveBtn');if(btn){btn.textContent='✅ تم الحفظ!';btn.classList.add('saved');}toast('تم الحفظ ✅','success');setTimeout(()=>{if(btn){btn.textContent='💾 احفظ التغييرات';btn.classList.remove('saved');}},2000);}
+function toast(msg,type='success'){const w=document.getElementById('toastWrap'),el=document.createElement('div');el.className='toast '+type;el.textContent=msg;w.appendChild(el);setTimeout(()=>{el.style.opacity='0';el.style.transition='.3s';setTimeout(()=>el.remove(),300);},3000);}
+function setText(id,txt){const el=document.getElementById(id);if(el&&el.textContent!==txt)el.textContent=txt;}
+function setStyle(id,prop,val){const el=document.getElementById(id);if(el)el.style[prop]=val;}
+document.addEventListener('DOMContentLoaded',init);
+</script>
+</body>
+</html>
