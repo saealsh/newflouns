@@ -2526,29 +2526,29 @@ document.addEventListener('keydown', function(e) {
    3 Themes · Full RTL · WCAG AA
 ════════════════════════════════════════════ */
 
-/* ── THEME: DARK (DEFAULT) ── */
+/* ── THEME: DARK (الأساسي - أسود وفوسفوري) ── */
 :root {
   --bg:     #0a0a0a;
-  --bg2:    #111111;
-  --bg3:    #181818;
-  --bg4:    #222222;
-  --bg5:    #2a2a2a;
+  --bg2:    #141414;
+  --bg3:    #1c1c1c; /* لونك المختار */
+  --bg4:    #252525;
+  --bg5:    #2d2d2d;
 
-  --gold:      #c9a84c;
-  --gold2:     #f0d98a;
-  --gold3:     #f5e8b0;
-  --gold-dim:  rgba(201,168,76,.12);
-  --gold-glow: rgba(201,168,76,.22);
-  --gold-border: rgba(201,168,76,.28);
+  --gold:       #01dd8c; /* لونك المختار (الأخضر النيون) */
+  --gold2:      #00f59b;
+  --gold3:      #5dffc3;
+  --gold-dim:   rgba(1, 221, 140, 0.12);
+  --gold-glow:  rgba(1, 221, 140, 0.22);
+  --gold-border: rgba(1, 221, 140, 0.28);
 
-  --green:  #10b981;
+  --green:  #01dd8c;
   --green2: #34d399;
-  --green-dim: rgba(16,185,129,.12);
+  --green-dim: rgba(1, 221, 140, 0.12);
 
-  --danger: #ef4444;
+  --danger: #ff4b4b;
   --warn:   #f97316;
 
-  --text:   #f0f0f0;
+  --text:   #f8f8f0; /* لونك المختار للنص */
   --text2:  #888888;
   --text3:  #404040;
 
@@ -2561,57 +2561,51 @@ document.addEventListener('keydown', function(e) {
   --font: 'IBM Plex Sans Arabic', sans-serif;
 }
 
-/* ── THEME: LIGHT ── */
+/* ── THEME: LIGHT (نظيف - أبيض كريمي وأسود فحمي) ── */
 [data-theme="light"] {
-  --bg:     #f5f5f0;
+  --bg:     #f8f8f0; /* لونك المختار للخلفية */
   --bg2:    #ffffff;
-  --bg3:    #ffffff;
-  --bg4:    #f0ede6;
-  --bg5:    #e8e4da;
-  --gold:      #a07828;
-  --gold2:     #c9a84c;
-  --gold3:     #e8c870;
-  --gold-dim:  rgba(160,120,40,.10);
-  --gold-glow: rgba(160,120,40,.18);
-  --gold-border: rgba(160,120,40,.25);
-  --green:  #059669;
-  --green2: #10b981;
-  --green-dim: rgba(5,150,105,.10);
-  --danger: #dc2626;
-  --warn:   #ea580c;
-  --text:   #1a1a0a;
-  --text2:  #606050;
+  --bg3:    #f5f5f5; /* لونك المختار للبطاقات */
+  --bg4:    #efefef;
+  --bg5:    #e5e5e0;
+
+  --gold:       #1c1c1c; /* العناوين هنا بالأسود الفحمي لتباين عالي */
+  --gold2:      #01dd8c; /* الأزرار تظل بالأخضر النيون */
+  --gold3:      #00c27b;
+  --gold-dim:   rgba(28, 28, 28, 0.05);
+  --gold-glow:  rgba(1, 221, 140, 0.18);
+  --gold-border: rgba(28, 28, 28, 0.15);
+
+  --text:   #1c1c1c; /* لونك المختار للنص */
+  --text2:  #505050;
   --text3:  #a0a090;
-  --border:  rgba(0,0,0,.08);
-  --border2: rgba(0,0,0,.14);
-  --border3: rgba(0,0,0,.22);
-  --shadow: 0 2px 16px rgba(0,0,0,.10);
+
+  --border:  rgba(0,0,0,.06);
+  --border2: rgba(0,0,0,.10);
+  --shadow: 0 2px 16px rgba(0,0,0,.06);
 }
 
-/* ── THEME: MIDNIGHT ── */
+/* ── THEME: MIDNIGHT (ليلي - أزرق عميق ونبض أخضر) ── */
 [data-theme="midnight"] {
-  --bg:     #020204;
-  --bg2:    #08080e;
-  --bg3:    #10101a;
-  --bg4:    #18182a;
-  --bg5:    #22223a;
-  --gold:      #d4a84c;
-  --gold2:     #f0d98a;
-  --gold-dim:  rgba(212,168,76,.14);
-  --gold-glow: rgba(212,168,76,.25);
-  --gold-border: rgba(212,168,76,.30);
-  --green:  #22c55e;
-  --green2: #4ade80;
-  --green-dim: rgba(34,197,94,.14);
-  --danger: #f87171;
-  --warn:   #fb923c;
+  --bg:     #05070a;
+  --bg2:    #0c0f16;
+  --bg3:    #121620;
+  --bg4:    #1c1c1c; 
+  --bg5:    #1a1f2c;
+
+  --gold:       #01dd8c;
+  --gold2:      #5dffc3;
+  --gold-dim:   rgba(1, 221, 140, 0.15);
+  --gold-glow:  rgba(1, 221, 140, 0.30);
+  --gold-border: rgba(1, 221, 140, 0.35);
+
   --text:   #e8e8f0;
   --text2:  #8888a0;
   --text3:  #383850;
+
   --border:  rgba(255,255,255,.07);
   --border2: rgba(255,255,255,.12);
-  --border3: rgba(255,255,255,.20);
-  --shadow: 0 8px 40px rgba(0,0,0,.9);
+  --shadow: 0 8px 40px rgba(0,0,0,.8);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
