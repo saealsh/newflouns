@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
 <meta name="description" content="تـدّبير — مخططك المالي الذكي: تتبّع الدخل والمصاريف، حاسبة الزكاة، أهداف مالية">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -2983,7 +2983,7 @@ body::before {
 /* ═══ CHAT + PROFILE SYSTEM v2.2 ═══ */
 .chat-overlay{position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity var(--t-med)}
 .chat-overlay.open{opacity:1;pointer-events:all}
-.chat-panel{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);z-index:100001;width:100%;max-width:var(--container);height:90vh;height:90dvh;background:var(--bg);border-radius:24px 24px 0 0;border-top:1px solid var(--accent-bd);display:flex;flex-direction:column;transition:transform var(--t-slow) var(--ease);box-shadow:0 -12px 48px rgba(0,0,0,.7);overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
+.chat-panel{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);z-index:100001;width:100%;max-width:var(--container);height:100vh;height:100dvh;background:var(--bg);border-radius:20px 20px 0 0;border-top:1px solid var(--accent-bd);display:flex;flex-direction:column;transition:transform var(--t-slow) var(--ease);box-shadow:0 -12px 48px rgba(0,0,0,.7);overflow:hidden}
 .chat-panel.open{transform:translate(-50%,0)}
 .chat-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:var(--s-3) var(--s-4);padding-top:calc(var(--s-3) + env(safe-area-inset-top,0px));display:flex;align-items:center;gap:var(--s-3);flex-shrink:0}
 .chat-back{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all var(--t-fast);flex-shrink:0}
@@ -3010,10 +3010,10 @@ body::before {
 .chat-empty-icon{width:64px;height:64px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-bd);display:flex;align-items:center;justify-content:center;font-size:30px}
 .chat-empty-title{font-size:15px;font-weight:700;color:var(--text2)}
 .chat-empty-desc{font-size:12px;color:var(--text3);line-height:1.6;max-width:260px}
-.chat-input-bar{background:var(--bg2);border-top:1px solid var(--border);padding:var(--s-3);display:flex;gap:var(--s-2);align-items:flex-end;flex-shrink:0}
-.chat-input{flex:1;background:var(--bg3);border:1.5px solid var(--border);border-radius:22px;padding:11px 16px;color:var(--text);font-size:14px;font-family:inherit;resize:none;max-height:100px;min-height:42px;line-height:1.4;transition:border-color var(--t-fast)}
+.chat-input-bar{background:var(--bg2);border-top:1px solid var(--border);padding:10px 12px;display:flex;gap:8px;align-items:flex-end;flex-shrink:0;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+.chat-input{flex:1;min-width:0;background:var(--bg3);border:1.5px solid var(--border);border-radius:20px;padding:10px 14px;color:var(--text);font-size:15px;font-family:inherit;resize:none;max-height:80px;min-height:40px;line-height:1.4;transition:border-color var(--t-fast);-webkit-appearance:none;overflow-y:auto}
 .chat-input:focus{border-color:var(--accent);outline:none}
-.chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0600;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px var(--accent-glow);transition:all var(--t-fast);flex-shrink:0}
+.chat-send{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0600;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px var(--accent-glow);transition:all var(--t-fast);flex-shrink:0;border:none;cursor:pointer;padding:0}
 .chat-send:disabled{background:var(--bg4);color:var(--text3);box-shadow:none;opacity:.6}
 .chat-send:not(:disabled):active{transform:scale(.92)}
 .conv-card{display:flex;align-items:center;gap:var(--s-3);padding:var(--s-3);background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-md);margin-bottom:6px;transition:all var(--t-fast);cursor:pointer}
@@ -3111,7 +3111,7 @@ body::before {
 /* ─── CHAT SYSTEM v2.1 ─── */
 .chat-overlay{position:fixed;inset:0;z-index:100000;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity var(--t-med)}
 .chat-overlay.open{opacity:1;pointer-events:all}
-.chat-panel{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);z-index:100001;width:100%;max-width:var(--container);height:90vh;height:90dvh;background:var(--bg);border-radius:24px 24px 0 0;border-top:1px solid var(--accent-bd);display:flex;flex-direction:column;transition:transform var(--t-slow) var(--ease);box-shadow:0 -12px 48px rgba(0,0,0,.7);overflow:hidden;padding-bottom:env(safe-area-inset-bottom)}
+.chat-panel{position:fixed;bottom:0;left:50%;transform:translate(-50%,100%);z-index:100001;width:100%;max-width:var(--container);height:100vh;height:100dvh;background:var(--bg);border-radius:20px 20px 0 0;border-top:1px solid var(--accent-bd);display:flex;flex-direction:column;transition:transform var(--t-slow) var(--ease);box-shadow:0 -12px 48px rgba(0,0,0,.7);overflow:hidden}
 .chat-panel.open{transform:translate(-50%,0)}
 .chat-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:var(--s-3) var(--s-4);padding-top:calc(var(--s-3) + env(safe-area-inset-top,0px));display:flex;align-items:center;gap:var(--s-3);flex-shrink:0}
 .chat-back{width:34px;height:34px;border-radius:50%;background:var(--bg3);border:1px solid var(--border2);color:var(--text2);font-size:20px;display:flex;align-items:center;justify-content:center;transition:all var(--t-fast);flex-shrink:0}
@@ -3138,10 +3138,10 @@ body::before {
 .chat-empty-icon{width:64px;height:64px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-bd);display:flex;align-items:center;justify-content:center;font-size:30px}
 .chat-empty-title{font-size:15px;font-weight:700;color:var(--text2)}
 .chat-empty-desc{font-size:12px;color:var(--text3);line-height:1.6;max-width:260px}
-.chat-input-bar{background:var(--bg2);border-top:1px solid var(--border);padding:var(--s-3);display:flex;gap:var(--s-2);align-items:flex-end;flex-shrink:0}
-.chat-input{flex:1;background:var(--bg3);border:1.5px solid var(--border);border-radius:22px;padding:11px 16px;color:var(--text);font-size:14px;font-family:inherit;resize:none;max-height:100px;min-height:42px;line-height:1.4;transition:border-color var(--t-fast);-webkit-appearance:none}
+.chat-input-bar{background:var(--bg2);border-top:1px solid var(--border);padding:10px 12px;display:flex;gap:8px;align-items:flex-end;flex-shrink:0;padding-bottom:calc(10px + env(safe-area-inset-bottom))}
+.chat-input{flex:1;min-width:0;background:var(--bg3);border:1.5px solid var(--border);border-radius:20px;padding:10px 14px;color:var(--text);font-size:15px;font-family:inherit;resize:none;max-height:80px;min-height:40px;line-height:1.4;transition:border-color var(--t-fast);-webkit-appearance:none;overflow-y:auto}
 .chat-input:focus{border-color:var(--accent);outline:none}
-.chat-send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0600;font-size:16px;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px var(--accent-glow);transition:all var(--t-fast);flex-shrink:0}
+.chat-send{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#0a0600;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 12px var(--accent-glow);transition:all var(--t-fast);flex-shrink:0;border:none;cursor:pointer;padding:0}
 .chat-send:disabled{background:var(--bg4);color:var(--text3);box-shadow:none;cursor:not-allowed;opacity:.6}
 .chat-send:not(:disabled):active{transform:scale(.92)}
 
@@ -4333,9 +4333,7 @@ body::before {
 }
 
 /* ═══ VOICE MESSAGES IN CHAT ═══ */
-.chat-voice-btn{
-  width:42px;height:42px;
-  border-radius:50%;
+.chat-voice-btn{width:44px;height:44px;border-radius:50%;
   background:var(--bg3);
   border:1px solid var(--border2);
   color:var(--text2);
@@ -4476,6 +4474,45 @@ body::before {
   gap:4px;
 }
 .msg-voice-upload.error{color:var(--danger)}
+
+/* ═══ MOBILE CHAT OPTIMIZATION ═══ */
+@media (max-width: 480px) {
+  .chat-input-bar{
+    padding:8px 10px;
+    gap:6px;
+    padding-bottom:calc(8px + env(safe-area-inset-bottom));
+  }
+  .chat-input{
+    font-size:16px !important;
+    padding:10px 13px;
+    border-radius:18px;
+  }
+  .chat-send,.chat-voice-btn{
+    width:42px;
+    height:42px;
+    font-size:17px;
+  }
+  .chat-panel{
+    border-radius:16px 16px 0 0;
+  }
+  .chat-header{
+    padding:10px 12px;
+  }
+  .chat-peer-name{font-size:14px}
+  .chat-peer-status{font-size:11px}
+  .voice-recording-overlay{
+    padding:12px 14px;
+    gap:10px;
+  }
+  .voice-rec-timer{font-size:14px}
+  .voice-rec-hint{font-size:11px}
+  .voice-rec-cancel,.voice-rec-send{width:38px;height:38px}
+}
+
+/* Prevent iOS zoom */
+@supports (-webkit-touch-callout: none) {
+  .chat-input{font-size:16px !important}
+}
 
 </style>
 </head>
@@ -11979,41 +12016,84 @@ const VoiceMessage = (() => {
     const btn = $('#chatVoiceBtn');
     if (!btn) return;
 
-    // Long-press to record
-    let pressTimer = null;
-    let didRecord = false;
+    let didStart = false;
+    let startX = 0;
+    let currentX = 0;
 
     const onPressStart = (e) => {
       e.preventDefault();
-      didRecord = false;
-      pressTimer = setTimeout(() => {
-        didRecord = true;
+      e.stopPropagation();
+      
+      // ابدأ التسجيل فوراً (WhatsApp style)
+      if (!state.isRecording) {
+        didStart = true;
         startRecording();
-      }, 200); // 200ms delay
+      }
+      
+      // سجّل نقطة البداية (للسحب)
+      if (e.touches && e.touches[0]) {
+        startX = e.touches[0].clientX;
+        currentX = startX;
+      } else if (e.clientX !== undefined) {
+        startX = e.clientX;
+        currentX = startX;
+      }
+    };
+
+    const onPressMove = (e) => {
+      if (!state.isRecording) return;
+      if (e.touches && e.touches[0]) {
+        currentX = e.touches[0].clientX;
+      } else if (e.clientX !== undefined) {
+        currentX = e.clientX;
+      }
+      
+      // اسحب لليسار للإلغاء (RTL: اليمين للإلغاء)
+      const diff = startX - currentX;
+      const overlay = $('#voiceRecordingOverlay');
+      if (overlay) {
+        if (diff > 80) {
+          overlay.style.opacity = '0.5';
+          const hint = overlay.querySelector('.voice-rec-hint');
+          if (hint) hint.textContent = '← اترك للإلغاء';
+        } else {
+          overlay.style.opacity = '1';
+          const hint = overlay.querySelector('.voice-rec-hint');
+          if (hint) hint.textContent = '🎙️ جاري التسجيل... اسحب للإلغاء';
+        }
+      }
     };
 
     const onPressEnd = (e) => {
-      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
-      if (didRecord && state.isRecording) {
+      if (!didStart) return;
+      didStart = false;
+      
+      if (!state.isRecording) return;
+      
+      // إذا سحب بعيداً، ألغِ
+      const diff = startX - currentX;
+      if (diff > 80) {
+        cancel();
+      } else {
         stopAndSend();
       }
-      didRecord = false;
     };
 
-    const onPressCancel = () => {
-      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
-      if (state.isRecording) cancel();
-      didRecord = false;
-    };
-
+    // Touch events (mobile)
     btn.addEventListener('touchstart', onPressStart, { passive: false });
+    btn.addEventListener('touchmove', onPressMove, { passive: false });
     btn.addEventListener('touchend', onPressEnd);
-    btn.addEventListener('touchcancel', onPressCancel);
+    btn.addEventListener('touchcancel', () => {
+      if (state.isRecording) cancel();
+      didStart = false;
+    });
+    
+    // Mouse events (desktop)
     btn.addEventListener('mousedown', onPressStart);
-    btn.addEventListener('mouseup', onPressEnd);
-    btn.addEventListener('mouseleave', onPressCancel);
+    document.addEventListener('mousemove', onPressMove);
+    document.addEventListener('mouseup', onPressEnd);
 
-    // Cancel/send buttons
+    // Cancel/send buttons (manual in overlay)
     $('#voiceRecCancelBtn')?.addEventListener('click', cancel);
     $('#voiceRecSendBtn')?.addEventListener('click', stopAndSend);
   }
