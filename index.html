@@ -118,6 +118,28 @@
   --text3: #383850;
 }
 
+/* Rose theme (للبنات) */
+[data-theme="rose"] {
+  --bg:     #1a0d14;
+  --bg2:    #261520;
+  --bg3:    #321a2a;
+  --bg4:    #3f2034;
+  --bg5:    #4a273f;
+  --accent: #ff6fa5;
+  --accent-2: #ffa8c5;
+  --accent-dim:  rgba(255,111,165,.14);
+  --accent-glow: rgba(255,111,165,.35);
+  --accent-bd:   rgba(255,111,165,.38);
+  --text:  #fce8f2;
+  --text2: #c09cb0;
+  --text3: #846b7b;
+  --green-2: #ffb3c7;
+  --green-dim: rgba(255,168,197,.15);
+  --border: rgba(255,111,165,.15);
+  --border2: rgba(255,111,165,.28);
+  --shadow-2: 0 4px 20px rgba(255,111,165,.2);
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -346,12 +368,13 @@ body::before {
 .header-band {
   background: linear-gradient(90deg, var(--accent-dim), transparent, var(--accent-dim));
   border-bottom: 1px solid var(--accent-bd);
-  padding: 4px var(--s-4);
+  padding: 6px var(--s-4);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--s-2);
-  font-size: 10px;
+  font-size: 11px;
+  flex-wrap: wrap;
 }
 .header-band-chip {
   background: var(--accent);
@@ -1677,6 +1700,48 @@ body::before {
 .theme-swatch.light .swatch-name { color: #0f172a; }
 .theme-swatch.midnight { background: linear-gradient(160deg, #060810, #161b27); }
 .theme-swatch.midnight .swatch-name { color: #e2e8f0; }
+.theme-swatch.rose { background: linear-gradient(160deg, #1a0d14, #3f2034); border-color: rgba(255,111,165,.3); }
+.theme-swatch.rose .swatch-emoji { color: #ffa8c5; }
+.theme-swatch.rose .swatch-name { color: #fce8f2; }
+.theme-swatch.rose .swatch-desc { color: #c09cb0; }
+
+/* Language buttons */
+.lang-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.lang-btn{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:14px;
+  background:var(--bg3);
+  border:1px solid var(--border2);
+  border-radius:12px;
+  color:var(--text2);
+  font-size:14px;
+  font-weight:700;
+  transition:all var(--t-fast);
+}
+.lang-btn.active{
+  background:var(--accent-dim);
+  border-color:var(--accent);
+  color:var(--accent-2);
+}
+
+/* Header date band */
+.header-band-date{
+  background:var(--accent-dim);
+  border:1px solid var(--accent-bd);
+  color:var(--accent-2);
+  padding:4px 12px;
+  border-radius:12px;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+}
 .swatch-emoji { font-size: 24px; }
 .swatch-name { font-size: 11px; font-weight: 700; }
 .swatch-desc { font-size: 9px; text-align: center; color: var(--text3); }
@@ -4267,6 +4332,151 @@ body::before {
   grid-template-columns:repeat(4, 1fr);
 }
 
+/* ═══ VOICE MESSAGES IN CHAT ═══ */
+.chat-voice-btn{
+  width:42px;height:42px;
+  border-radius:50%;
+  background:var(--bg3);
+  border:1px solid var(--border2);
+  color:var(--text2);
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  transition:all var(--t-fast);
+  touch-action:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.chat-voice-btn:active,.chat-voice-btn.recording{
+  background:var(--danger);
+  color:#fff;
+  border-color:var(--danger);
+  transform:scale(1.15);
+}
+.chat-voice-btn.recording{
+  animation:recPulse 1.2s ease-in-out infinite;
+}
+@keyframes recPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.6)}
+  50%{box-shadow:0 0 0 12px rgba(239,68,68,0)}
+}
+
+.voice-recording-overlay{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  background:var(--bg);
+  border-top:1px solid var(--accent);
+  padding:14px 16px;
+  display:none;
+  align-items:center;
+  gap:12px;
+  z-index:100015;
+  padding-bottom:calc(14px + env(safe-area-inset-bottom));
+  animation:slideUp .2s ease-out;
+}
+.voice-recording-overlay.active{display:flex}
+.voice-rec-dot{
+  width:14px;height:14px;
+  background:var(--danger);
+  border-radius:50%;
+  animation:recPulse 1s ease-in-out infinite;
+  flex-shrink:0;
+}
+.voice-rec-timer{
+  font-family:'Courier New',monospace;
+  font-size:15px;
+  font-weight:700;
+  color:var(--accent-2);
+  min-width:50px;
+  direction:ltr;
+}
+.voice-rec-hint{
+  flex:1;
+  font-size:12px;
+  color:var(--text3);
+  text-align:center;
+}
+.voice-rec-cancel,.voice-rec-send{
+  width:40px;height:40px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  font-size:16px;
+  border:none;
+}
+.voice-rec-cancel{
+  background:var(--bg3);
+  border:1px solid var(--danger);
+  color:var(--danger);
+}
+.voice-rec-send{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#0a0600;
+  box-shadow:0 3px 12px var(--accent-glow);
+}
+
+/* Voice message bubble */
+.msg-voice-wrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:180px;
+  padding:4px 0;
+}
+.msg-voice-play{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,.18);
+  border:none;
+  color:inherit;
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  cursor:pointer;
+}
+.msg.theirs .msg-voice-play,.msg.bot .msg-voice-play{
+  background:var(--accent-dim);
+  color:var(--accent-2);
+}
+.msg-voice-wave{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:2px;
+  height:26px;
+}
+.msg-voice-bar{
+  flex:1;
+  background:currentColor;
+  opacity:.4;
+  border-radius:1px;
+  min-width:2px;
+  transition:opacity var(--t-fast);
+}
+.msg-voice-bar.played{opacity:1}
+.msg-voice-duration{
+  font-size:11px;
+  opacity:.75;
+  direction:ltr;
+  min-width:34px;
+  font-family:'Courier New',monospace;
+  font-weight:600;
+}
+.msg-voice-upload{
+  font-size:11px;
+  opacity:.6;
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+.msg-voice-upload.error{color:var(--danger)}
+
 </style>
 </head>
 <body>
@@ -4520,15 +4730,15 @@ body::before {
     <!-- Header -->
     <header class="app-header">
       <div class="header-band">
-        <span class="header-band-chip">PRO</span>
-        <span class="header-band-text">مخططك المالي الذكي</span>
+        <span class="header-band-date" id="headerDate">—</span>
+        <span class="header-band-text" id="headerGreeting">مخططك المالي الذكي</span>
       </div>
       <div class="header-inner">
         <div class="app-logo">
           <div class="app-logo-mark">
             <svg viewBox="0 0 540 325" fill="#0a0600"><path d="M216.45 37.73 C226.48 16.28 243.13 4.36 266.50 3.54 C287.23 2.82 306.24 12.42 317.56 33.46 C325.74 48.67 327.25 65.23 325.93 82.20 C323.86 109.00 314.65 133.69 303.21 157.63 C290.95 183.27 279.27 209.14 270.14 236.11 C269.70 237.39 269.49 238.88 268.10 239.66 C266.32 239.57 266.29 238.03 265.91 236.89 C256.65 208.98 244.69 182.21 231.98 155.73 C222.96 136.93 215.38 117.55 211.84 96.86 C208.65 78.22 208.26 59.67 214.88 41.54 C215.32 40.33 215.85 39.16 216.45 37.73 Z"/><path d="M507.78 222.63 C533.82 237.59 540.14 269.80 527.05 293.34 C519.76 306.47 507.98 314.48 493.91 318.79 C472.26 325.43 450.65 322.71 429.21 317.19 C405.55 311.10 383.25 301.42 361.07 291.40 C340.06 281.91 318.79 273.12 296.54 266.93 C295.75 266.71 294.99 266.39 294.26 266.04 C293.99 265.91 293.83 265.55 293.46 265.10 C295.59 263.11 298.38 263.05 300.83 262.44 C323.00 256.92 344.56 249.61 365.68 240.92 C388.50 231.54 411.35 222.29 435.61 217.09 C454.47 213.04 473.30 212.11 492.22 216.60 C497.60 217.88 502.70 219.86 507.78 222.63 Z"/><path d="M182.21 246.27 C201.52 253.63 221.03 259.51 240.69 264.31 C240.57 266.34 239.46 266.48 238.64 266.69 C212.40 273.30 188.10 284.80 163.70 296.11 C144.06 305.22 124.10 313.51 102.91 318.46 C90.33 321.39 77.63 323.39 64.70 322.39 C48.89 321.18 33.59 317.96 20.87 307.62 C7.96 297.13 2.68 283.02 2.75 266.78 C2.85 240.20 21.43 222.07 44.22 216.57 C63.71 211.87 82.92 213.23 102.16 217.61 C122.53 222.25 141.89 229.86 161.13 237.82 C168.04 240.68 175.01 243.39 182.21 246.27 Z"/></svg>
           </div>
-          <div class="app-logo-name">تـدّبير<span class="app-logo-pro">PRO</span></div>
+          <div class="app-logo-name" id="appLogoName">تـدّبير</div>
         </div>
         <div class="header-spacer"></div>
         <button class="icon-btn" id="bellBtn" aria-label="تنبيهات">🔔<span class="icon-dot" id="bellDot"></span></button>
@@ -5227,6 +5437,22 @@ body::before {
           </div>
           <div class="card">
             <div class="card-head">
+              <div class="card-title">🌐 اللغة / Language</div>
+              <div class="card-sub">اختر لغة واجهة التطبيق</div>
+            </div>
+            <div class="lang-grid">
+              <button class="lang-btn active" data-lang="ar">
+                <span style="font-size:18px">🇸🇦</span>
+                <span>العربية</span>
+              </button>
+              <button class="lang-btn" data-lang="en">
+                <span style="font-size:18px">🇬🇧</span>
+                <span>English</span>
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head">
               <div class="card-title">🎨 الثيم</div>
             </div>
             <div class="theme-grid">
@@ -5244,6 +5470,11 @@ body::before {
                 <span class="swatch-emoji">🌌</span>
                 <span class="swatch-name">منتصف الليل</span>
                 <span class="swatch-desc">أخضر</span>
+              </button>
+              <button class="theme-swatch rose" data-theme="rose">
+                <span class="swatch-emoji">🌸</span>
+                <span class="swatch-name">وردي</span>
+                <span class="swatch-desc">للبنات</span>
               </button>
             </div>
           </div>
@@ -5440,9 +5671,19 @@ body::before {
     </div>
   </div>
   <div class="chat-input-bar">
+    <button class="chat-voice-btn" id="chatVoiceBtn" aria-label="تسجيل صوتي">🎤</button>
     <textarea class="chat-input" id="chatInput" placeholder="اكتب رسالة..." rows="1" maxlength="1000"></textarea>
     <button class="chat-send" id="chatSendBtn" disabled aria-label="إرسال">➤</button>
   </div>
+</div>
+
+<!-- VOICE RECORDING OVERLAY -->
+<div class="voice-recording-overlay" id="voiceRecordingOverlay">
+  <span class="voice-rec-dot"></span>
+  <span class="voice-rec-timer" id="voiceRecTimer">0:00</span>
+  <span class="voice-rec-hint">🎙️ جاري التسجيل...</span>
+  <button class="voice-rec-cancel" id="voiceRecCancelBtn" aria-label="إلغاء">✕</button>
+  <button class="voice-rec-send" id="voiceRecSendBtn" aria-label="إرسال">➤</button>
 </div>
 
 <!-- FRIEND CONTEXT MENU -->
@@ -6665,7 +6906,7 @@ const App = (() => {
   // ═══ THEME ═══
   const Theme = {
     apply(theme) {
-      const valid = ['default', 'light', 'midnight'];
+      const valid = ['default', 'light', 'midnight', 'rose'];
       const t = valid.includes(theme) ? theme : 'default';
       if (t === 'default') document.documentElement.removeAttribute('data-theme');
       else document.documentElement.setAttribute('data-theme', t);
@@ -6673,9 +6914,110 @@ const App = (() => {
       // Also update theme-color meta for PWA
       const meta = document.querySelector('meta[name="theme-color"]');
       if (meta) {
-        const colors = { default: '#0a0a0a', light: '#fdf8f3', midnight: '#05070a' };
+        const colors = { default: '#0a0a0a', light: '#fdf8f3', midnight: '#05070a', rose: '#1a0d14' };
         meta.setAttribute('content', colors[t]);
       }
+    }
+  };
+
+  const Lang = {
+    apply(lang) {
+      const valid = ['ar', 'en'];
+      const l = valid.includes(lang) ? lang : 'ar';
+      store.set('lang', l);
+      document.documentElement.setAttribute('lang', l);
+      document.documentElement.setAttribute('dir', l === 'en' ? 'ltr' : 'rtl');
+      document.body.style.direction = l === 'en' ? 'ltr' : 'rtl';
+      
+      // Translate key UI elements
+      const translations = {
+        ar: {
+          home: 'الرئيسية', money: 'أموالي', social: 'اجتماعي', profile: 'الملف',
+          appName: 'تـدّبير',
+          monthly: '📊 الشهر', yearly: '📅 السنة', zakat: '🕌 الزكاة',
+          achievements: '🏆 إنجازاتي', settings: '⚙️ الإعدادات',
+          welcomeText: 'مخططك المالي الذكي'
+        },
+        en: {
+          home: 'Home', money: 'My Money', social: 'Social', profile: 'Profile',
+          appName: 'Tadbeer',
+          monthly: '📊 Month', yearly: '📅 Year', zakat: '🕌 Zakat',
+          achievements: '🏆 Achievements', settings: '⚙️ Settings',
+          welcomeText: 'Your smart financial planner'
+        }
+      };
+      
+      const T = translations[l];
+      
+      // Update main nav
+      const tabs = [
+        { tab: 'home', key: 'home', icon: '🏠' },
+        { tab: 'money', key: 'money', icon: '💰' },
+        { tab: 'social', key: 'social', icon: '👥' },
+        { tab: 'profile', key: 'profile', icon: '👤' }
+      ];
+      tabs.forEach(t => {
+        const btn = document.querySelector(`[data-tab="${t.tab}"] .tab-label`);
+        if (btn) btn.textContent = T[t.key];
+      });
+      
+      // Update sub-navs
+      const subMap = [
+        { sub: 'monthly', key: 'monthly' },
+        { sub: 'yearly', key: 'yearly' },
+        { sub: 'zakat', key: 'zakat' },
+        { sub: 'achievements', key: 'achievements' },
+        { sub: 'settings', key: 'settings' }
+      ];
+      subMap.forEach(s => {
+        const btn = document.querySelector(`[data-sub="${s.sub}"]`);
+        if (btn) btn.textContent = T[s.key];
+      });
+      
+      // App name
+      const logoName = document.getElementById('appLogoName');
+      if (logoName) logoName.textContent = T.appName;
+      
+      // Header greeting
+      const greetingEl = document.getElementById('headerGreeting');
+      if (greetingEl) greetingEl.textContent = T.welcomeText;
+      
+      // Update lang buttons active state
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.lang === l);
+      });
+    },
+    
+    current() {
+      return store.get('lang') || 'ar';
+    }
+  };
+
+  // Date/Time display
+  const DateDisplay = {
+    update() {
+      const el = document.getElementById('headerDate');
+      if (!el) return;
+      const lang = store.get('lang') || 'ar';
+      const now = new Date();
+      const days = lang === 'en' 
+        ? ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        : ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+      const months = lang === 'en'
+        ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        : ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+      const dayName = days[now.getDay()];
+      const day = now.getDate();
+      const monthName = months[now.getMonth()];
+      const year = now.getFullYear();
+      
+      const prefix = lang === 'en' ? 'Today: ' : 'تاريخ اليوم: ';
+      el.textContent = `${prefix}${dayName} ${day} ${monthName} ${year}`;
+    },
+    start() {
+      this.update();
+      // Update every minute
+      setInterval(() => this.update(), 60000);
     }
   };
 
@@ -6747,7 +7089,7 @@ ${items.map(r => `<tr><td>${U.esc(r.name)}</td><td>${U.esc(r.cat)}</td><td>${r.t
   };
 
   return { store, Sel, Toast, Pts, Achievements, Streak, Entries, Goals, Budgets,
-           Notifs, Zakat, Salary, AI, Search, Theme, Export };
+           Notifs, Zakat, Salary, AI, Search, Theme, Export, Lang, DateDisplay };
 })();
 /* ═══════════════════════════════════════════════════
    TDBEER — Renderers
@@ -7724,6 +8066,14 @@ const Controllers = (() => {
     });
   }
 
+  function bindLang() {
+    DOM.delegate(document, 'click', '.lang-btn[data-lang]', (e, btn) => {
+      App.Lang.apply(btn.dataset.lang);
+      App.DateDisplay.update();
+      Toast.show(btn.dataset.lang === 'en' ? 'Language changed ✨' : 'تم تغيير اللغة ✨');
+    });
+  }
+
   // ═══ DRAWER ═══
   const DRAWER_CATS = {
     exp: [
@@ -8092,6 +8442,7 @@ const Controllers = (() => {
     bindForms();
     bindItemActions();
     bindTheme();
+    bindLang();
     bindDrawer();
     bindNotifs();
     bindZakat();
@@ -8482,6 +8833,14 @@ const Social = (() => {
         }
       }
       const isMine = m.from === state.user.uid;
+      
+      // Voice message
+      if (m.type === 'voice' && m.voiceUrl && window.VoiceMessage) {
+        const voiceBubble = window.VoiceMessage.renderVoiceBubble(m, isMine);
+        cont.appendChild(voiceBubble);
+        continue;
+      }
+      
       const bubble = DOM.h('div', { class: 'msg ' + (isMine ? 'mine' : 'theirs') });
       bubble.appendChild(DOM.h('div', { class: 'msg-text' }, m.text || ''));
       const timeRow = DOM.h('div', { class: 'msg-time' }, formatMsgTime(m.at));
@@ -11312,6 +11671,362 @@ const FreshContent = (() => {
 
 window.FreshContent = FreshContent;
 
+/* ═══════════════════════════════════════════════════
+   TDBEER — Voice Messages (Chat Voice Notes)
+═══════════════════════════════════════════════════ */
+
+const VoiceMessage = (() => {
+  const { DOM, $, $$, Logger, U, Fmt } = Tdbeer;
+  const { Toast } = App;
+
+  const state = {
+    mediaRecorder: null,
+    chunks: [],
+    stream: null,
+    startTime: 0,
+    timerInterval: null,
+    isRecording: false,
+    recordingDuration: 0
+  };
+
+  function isSupported() {
+    return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+  }
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
+
+  async function startRecording() {
+    if (!isSupported()) {
+      Toast.show('المتصفح لا يدعم التسجيل الصوتي', 'warn');
+      return;
+    }
+    if (state.isRecording) return;
+
+    try {
+      state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      
+      // اختر أفضل MIME type مدعوم
+      const mimeTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg'];
+      let mimeType = '';
+      for (const t of mimeTypes) {
+        if (MediaRecorder.isTypeSupported(t)) { mimeType = t; break; }
+      }
+      
+      state.mediaRecorder = mimeType 
+        ? new MediaRecorder(state.stream, { mimeType })
+        : new MediaRecorder(state.stream);
+      
+      state.chunks = [];
+      state.mediaRecorder.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) state.chunks.push(e.data);
+      };
+      
+      state.mediaRecorder.start();
+      state.isRecording = true;
+      state.startTime = Date.now();
+      
+      // UI
+      $('#voiceRecordingOverlay')?.classList.add('active');
+      $('#chatVoiceBtn')?.classList.add('recording');
+      
+      // Timer
+      state.timerInterval = setInterval(() => {
+        const seconds = Math.floor((Date.now() - state.startTime) / 1000);
+        state.recordingDuration = seconds;
+        const timerEl = $('#voiceRecTimer');
+        if (timerEl) timerEl.textContent = formatTime(seconds);
+        
+        // حد 60 ثانية
+        if (seconds >= 60) stopAndSend();
+      }, 200);
+      
+      // Haptic
+      try { if (navigator.vibrate) navigator.vibrate(30); } catch {}
+      
+    } catch (e) {
+      Logger.warn('Voice.start', e.message);
+      if (e.name === 'NotAllowedError') {
+        Toast.show('يجب السماح بالميكروفون', 'warn');
+      } else {
+        Toast.show('تعذّر بدء التسجيل', 'danger');
+      }
+      cleanup();
+    }
+  }
+
+  function cleanup() {
+    if (state.timerInterval) { clearInterval(state.timerInterval); state.timerInterval = null; }
+    if (state.stream) {
+      state.stream.getTracks().forEach(t => { try { t.stop(); } catch {} });
+      state.stream = null;
+    }
+    state.mediaRecorder = null;
+    state.chunks = [];
+    state.isRecording = false;
+    state.recordingDuration = 0;
+    $('#voiceRecordingOverlay')?.classList.remove('active');
+    $('#chatVoiceBtn')?.classList.remove('recording');
+    const timerEl = $('#voiceRecTimer');
+    if (timerEl) timerEl.textContent = '0:00';
+  }
+
+  function cancel() {
+    if (!state.isRecording) { cleanup(); return; }
+    try {
+      state.mediaRecorder.stop();
+    } catch {}
+    cleanup();
+    Toast.show('تم إلغاء التسجيل', 'info');
+  }
+
+  async function stopAndSend() {
+    if (!state.isRecording) return;
+    const duration = state.recordingDuration;
+    
+    if (duration < 1) {
+      cancel();
+      Toast.show('التسجيل قصير جداً', 'warn');
+      return;
+    }
+
+    // أوقف التسجيل وانتظر البيانات
+    const recorder = state.mediaRecorder;
+    const chunks = state.chunks;
+    
+    await new Promise((resolve) => {
+      recorder.onstop = resolve;
+      try { recorder.stop(); } catch { resolve(); }
+    });
+    
+    // نظّف الـ stream
+    if (state.stream) {
+      state.stream.getTracks().forEach(t => { try { t.stop(); } catch {} });
+    }
+    
+    const blob = new Blob(chunks, { type: chunks[0]?.type || 'audio/webm' });
+    cleanup();
+    
+    // أرسل الرسالة
+    await sendVoiceMessage(blob, duration);
+  }
+
+  async function sendVoiceMessage(blob, duration) {
+    const social = window.Social;
+    if (!social?._state?.activeChat) {
+      Toast.show('لا يوجد محادثة نشطة', 'warn');
+      return;
+    }
+
+    const chat = social._state.activeChat;
+    
+    // البوت لا يدعم الرسائل الصوتية
+    if (chat.isBot) {
+      Toast.show('🤖 البوت لا يستقبل رسائل صوتية', 'warn');
+      return;
+    }
+
+    if (!window.FB || !window.FB.uploadFile) {
+      Toast.show('Firebase Storage غير متاح', 'danger');
+      return;
+    }
+
+    try {
+      const user = social._state.user;
+      if (!user) throw new Error('Not signed in');
+      
+      const chatId = chat.chatId;
+      const timestamp = Date.now();
+      const ext = blob.type.includes('mp4') ? 'mp4' : (blob.type.includes('ogg') ? 'ogg' : 'webm');
+      const path = `chats/${chatId}/voice_${user.uid}_${timestamp}.${ext}`;
+      
+      Toast.show('⏳ جاري رفع التسجيل...', 'info');
+      
+      // رفع الملف
+      const result = await window.FB.uploadFile(path, blob, (pct) => {
+        // تقدم الرفع (يمكن إضافة UI لاحقاً)
+      });
+      
+      if (!result || !result.url) throw new Error('Upload failed');
+      
+      // إرسال رسالة Firestore
+      const db = window.FB.db || (window.firebase && window.firebase.firestore());
+      if (!db) throw new Error('Firestore not available');
+      
+      const msgData = {
+        from: user.uid,
+        type: 'voice',
+        voiceUrl: result.url,
+        voicePath: result.path,
+        voiceDuration: duration,
+        voiceSize: result.size,
+        text: '🎙️ رسالة صوتية',
+        at: window.FB.serverTimestamp ? window.FB.serverTimestamp() : new Date(),
+        createdAt: Date.now()
+      };
+      
+      await db.collection('chats').doc(chatId)
+        .collection('messages').add(msgData);
+      
+      Toast.show('✅ تم الإرسال', 'success');
+      
+    } catch (e) {
+      Logger.error('VoiceMessage.send', e);
+      Toast.show('فشل الإرسال: ' + (e.message || 'خطأ'), 'danger');
+    }
+  }
+
+  // ═══ Playback ═══
+  const audioElements = new Map();
+
+  function playVoice(url, btn) {
+    let audio = audioElements.get(url);
+    
+    if (!audio) {
+      audio = new Audio(url);
+      audio.preload = 'metadata';
+      audioElements.set(url, audio);
+      
+      audio.addEventListener('ended', () => {
+        btn.textContent = '▶';
+        // Reset bars
+        const wrap = btn.closest('.msg-voice-wrap');
+        if (wrap) wrap.querySelectorAll('.msg-voice-bar').forEach(b => b.classList.remove('played'));
+      });
+      
+      audio.addEventListener('timeupdate', () => {
+        const wrap = btn.closest('.msg-voice-wrap');
+        if (!wrap) return;
+        const bars = wrap.querySelectorAll('.msg-voice-bar');
+        if (!bars.length || !audio.duration) return;
+        const progress = audio.currentTime / audio.duration;
+        const currentBarIdx = Math.floor(progress * bars.length);
+        bars.forEach((b, i) => b.classList.toggle('played', i <= currentBarIdx));
+      });
+    }
+    
+    // إيقاف جميع الأصوات الأخرى
+    audioElements.forEach((a, u) => {
+      if (u !== url && !a.paused) {
+        a.pause();
+        a.currentTime = 0;
+      }
+    });
+    
+    // إعادة رموز أخرى
+    document.querySelectorAll('.msg-voice-play').forEach(b => {
+      if (b !== btn) b.textContent = '▶';
+    });
+    
+    if (audio.paused) {
+      audio.play().then(() => {
+        btn.textContent = '⏸';
+      }).catch((e) => {
+        Logger.warn('Voice.play', e.message);
+        Toast.show('تعذّر التشغيل', 'warn');
+      });
+    } else {
+      audio.pause();
+      btn.textContent = '▶';
+    }
+  }
+
+  // ═══ Render voice message bubble ═══
+  function renderVoiceBubble(msg, isMine) {
+    const bubble = DOM.h('div', { class: 'msg ' + (isMine ? 'mine' : 'theirs') });
+    
+    const wrap = DOM.h('div', { class: 'msg-voice-wrap' });
+    
+    const playBtn = DOM.h('button', {
+      class: 'msg-voice-play',
+      'aria-label': 'تشغيل'
+    }, '▶');
+    playBtn.onclick = () => playVoice(msg.voiceUrl, playBtn);
+    wrap.appendChild(playBtn);
+    
+    const waveBars = DOM.h('div', { class: 'msg-voice-wave' });
+    // Random heights for waveform visual
+    const barCount = 22;
+    for (let i = 0; i < barCount; i++) {
+      const h = 30 + Math.random() * 70; // 30% to 100%
+      const bar = DOM.h('div', {
+        class: 'msg-voice-bar',
+        style: { height: h + '%' }
+      });
+      waveBars.appendChild(bar);
+    }
+    wrap.appendChild(waveBars);
+    
+    const duration = msg.voiceDuration || 0;
+    const durLabel = DOM.h('div', { class: 'msg-voice-duration' }, formatTime(duration));
+    wrap.appendChild(durLabel);
+    
+    bubble.appendChild(wrap);
+    
+    // Time
+    const t = msg.at?.toDate ? msg.at.toDate() : (msg.createdAt ? new Date(msg.createdAt) : new Date());
+    const timeStr = t.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
+    bubble.appendChild(DOM.h('div', { class: 'msg-time' }, timeStr));
+    
+    return bubble;
+  }
+
+  // ═══ Event binding ═══
+  function bindEvents() {
+    const btn = $('#chatVoiceBtn');
+    if (!btn) return;
+
+    // Long-press to record
+    let pressTimer = null;
+    let didRecord = false;
+
+    const onPressStart = (e) => {
+      e.preventDefault();
+      didRecord = false;
+      pressTimer = setTimeout(() => {
+        didRecord = true;
+        startRecording();
+      }, 200); // 200ms delay
+    };
+
+    const onPressEnd = (e) => {
+      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      if (didRecord && state.isRecording) {
+        stopAndSend();
+      }
+      didRecord = false;
+    };
+
+    const onPressCancel = () => {
+      if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+      if (state.isRecording) cancel();
+      didRecord = false;
+    };
+
+    btn.addEventListener('touchstart', onPressStart, { passive: false });
+    btn.addEventListener('touchend', onPressEnd);
+    btn.addEventListener('touchcancel', onPressCancel);
+    btn.addEventListener('mousedown', onPressStart);
+    btn.addEventListener('mouseup', onPressEnd);
+    btn.addEventListener('mouseleave', onPressCancel);
+
+    // Cancel/send buttons
+    $('#voiceRecCancelBtn')?.addEventListener('click', cancel);
+    $('#voiceRecSendBtn')?.addEventListener('click', stopAndSend);
+  }
+
+  function init() {
+    try { bindEvents(); } catch (e) { Logger.warn('VoiceMessage.init', e.message); }
+  }
+
+  return { init, renderVoiceBubble, playVoice, startRecording, cancel, stopAndSend, isSupported };
+})();
+
+window.VoiceMessage = VoiceMessage;
+
 
 (function bootstrap() {
   const { U, Storage, Logger } = Tdbeer;
@@ -11338,6 +12053,12 @@ window.FreshContent = FreshContent;
       document.querySelectorAll('.theme-swatch').forEach(s => {
         s.classList.toggle('active', s.dataset.theme === store.get('theme'));
       });
+      
+      // Apply language
+      try { App.Lang.apply(store.get('lang') || 'ar'); } catch {}
+      
+      // Start date display
+      try { App.DateDisplay.start(); } catch {}
     } catch (e) {
       Logger.error('Bootstrap.loadState', e);
     }
@@ -11469,6 +12190,13 @@ window.FreshContent = FreshContent;
           Companion.load();
         }
       } catch (e) { Logger.warn('Bootstrap.Companion', e.message); }
+
+      // Voice Messages init
+      try {
+        if (typeof VoiceMessage !== 'undefined' && VoiceMessage.init) {
+          VoiceMessage.init();
+        }
+      } catch (e) { Logger.warn('Bootstrap.VoiceMessage', e.message); }
 
       // Tests
       if (new URLSearchParams(location.search).has('test')) {
