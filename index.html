@@ -4167,6 +4167,106 @@ body::before {
   color:var(--accent-2);
 }
 
+/* ═══ NEW 4-TAB STRUCTURE ═══ */
+
+/* Sub-nav */
+.sub-nav{
+  position:sticky;
+  top:calc(64px + env(safe-area-inset-top));
+  z-index:198;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+  padding:10px 12px;
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+.sub-nav::-webkit-scrollbar{display:none}
+.sub-nav-btn{
+  flex-shrink:0;
+  padding:8px 14px;
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:20px;
+  color:var(--text3);
+  font-size:12px;
+  font-weight:600;
+  transition:all var(--t-fast);
+  white-space:nowrap;
+}
+.sub-nav-btn.active{
+  background:var(--accent);
+  color:#0a0600;
+  border-color:var(--accent);
+}
+.sub-nav-btn:not(.active):hover{
+  border-color:var(--accent-bd);
+  color:var(--text2);
+}
+
+/* Home tab */
+.home-welcome{
+  padding:var(--s-4) var(--s-2) var(--s-3);
+  margin-bottom:var(--s-3);
+  text-align:center;
+}
+.home-welcome-greeting{
+  font-size:22px;
+  font-weight:800;
+  color:var(--accent-2);
+  margin-bottom:4px;
+  line-height:1.3;
+}
+.home-welcome-sub{
+  font-size:13px;
+  color:var(--text3);
+}
+
+.home-stats-row{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:var(--s-2);
+  margin-bottom:var(--s-3);
+}
+.home-stat-card{
+  background:linear-gradient(145deg, var(--bg3), var(--bg2));
+  border:1px solid var(--border);
+  border-radius:var(--r-md);
+  padding:var(--s-3) var(--s-2);
+  text-align:center;
+  transition:all var(--t-fast);
+}
+.home-stat-card:hover{
+  border-color:var(--accent-bd);
+  transform:translateY(-1px);
+}
+.home-stat-icon{
+  font-size:22px;
+  line-height:1;
+  margin-bottom:4px;
+}
+.home-stat-value{
+  font-size:18px;
+  font-weight:800;
+  color:var(--accent-2);
+  line-height:1.2;
+  font-variant-numeric:tabular-nums;
+  margin-bottom:2px;
+}
+.home-stat-label{
+  font-size:10px;
+  color:var(--text3);
+  font-weight:600;
+}
+
+/* Main nav now uses 4 columns */
+.main-nav-inner{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+}
+
 </style>
 </head>
 <body>
@@ -4435,31 +4535,40 @@ body::before {
       </div>
     </header>
 
-    <!-- Main Nav -->
+    <!-- Main Nav (4 tabs - New redesigned structure) -->
     <nav class="main-nav">
       <div class="main-nav-inner">
-        <button class="tab-btn active" data-tab="monthly">
-          <span class="tab-icon">📊</span>
-          <span class="tab-label">الشهر</span>
+        <button class="tab-btn active" data-tab="home">
+          <span class="tab-icon">🏠</span>
+          <span class="tab-label">الرئيسية</span>
         </button>
-        <button class="tab-btn" data-tab="yearly">
-          <span class="tab-icon">📅</span>
-          <span class="tab-label">السنة</span>
+        <button class="tab-btn" data-tab="money">
+          <span class="tab-icon">💰</span>
+          <span class="tab-label">أموالي</span>
         </button>
-        <button class="tab-btn" data-tab="friends">
+        <button class="tab-btn" data-tab="social">
           <span class="tab-icon">👥</span>
-          <span class="tab-label">أصدقاء</span>
+          <span class="tab-label">اجتماعي</span>
         </button>
-        <button class="tab-btn" data-tab="zakat">
-          <span class="tab-icon">🕌</span>
-          <span class="tab-label">زكاة</span>
-        </button>
-        <button class="tab-btn" data-tab="settings">
-          <span class="tab-icon">⚙️</span>
-          <span class="tab-label">إعدادات</span>
+        <button class="tab-btn" data-tab="profile">
+          <span class="tab-icon">👤</span>
+          <span class="tab-label">الملف</span>
         </button>
       </div>
     </nav>
+
+    <!-- Sub-nav for Money tab -->
+    <div class="sub-nav" id="moneySubNav" style="display:none">
+      <button class="sub-nav-btn active" data-sub="monthly">📊 الشهر</button>
+      <button class="sub-nav-btn" data-sub="yearly">📅 السنة</button>
+      <button class="sub-nav-btn" data-sub="zakat">🕌 الزكاة</button>
+    </div>
+
+    <!-- Sub-nav for Profile tab -->
+    <div class="sub-nav" id="profileSubNav" style="display:none">
+      <button class="sub-nav-btn active" data-sub="achievements">🏆 إنجازاتي</button>
+      <button class="sub-nav-btn" data-sub="settings">⚙️ الإعدادات</button>
+    </div>
 
     <!-- Month bar -->
     <div class="month-bar" id="monthBar">
@@ -4471,8 +4580,65 @@ body::before {
     <div class="app-scroll" id="appScroll">
       <main class="main" id="mainContent">
 
+        <!-- ═══ HOME TAB (new) ═══ -->
+        <div class="tab-content" id="tab-home">
+          <div class="home-welcome">
+            <div class="home-welcome-greeting" id="homeGreeting">أهلاً بك 👋</div>
+            <div class="home-welcome-sub" id="homeGreetingSub">مساعدك المالي الذكي جاهز</div>
+          </div>
+
+          <!-- Quick Stats -->
+          <div class="home-stats-row">
+            <div class="home-stat-card">
+              <div class="home-stat-icon">💰</div>
+              <div class="home-stat-value" id="homeStatSave">—</div>
+              <div class="home-stat-label">توفير الشهر</div>
+            </div>
+            <div class="home-stat-card">
+              <div class="home-stat-icon">🔥</div>
+              <div class="home-stat-value" id="homeStatStreak">—</div>
+              <div class="home-stat-label">سلسلتك</div>
+            </div>
+            <div class="home-stat-card">
+              <div class="home-stat-icon">🏆</div>
+              <div class="home-stat-value" id="homeStatXp">—</div>
+              <div class="home-stat-label">نقاط XP</div>
+            </div>
+          </div>
+
+          <!-- Fresh Content -->
+          <div id="homeFreshContent"></div>
+
+          <!-- Smart Moments -->
+          <div id="homeSmartMoments"></div>
+
+          <!-- Bot/Companion Card -->
+          <div id="homeBotCard"></div>
+
+          <!-- Smart Tools Grid -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">🛠️ الأدوات الذكية</div>
+            </div>
+            <div class="smart-tools-grid">
+              <button class="smart-tool-btn" id="btnOpenGift2" aria-label="صندوق اليوم">
+                <div class="smart-tool-icon">🎁</div>
+                <div class="smart-tool-label">صندوق<br>اليوم</div>
+              </button>
+              <button class="smart-tool-btn" id="btnOpenSimulator2" aria-label="ماذا لو؟">
+                <div class="smart-tool-icon">🔮</div>
+                <div class="smart-tool-label">ماذا<br>لو؟</div>
+              </button>
+              <button class="smart-tool-btn" id="btnOpenVoice2" aria-label="سجّل بصوتك">
+                <div class="smart-tool-icon">🎙️</div>
+                <div class="smart-tool-label">سجّل<br>بصوتك</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- ═══ MONTHLY TAB ═══ -->
-        <div class="tab-content" id="tab-monthly">
+        <div class="tab-content" id="tab-monthly" style="display:none">
           <!-- Greeting -->
           <div class="greeting-card" id="greetingCard">
             <div class="greeting-text">
@@ -5993,7 +6159,7 @@ const App = (() => {
     // UI state
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
-    tab: 'monthly',
+    tab: 'home',
     period: 'daily',
     zakatTab: 'cash',
     tipIdx: 0,
@@ -7240,14 +7406,152 @@ const Controllers = (() => {
   const R = Renderers;
 
   function showTab(tab) {
-    const valid = ['monthly', 'yearly', 'friends', 'zakat', 'settings'];
-    if (!valid.includes(tab)) tab = 'monthly';
-    store.set('tab', tab);
-    $$('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-    $$('.tab-content').forEach(c => c.style.display = c.id === `tab-${tab}` ? '' : 'none');
+    // New 4-tab structure with sub-tabs
+    const valid = ['home', 'money', 'social', 'profile'];
+    
+    // Legacy support - map old tab names to new ones
+    const legacyMap = {
+      'monthly': 'money:monthly',
+      'yearly': 'money:yearly',
+      'zakat': 'money:zakat',
+      'friends': 'social',
+      'settings': 'profile:settings'
+    };
+    
+    // Handle legacy or sub-tab syntax
+    let mainTab = tab;
+    let subTab = null;
+    
+    if (legacyMap[tab]) {
+      const parts = legacyMap[tab].split(':');
+      mainTab = parts[0];
+      subTab = parts[1] || null;
+    } else if (tab.includes(':')) {
+      const parts = tab.split(':');
+      mainTab = parts[0];
+      subTab = parts[1];
+    }
+    
+    if (!valid.includes(mainTab)) mainTab = 'home';
+    store.set('tab', mainTab);
+    if (subTab) store.set('subTab', subTab);
+    
+    // Update main nav
+    $$('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === mainTab));
+    
+    // Handle sub-navigation visibility
+    const moneySubNav = $('#moneySubNav');
+    const profileSubNav = $('#profileSubNav');
+    if (moneySubNav) moneySubNav.style.display = mainTab === 'money' ? '' : 'none';
+    if (profileSubNav) profileSubNav.style.display = mainTab === 'profile' ? '' : 'none';
+    
+    // Map main tab to actual content tab to show
+    let actualTab;
+    if (mainTab === 'home') {
+      actualTab = 'home';
+    } else if (mainTab === 'money') {
+      const currentSub = subTab || store.get('subTab') || 'monthly';
+      actualTab = currentSub; // monthly/yearly/zakat
+      if (moneySubNav) {
+        moneySubNav.querySelectorAll('.sub-nav-btn').forEach(b => 
+          b.classList.toggle('active', b.dataset.sub === currentSub));
+      }
+    } else if (mainTab === 'social') {
+      actualTab = 'friends';
+    } else if (mainTab === 'profile') {
+      const currentSub = subTab || store.get('subTab') || 'settings';
+      actualTab = currentSub === 'achievements' ? 'settings' : 'settings'; // both under settings for now
+      if (profileSubNav) {
+        profileSubNav.querySelectorAll('.sub-nav-btn').forEach(b => 
+          b.classList.toggle('active', b.dataset.sub === currentSub));
+      }
+    }
+    
+    // Show/hide content
+    $$('.tab-content').forEach(c => c.style.display = c.id === `tab-${actualTab}` ? '' : 'none');
+    
     R.scheduledAll();
-    // Friends rendering handled by Social
-    if (tab === 'friends' && typeof Social !== 'undefined') Social.renderFriendsTab();
+    
+    // Render specific tabs
+    if (mainTab === 'home') renderHome();
+    if (mainTab === 'social' && typeof Social !== 'undefined') Social.renderFriendsTab();
+  }
+
+  function renderHome() {
+    try {
+      // Greeting
+      const hour = new Date().getHours();
+      const name = store.get('userName') || '';
+      let greet;
+      if (hour < 12) greet = '☀️ صباح الخير';
+      else if (hour < 18) greet = '🌤️ مساء الخير';
+      else greet = '🌙 مساء الخير';
+      
+      const greetingEl = $('#homeGreeting');
+      if (greetingEl) DOM.setText(greetingEl, greet + (name ? ' ' + name : ''));
+      
+      const subEl = $('#homeGreetingSub');
+      if (subEl) {
+        const daySub = ['يوم ممتاز لتخطيط مالي', 'ابدأ يومك بقرار ذكي', 'المال المدبّر أفضل', 'خطتك = نجاحك', 'كل خطوة تقربك لهدفك'];
+        DOM.setText(subEl, daySub[new Date().getDate() % daySub.length]);
+      }
+      
+      // Quick stats
+      try {
+        const y = store.get('year'), m = store.get('month');
+        const t = App.Sel.totals(y, m);
+        const streak = App.Streak.calc();
+        const points = store.get('points') || 0;
+        
+        const saveEl = $('#homeStatSave');
+        if (saveEl) DOM.setText(saveEl, t.save > 0 ? Fmt.c(t.save).replace(' ﷼', '') : '—');
+        const streakEl = $('#homeStatStreak');
+        if (streakEl) DOM.setText(streakEl, streak.current > 0 ? streak.current : '—');
+        const xpEl = $('#homeStatXp');
+        if (xpEl) DOM.setText(xpEl, points > 0 ? points : '—');
+      } catch {}
+      
+      // Fresh content
+      try {
+        const freshCont = $('#homeFreshContent');
+        if (freshCont && window.FreshContent) {
+          // Temporarily swap container
+          const origCont = $('#freshContentContainer');
+          if (origCont) {
+            freshCont.innerHTML = '';
+            // Move fresh content from original to home
+            window.FreshContent.render();
+            const freshCard = origCont.querySelector('.fresh-content-card');
+            if (freshCard) freshCont.appendChild(freshCard);
+          }
+        }
+      } catch {}
+      
+      // Smart moments
+      try {
+        const momentsCont = $('#homeSmartMoments');
+        if (momentsCont && window.SmartMoments) {
+          const origCont = $('#smartMomentsContainer');
+          if (origCont) {
+            momentsCont.innerHTML = '';
+            window.SmartMoments.render();
+            const section = origCont.querySelector('.moments-section');
+            if (section) momentsCont.appendChild(section);
+          }
+        }
+      } catch {}
+      
+      // Bot card
+      try {
+        const botCont = $('#homeBotCard');
+        if (botCont && window.Bot && window.Bot.renderBotCard) {
+          botCont.innerHTML = '';
+          window.Bot.renderBotCard(botCont);
+        }
+      } catch {}
+    } catch (e) {
+      console.warn('renderHome:', e.message);
+    }
   }
 
   function changeMonth(delta) {
@@ -7749,6 +8053,12 @@ const Controllers = (() => {
   function init() {
     // Tab switching
     DOM.delegate(document, 'click', '.tab-btn', (e, btn) => showTab(btn.dataset.tab));
+    // Sub-nav listener
+    DOM.delegate(document, 'click', '.sub-nav-btn', (e, btn) => {
+      const sub = btn.dataset.sub;
+      const mainTab = store.get('tab') || 'home';
+      showTab(mainTab + ':' + sub);
+    });
     // Month nav
     DOM.delegate(document, 'click', '[data-nav]', (e, btn) => changeMonth(parseInt(btn.dataset.nav, 10)));
     // Landing → app
@@ -10387,6 +10697,7 @@ const SmartFeatures = (() => {
   function bindEvents() {
     // Gift
     $('#btnOpenGift')?.addEventListener('click', Gift.open);
+    $('#btnOpenGift2')?.addEventListener('click', Gift.open);
     $('#giftCloseBtn')?.addEventListener('click', Gift.close);
     $('#giftOpenBtn')?.addEventListener('click', Gift.openBox);
     $('#giftBox')?.addEventListener('click', Gift.openBox);
@@ -10397,6 +10708,7 @@ const SmartFeatures = (() => {
 
     // Simulator
     $('#btnOpenSimulator')?.addEventListener('click', Simulator.open);
+    $('#btnOpenSimulator2')?.addEventListener('click', Simulator.open);
     $('#simCloseBtn')?.addEventListener('click', Simulator.close);
     $('#simCalcBtn')?.addEventListener('click', Simulator.calculate);
     $('#simInput1')?.addEventListener('input', Simulator.calculate);
@@ -10407,6 +10719,7 @@ const SmartFeatures = (() => {
 
     // Voice
     $('#btnOpenVoice')?.addEventListener('click', Voice.open);
+    $('#btnOpenVoice2')?.addEventListener('click', Voice.open);
     $('#voiceCloseBtn')?.addEventListener('click', Voice.close);
     $('#voiceMicBtn')?.addEventListener('click', Voice.toggle);
     $('#voiceConfirmBtn')?.addEventListener('click', Voice.confirm);
@@ -10660,7 +10973,7 @@ const SmartMoments = (() => {
         title: 'وصل راتبك؟',
         desc: 'ابدأ شهرك بتخطيط ذكي — وزّع الراتب قبل الإنفاق',
         action: () => { 
-          document.querySelector('[data-tab="month"]')?.click();
+          document.querySelector('[data-tab="money"]')?.click();
           setTimeout(() => Toast.show('💡 جرّب إضافة الراتب الآن', 'info'), 300);
         }
       });
@@ -10676,7 +10989,7 @@ const SmartMoments = (() => {
         title: `باقي ${daysInMonth - day + 1} ${daysInMonth - day + 1 === 1 ? 'يوم' : 'أيام'} على نهاية الشهر`,
         desc: 'راجع إنجازاتك المالية واستعد للشهر القادم',
         action: () => {
-          document.querySelector('[data-tab="yearly"]')?.click();
+          document.querySelector('[data-tab="money"]')?.click();
         }
       });
     }
@@ -10692,7 +11005,7 @@ const SmartMoments = (() => {
         title: `احمِ سلسلتك (${streak.current} يوم)!`,
         desc: 'سجّل حضورك اليوم قبل أن تنكسر السلسلة',
         action: () => {
-          document.querySelector('[data-tab="month"]')?.click();
+          document.querySelector('[data-tab="money"]')?.click();
           setTimeout(() => Toast.show('سجّل حضورك اليوم 🔥', 'warn'), 300);
         }
       });
@@ -10706,7 +11019,7 @@ const SmartMoments = (() => {
         type: 'success',
         title: 'صباح الخير! جاهز ليوم منتج؟',
         desc: 'ابدأ بطقسك اليومي — تسجيل حضور + مراجعة ميزانيتك',
-        action: () => document.querySelector('[data-tab="month"]')?.click()
+        action: () => document.querySelector('[data-tab="money"]')?.click()
       });
     }
 
@@ -10718,7 +11031,7 @@ const SmartMoments = (() => {
         type: 'urgent',
         title: 'تجاوزت ٩٠٪ من دخلك هذا الشهر',
         desc: 'انتبه! راجع مصاريفك قبل نهاية الشهر',
-        action: () => document.querySelector('[data-tab="month"]')?.click()
+        action: () => document.querySelector('[data-tab="money"]')?.click()
       });
     }
 
@@ -10743,7 +11056,7 @@ const SmartMoments = (() => {
         type: 'special',
         title: 'رمضان قريب',
         desc: 'ابدأ خطة الميزانية الرمضانية والصدقات من الآن',
-        action: () => document.querySelector('[data-tab="zakat"]')?.click()
+        action: () => document.querySelector('[data-tab="money"]')?.click()
       });
     }
 
@@ -10787,7 +11100,7 @@ const SmartMoments = (() => {
         type: 'info',
         title: 'ابدأ بتسجيل بياناتك',
         desc: 'أضف راتبك أو مصاريفك الشهرية من تبويب الشهر',
-        action: () => document.querySelector('[data-tab="month"]')?.click()
+        action: () => document.querySelector('[data-tab="money"]')?.click()
       });
     }
 
@@ -11075,7 +11388,7 @@ window.FreshContent = FreshContent;
       document.getElementById('appModal').classList.add('open');
     }
     const tab = params.get('tab');
-    if (tab && ['monthly', 'yearly', 'friends', 'zakat', 'settings'].includes(tab)) {
+    if (tab && ['home', 'money', 'social', 'profile', 'monthly', 'yearly', 'friends', 'zakat', 'settings'].includes(tab)) {
       Controllers.showTab(tab);
     }
   }
