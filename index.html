@@ -11935,23 +11935,48 @@ const VoiceMessage = (() => {
       
       Toast.show('⏳ جاري رفع التسجيل...', 'info');
       
-      // رفع الملف - استخدم Firebase Storage مباشرة (أكثر موثوقية)
+      // استخدام Blob بنوع بسيط (audio/webm بدون codecs) - أكثر توافقاً
+      const simpleBlob = new Blob([blob], { type: 'audio/webm' });
+      console.log('[Voice] Simplified blob type:', simpleBlob.type, 'size:', simpleBlob.size);
+      
+      // رفع الملف مع metadata
+      const metadata = {
+        contentType: 'audio/webm',
+        customMetadata: {
+          from: user.uid,
+          to: chat.peerUid,
+          duration: String(duration)
+        }
+      };
+      
       const storageRef = window.firebase.storage().ref(path);
       console.log('[Voice] Starting upload...');
       
-      const uploadTask = storageRef.put(blob);
+      const uploadTask = storageRef.put(simpleBlob, metadata);
+      
+      // Timeout بعد 30 ثانية
+      let timeoutId = null;
       
       const uploadResult = await new Promise((resolve, reject) => {
+        // timeout للحماية من التعليق
+        timeoutId = setTimeout(() => {
+          console.error('[Voice] Upload timeout after 30s');
+          try { uploadTask.cancel(); } catch {}
+          reject(new Error('انتهت مهلة الرفع - جرّب شبكة أقوى'));
+        }, 30000);
+        
         uploadTask.on('state_changed',
           (snap) => {
             const pct = (snap.bytesTransferred / snap.totalBytes) * 100;
-            console.log('[Voice] Upload progress:', pct.toFixed(0) + '%');
+            console.log('[Voice] Upload progress:', pct.toFixed(0) + '%', 'state:', snap.state);
           },
           (err) => {
-            console.error('[Voice] Upload error:', err.code, err.message);
+            if (timeoutId) clearTimeout(timeoutId);
+            console.error('[Voice] Upload error:', err.code, err.message, err);
             reject(err);
           },
           async () => {
+            if (timeoutId) clearTimeout(timeoutId);
             try {
               const url = await uploadTask.snapshot.ref.getDownloadURL();
               console.log('[Voice] Upload complete, URL:', url.substring(0, 80) + '...');
