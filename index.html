@@ -11744,7 +11744,9 @@ const VoiceMessage = (() => {
     if (state.isRecording) return;
 
     try {
+      console.log('[Voice] Requesting mic...');
       state.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      console.log('[Voice] Got stream:', state.stream.active);
       
       // اختر أفضل MIME type مدعوم
       const mimeTypes = ['audio/webm;codecs=opus', 'audio/webm', 'audio/mp4', 'audio/ogg'];
@@ -11752,6 +11754,7 @@ const VoiceMessage = (() => {
       for (const t of mimeTypes) {
         if (MediaRecorder.isTypeSupported(t)) { mimeType = t; break; }
       }
+      console.log('[Voice] Using mime:', mimeType || 'default');
       
       state.mediaRecorder = mimeType 
         ? new MediaRecorder(state.stream, { mimeType })
@@ -11759,10 +11762,17 @@ const VoiceMessage = (() => {
       
       state.chunks = [];
       state.mediaRecorder.ondataavailable = (e) => {
+        console.log('[Voice] ondataavailable, size:', e.data?.size);
         if (e.data && e.data.size > 0) state.chunks.push(e.data);
       };
       
-      state.mediaRecorder.start();
+      state.mediaRecorder.onerror = (e) => {
+        console.error('[Voice] MediaRecorder error:', e.error);
+      };
+      
+      // start with timeslice - يطلب البيانات كل ثانية (أكثر موثوقية)
+      state.mediaRecorder.start(1000);
+      console.log('[Voice] MediaRecorder started, state:', state.mediaRecorder.state);
       state.isRecording = true;
       state.startTime = Date.now();
       
@@ -11821,10 +11831,15 @@ const VoiceMessage = (() => {
   }
 
   async function stopAndSend() {
-    if (!state.isRecording) return;
+    console.log('[Voice] stopAndSend called, isRecording:', state.isRecording, 'duration:', state.recordingDuration);
+    if (!state.isRecording) {
+      console.warn('[Voice] Not recording, aborting');
+      return;
+    }
     const duration = state.recordingDuration;
     
     if (duration < 1) {
+      console.warn('[Voice] Duration too short:', duration);
       cancel();
       Toast.show('التسجيل قصير جداً', 'warn');
       return;
@@ -11833,18 +11848,40 @@ const VoiceMessage = (() => {
     // أوقف التسجيل وانتظر البيانات
     const recorder = state.mediaRecorder;
     const chunks = state.chunks;
+    const stream = state.stream;
+    
+    console.log('[Voice] Stopping recorder, chunks so far:', chunks.length);
     
     await new Promise((resolve) => {
-      recorder.onstop = resolve;
-      try { recorder.stop(); } catch { resolve(); }
+      if (!recorder) { resolve(); return; }
+      recorder.onstop = () => {
+        console.log('[Voice] Recorder stopped, final chunks:', chunks.length);
+        resolve();
+      };
+      try { 
+        if (recorder.state !== 'inactive') recorder.stop();
+        else resolve();
+      } catch(e) { 
+        console.warn('[Voice] stop error:', e.message);
+        resolve(); 
+      }
     });
     
     // نظّف الـ stream
-    if (state.stream) {
-      state.stream.getTracks().forEach(t => { try { t.stop(); } catch {} });
+    if (stream) {
+      stream.getTracks().forEach(t => { try { t.stop(); } catch {} });
+    }
+    
+    if (chunks.length === 0) {
+      console.error('[Voice] No audio chunks!');
+      cleanup();
+      Toast.show('لم يُسجّل أي صوت', 'danger');
+      return;
     }
     
     const blob = new Blob(chunks, { type: chunks[0]?.type || 'audio/webm' });
+    console.log('[Voice] Blob created, size:', blob.size, 'type:', blob.type);
+    
     cleanup();
     
     // أرسل الرسالة
@@ -11852,13 +11889,17 @@ const VoiceMessage = (() => {
   }
 
   async function sendVoiceMessage(blob, duration) {
+    console.log('[Voice] sendVoiceMessage, blob size:', blob.size, 'duration:', duration);
+    
     const social = window.Social;
     if (!social?._state?.activeChat) {
+      console.warn('[Voice] No active chat');
       Toast.show('لا يوجد محادثة نشطة', 'warn');
       return;
     }
 
     const chat = social._state.activeChat;
+    console.log('[Voice] Active chat:', chat);
     
     // البوت لا يدعم الرسائل الصوتية
     if (chat.isBot) {
@@ -11866,53 +11907,89 @@ const VoiceMessage = (() => {
       return;
     }
 
-    if (!window.FB || !window.FB.uploadFile) {
-      Toast.show('Firebase Storage غير متاح', 'danger');
+    // تحقق من Firebase
+    console.log('[Voice] window.FB:', !!window.FB);
+    console.log('[Voice] window.firebase:', !!window.firebase);
+    console.log('[Voice] firebase.storage:', !!(window.firebase && window.firebase.storage));
+    
+    if (!window.firebase || !window.firebase.storage) {
+      Toast.show('Firebase Storage غير محمّل', 'danger');
+      console.error('[Voice] firebase.storage missing');
       return;
     }
 
     try {
       const user = social._state.user;
       if (!user) throw new Error('Not signed in');
+      console.log('[Voice] User:', user.uid);
       
       const chatId = chat.chatId;
       const timestamp = Date.now();
       const ext = blob.type.includes('mp4') ? 'mp4' : (blob.type.includes('ogg') ? 'ogg' : 'webm');
       const path = `chats/${chatId}/voice_${user.uid}_${timestamp}.${ext}`;
+      console.log('[Voice] Upload path:', path);
       
       Toast.show('⏳ جاري رفع التسجيل...', 'info');
       
-      // رفع الملف
-      const result = await window.FB.uploadFile(path, blob, (pct) => {
-        // تقدم الرفع (يمكن إضافة UI لاحقاً)
+      // رفع الملف - استخدم Firebase Storage مباشرة (أكثر موثوقية)
+      const storageRef = window.firebase.storage().ref(path);
+      console.log('[Voice] Starting upload...');
+      
+      const uploadTask = storageRef.put(blob);
+      
+      const uploadResult = await new Promise((resolve, reject) => {
+        uploadTask.on('state_changed',
+          (snap) => {
+            const pct = (snap.bytesTransferred / snap.totalBytes) * 100;
+            console.log('[Voice] Upload progress:', pct.toFixed(0) + '%');
+          },
+          (err) => {
+            console.error('[Voice] Upload error:', err.code, err.message);
+            reject(err);
+          },
+          async () => {
+            try {
+              const url = await uploadTask.snapshot.ref.getDownloadURL();
+              console.log('[Voice] Upload complete, URL:', url.substring(0, 80) + '...');
+              resolve({ url, path, size: blob.size });
+            } catch(e) { reject(e); }
+          }
+        );
       });
       
-      if (!result || !result.url) throw new Error('Upload failed');
+      if (!uploadResult || !uploadResult.url) throw new Error('Upload failed');
       
       // إرسال رسالة Firestore
-      const db = window.FB.db || (window.firebase && window.firebase.firestore());
-      if (!db) throw new Error('Firestore not available');
+      console.log('[Voice] Sending Firestore message...');
+      const db = window.firebase.firestore();
       
       const msgData = {
         from: user.uid,
+        to: chat.peerUid,
         type: 'voice',
-        voiceUrl: result.url,
-        voicePath: result.path,
+        voiceUrl: uploadResult.url,
+        voicePath: uploadResult.path,
         voiceDuration: duration,
-        voiceSize: result.size,
+        voiceSize: blob.size,
         text: '🎙️ رسالة صوتية',
-        at: window.FB.serverTimestamp ? window.FB.serverTimestamp() : new Date(),
-        createdAt: Date.now()
+        at: window.firebase.firestore.FieldValue.serverTimestamp(),
+        read: false
       };
       
       await db.collection('chats').doc(chatId)
         .collection('messages').add(msgData);
       
+      console.log('[Voice] ✅ Message sent successfully!');
       Toast.show('✅ تم الإرسال', 'success');
       
     } catch (e) {
+      console.error('[Voice] Error:', e.code, e.message, e);
       Logger.error('VoiceMessage.send', e);
-      Toast.show('فشل الإرسال: ' + (e.message || 'خطأ'), 'danger');
+      let msg = e.message || 'خطأ غير معروف';
+      if (e.code === 'storage/unauthorized') msg = 'قواعد Storage لا تسمح - تحقق من القواعد';
+      else if (e.code === 'storage/canceled') msg = 'تم الإلغاء';
+      else if (e.code === 'storage/unknown') msg = 'خطأ Storage - تحقق من تفعيله';
+      Toast.show('فشل الإرسال: ' + msg, 'danger');
     }
   }
 
