@@ -11831,17 +11831,21 @@ const VoiceMessage = (() => {
   }
 
   async function stopAndSend() {
-    console.log('[Voice] stopAndSend called, isRecording:', state.isRecording, 'duration:', state.recordingDuration);
+    console.log('[Voice] stopAndSend called, isRecording:', state.isRecording, 'duration:', state.recordingDuration, 'chunks:', state.chunks.length);
     if (!state.isRecording) {
       console.warn('[Voice] Not recording, aborting');
       return;
     }
-    const duration = state.recordingDuration;
     
-    if (duration < 1) {
+    // حساب المدة الفعلية (وليس من timer)
+    const actualDuration = state.startTime ? Math.max(0.5, (Date.now() - state.startTime) / 1000) : 0;
+    const duration = Math.max(actualDuration, state.recordingDuration);
+    console.log('[Voice] Actual duration:', actualDuration, 'timer duration:', state.recordingDuration);
+    
+    if (duration < 0.5) {
       console.warn('[Voice] Duration too short:', duration);
       cancel();
-      Toast.show('التسجيل قصير جداً', 'warn');
+      Toast.show('اضغط مطوّلاً أكثر لتسجيل رسالة', 'warn');
       return;
     }
 
@@ -12096,6 +12100,7 @@ const VoiceMessage = (() => {
     let didStart = false;
     let startX = 0;
     let currentX = 0;
+    let pressStartTime = 0;
 
     const onPressStart = (e) => {
       e.preventDefault();
@@ -12104,6 +12109,7 @@ const VoiceMessage = (() => {
       // ابدأ التسجيل فوراً (WhatsApp style)
       if (!state.isRecording) {
         didStart = true;
+        pressStartTime = Date.now();
         startRecording();
       }
       
@@ -12125,7 +12131,6 @@ const VoiceMessage = (() => {
         currentX = e.clientX;
       }
       
-      // اسحب لليسار للإلغاء (RTL: اليمين للإلغاء)
       const diff = startX - currentX;
       const overlay = $('#voiceRecordingOverlay');
       if (overlay) {
@@ -12141,11 +12146,29 @@ const VoiceMessage = (() => {
       }
     };
 
-    const onPressEnd = (e) => {
+    const onPressEnd = async (e) => {
       if (!didStart) return;
       didStart = false;
       
-      if (!state.isRecording) return;
+      // انتظر اكتمال بدء التسجيل إذا ما زال يتم التهيئة
+      const elapsedPress = Date.now() - pressStartTime;
+      if (elapsedPress < 500) {
+        console.log('[Voice] Press too short, waiting for recorder...');
+        await new Promise(r => setTimeout(r, 600 - elapsedPress));
+      }
+      
+      if (!state.isRecording) {
+        console.log('[Voice] Not yet recording, cancelling...');
+        return;
+      }
+      
+      // انتظر حتى الحصول على بيانات كافية
+      let waited = 0;
+      while (state.chunks.length === 0 && waited < 2000) {
+        await new Promise(r => setTimeout(r, 100));
+        waited += 100;
+      }
+      console.log('[Voice] Waited', waited, 'ms, chunks:', state.chunks.length);
       
       // إذا سحب بعيداً، ألغِ
       const diff = startX - currentX;
